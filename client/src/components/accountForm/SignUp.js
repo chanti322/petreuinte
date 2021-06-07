@@ -29,7 +29,8 @@ export default function SignUp({ submitForm }) {
     <div className="container">
       <div className="app-wrapper">
         <div>
-          <h2 className="title">Create Account</h2>
+          <h2 className="welcome">Welcome!</h2>
+          <h2 className="title">Create an Account</h2>
         </div>
         <form className="form-wrapper">
           <div className="name">

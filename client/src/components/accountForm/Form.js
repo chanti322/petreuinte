@@ -14,7 +14,6 @@ export default function Form() {
       ) : (
         <SignUpSuccess />
       )}
-      <SignUp /> <SignUp />
     </div>
   );
 }
