@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 import LocalMallIcon from "@material-ui/icons/LocalMall";
@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBarColor: {
-    background: " rgb(255,255,255)",
+    background: "rgb(61,24,228)",
     background:
-      "linear-gradient(90deg, rgba(255,255,255,1) 2%, rgba(39,161,45,1) 19%, rgba(25,78,34,1) 100%)",
+      "linear-gradient(90deg, rgba(61,24,228,1) 2%, rgba(10,134,255,1) 44%, rgba(26,40,186,1) 100%);",
   },
   menuButton: {
     //  marginRight: theme.spacing(1),
@@ -109,7 +109,7 @@ export default function MenuAppBar() {
             onClose={handleClose}
           >
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              Home
+              <Link to="/petsLost">Pets Lost</Link>
             </MenuItem>
           </Menu>
         </Toolbar>
