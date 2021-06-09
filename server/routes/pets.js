@@ -3,9 +3,10 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const petModel = require("../models/petsModel");
-console.log(petModel);
+
+//const upload = require("../middleware/upload");
 router.get("/all", (req, res) => {
-  petModel.find({ type: "dog" }, function (err, pets) {
+  petModel.find({}, function (err, pets) {
     if (err) {
       res.send(err);
     } else {
@@ -13,27 +14,11 @@ router.get("/all", (req, res) => {
     }
   });
 });
-/* //Schema
-const Pet = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  breed: {
-    type: String,
-  },
-  img: {
-    type: String,
-    required: true,
-  },
-});
-var Pet = mongoose.model("Pet", petSchema); */
+module.exports = router;
 // Create new Post
-router.post("/createpost", (req, res) => {
-  const { name, type, breed, pic } = req.body;
+router.post("/uploads", (req, res) => {
+  const { name, type, breed, img } = req.body;
+  console.log(img);
 
   /*   if (!type || !pic) {
     return res.status(422).json({
@@ -44,12 +29,18 @@ router.post("/createpost", (req, res) => {
     name,
     type,
     breed,
-    img: pic,
+    img: img,
   });
+  /*   if (req.file) {
+    pet.avatar = req.file.path;
+  } */
   pet
     .save()
     .then((result) => {
-      res.json({ pet: result });
+      res.status(201).json({
+        message: "Handling POST requests to /pet",
+        createdProduct: result,
+      });
     })
     .catch((err) => {
       console.log(err);
