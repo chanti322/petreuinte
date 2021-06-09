@@ -33,12 +33,11 @@ export default function PetsLost() {
                 component="img"
                 alt="Contemplative Reptile"
                 height="140"
-                image={pet.image}
+                image={pet.img}
                 title="Contemplative Reptile"
               />
 
               <CardContent>
-                <img src="../img/labrador.jpg" alt="labrador" />
                 <Typography gutterBottom variant="h5" component="h2">
                   {pet.name}
                 </Typography>

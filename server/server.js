@@ -29,33 +29,19 @@ app.use(express.json());
 app.use(cors());
 //images
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    var extension = file.mimetype;
-    extension = extension.substring(
-      extension.indexOf("/") + 1,
-      extension.length
-    );
-    var filename = file.fieldname + "-" + Date.now() + "." + extension;
-    callback(null, filename);
-  },
-});
 //upload parameters from multer
-const upload = multer({
+/* const upload = multer({
   storage: storage,
-});
+}); */
 
-app.get("/uploads", (req, res) => {
+/* app.get("/uploads", (req, res) => {
   res.sendFile(__dirname + "/pets/uploads");
-});
-router.post("/uploads", upload.single("avatar"), (req, res) => {
+}); */
+/* router.post("/uploads", upload.single("avatar"), (req, res) => {
   res.send("test");
   console.log(req.file);
 });
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static("uploads")); */
 
 //Pets
 app.use("/pets", require("./routes/pets"));

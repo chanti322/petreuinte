@@ -5,7 +5,7 @@ import "./styles/SignUpForm.css";
 import Form from "./components/accountForm/Form";
 import MenuAppBar from "./components/NavBar";
 import PetsLost from "./views/PetsLost";
-import FormPicture from "./components/FormPicture";
+import FormPet from "./components/FormPet";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Router>
         <MenuAppBar />
-        <FormPicture />
+        <FormPet />
         <Switch>
           <Route path="/petsLost" exact component={PetsLost} />
         </Switch>
