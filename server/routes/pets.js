@@ -15,9 +15,30 @@ router.get("/all", (req, res) => {
   });
 });
 module.exports = router;
+
+// only Lost Pets
+router.get("/lost", (req, res) => {
+  petModel.find({ radio: "lost" }, function (err, pets) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(pets);
+    }
+  });
+});
+router.get("/found", (req, res) => {
+  petModel.find({ radio: "found" }, function (err, pets) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(pets);
+    }
+  });
+});
+//only Found pets
 // Create new Post
 router.post("/uploads", (req, res) => {
-  const { name, type, breed, img } = req.body;
+  const { radio, name, type, breed, color, info, img } = req.body;
   console.log(img);
 
   /*   if (!type || !pic) {
@@ -26,9 +47,12 @@ router.post("/uploads", (req, res) => {
     });
   } */
   const pet = new petModel({
+    radio,
     name,
     type,
     breed,
+    color,
+    info,
     img: img,
   });
   /*   if (req.file) {

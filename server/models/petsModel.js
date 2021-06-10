@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const petSchema = new mongoose.Schema(
   {
+    radio: {
+      type: String,
+    },
     name: {
       type: String,
     },
@@ -8,6 +11,12 @@ const petSchema = new mongoose.Schema(
       type: String,
     },
     breed: {
+      type: String,
+    },
+    color: {
+      type: String,
+    },
+    info: {
       type: String,
     },
     img: {

@@ -15,6 +15,10 @@ export default function FormPet() {
   const [breed, setBreed] = useState("");
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
+  const [info, setInfo] = useState("");
+  const [color, setColor] = useState("");
+  const [radio, setRadio] = useState("");
+
   //Update image
   useEffect(() => {
     if (url) {
@@ -24,9 +28,12 @@ export default function FormPet() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          radio,
           name,
           type,
           breed,
+          color,
+          info,
           img: url,
         }),
       })
@@ -38,7 +45,7 @@ export default function FormPet() {
           console.log(err);
         });
     }
-  });
+  }, [url]);
 
   const postDetails = () => {
     const data = new FormData();
@@ -61,22 +68,40 @@ export default function FormPet() {
 
   return (
     <div style={{ marginTop: 100 }}>
+      <label forhtml="lost">Lost</label>
+      <input
+        type="radio"
+        id="lost"
+        name="situation"
+        value="lost"
+        onChange={(e) => setRadio(e.target.value)}
+        required
+      />
+      <label forhtml="found">Found on the street</label>
+      <input
+        type="radio"
+        id="found"
+        name="situation"
+        value="found"
+        onChange={(e) => setRadio(e.target.value)}
+        required
+      />
       <div style={marginInputGroup}>
-        <label htmlFor="name">Pet's name</label>
+        <label forhtml="name">Pet's name</label>
         <input
           type="text"
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <label htmlFor="type">Pet's specie</label>
+        <label forhtml="type">Pet's specie</label>
         <input
           type="text"
           name="type"
           value={type}
           onChange={(e) => setType(e.target.value)}
         />
-        <label htmlFor="breed">Pet's breed</label>
+        <label forhtml="breed">Pet's breed</label>
         <input
           type="text"
           name="breed"
@@ -84,8 +109,24 @@ export default function FormPet() {
           onChange={(e) => setBreed(e.target.value)}
         />
       </div>
+      <label forhtml="color">Color</label>
+      <input
+        type="text"
+        name="color"
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+      />
+      <div style={marginInputGroup}>
+        <label forhtml="info">Write further informations</label>
+        <textarea
+          placeholder="Write further information about the pet and where you lost or saw it"
+          value={info}
+          onChange={(e) => setInfo(e.target.value)}
+        ></textarea>
+      </div>
+
       <div>
-        <label htmlFor="image">Upload Image</label>
+        <label forhtml="image">Upload Image</label>
         <input type="file" onChange={(e) => setImage(e.target.files[0])} />
       </div>
       <button onClick={() => postDetails()}>Submit</button>
