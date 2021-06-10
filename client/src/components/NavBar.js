@@ -109,7 +109,10 @@ export default function MenuAppBar() {
             onClose={handleClose}
           >
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link to="/petsLost">Pets Lost</Link>
+              <Link to="/petsLost">Lost Pets</Link>
+            </MenuItem>
+            <MenuItem className={classes.menuIt} onClick={twoFunction}>
+              <Link to="/petsFound">Found Pets</Link>
             </MenuItem>
           </Menu>
         </Toolbar>
