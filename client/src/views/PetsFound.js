@@ -15,11 +15,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PetsLost() {
+export default function PetsFound() {
   const classes = useStyles();
   const { pets, setPets } = useContext(VariablesContext);
   useEffect(() => {
-    fetch("http://localhost:5000/pets/lost")
+    fetch("http://localhost:5000/pets/found")
       .then((res) => res.json())
       .then((data) => setPets(data));
   }, []);
@@ -28,7 +28,7 @@ export default function PetsLost() {
       <p>All animals</p>
       {pets.map((pet) => {
         return (
-          <Card className={classes.root} key={pet._id}>
+          <Card className={classes.root} key={`found ${pet._id}`}>
             <CardActionArea>
               <CardMedia
                 component="img"

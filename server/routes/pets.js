@@ -26,6 +26,7 @@ router.get("/lost", (req, res) => {
     }
   });
 });
+//only Found pets
 router.get("/found", (req, res) => {
   petModel.find({ radio: "found" }, function (err, pets) {
     if (err) {
@@ -35,7 +36,18 @@ router.get("/found", (req, res) => {
     }
   });
 });
-//only Found pets
+
+// More details single pet
+router.get("/:id", (req, res) => {
+  let PetId = req.params.id;
+  petModel.finDById(PetId, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(user);
+    }
+  });
+});
 // Create new Post
 router.post("/uploads", (req, res) => {
   const { radio, name, type, breed, color, info, img } = req.body;
