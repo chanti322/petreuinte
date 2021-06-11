@@ -24,8 +24,8 @@ export default function PetsLost() {
       .then((data) => setPets(data));
   }, []);
   return (
-    <div style={{ marginTop: 200 }}>
-      <p>All animals</p>
+    <div style={{ marginTop: 80 }}>
+      <p>Lost Pets</p>
       {pets.map((pet) => {
         return (
           <Card className={classes.root} key={pet._id}>

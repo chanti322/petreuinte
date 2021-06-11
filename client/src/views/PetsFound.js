@@ -25,7 +25,8 @@ export default function PetsFound() {
   }, []);
   return (
     <div style={{ marginTop: 200 }}>
-      <p>All animals</p>
+      <h2>Pets that were saw on the street</h2>
+      <p>Did you see a pet?</p>
       {pets.map((pet) => {
         return (
           <Card className={classes.root} key={`found ${pet._id}`}>

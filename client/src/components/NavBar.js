@@ -114,6 +114,9 @@ export default function MenuAppBar() {
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
               <Link to="/petsFound">Found Pets</Link>
             </MenuItem>
+            <MenuItem className={classes.menuIt} onClick={twoFunction}>
+              <Link to="/Form">Pet registration</Link>
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
