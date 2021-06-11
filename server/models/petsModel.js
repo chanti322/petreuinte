@@ -16,6 +16,9 @@ const petSchema = new mongoose.Schema(
     color: {
       type: String,
     },
+    markers: {
+      type:Array,
+    },
     info: {
       type: String,
     },

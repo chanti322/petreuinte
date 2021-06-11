@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { VariablesContext } from "../../context/VariablesContext";
 import {
   GoogleMap,
   useLoadScript,
@@ -44,14 +45,21 @@ const options = {
   ],
   // disabledDefaultUI: true,
 };
+const buttonLocate = {
+  position: "absolute",
+  top: 600,
+  zIndex : 10,
+
+}
 export default function Map() {
+   const { markers, setMarkers } = useContext(VariablesContext);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     libraries,
   });
-  const [markers, setMarkers] = useState([]);
+  //const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  console.log("sel", selected);
+  console.log("sel", markers);
   //To avoid rerender of the map
   const onMapClick = React.useCallback(
     (event) =>
@@ -125,7 +133,7 @@ export default function Map() {
 
   function Locate({ panTo }) {
     return (
-      <button
+      <button style={buttonLocate}
         onClick={() => {
           navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -138,7 +146,8 @@ export default function Map() {
           );
         }}
       >
-        <img src="compass.svg" alt="compass - locate me " />
+       {/*  <img src="compass.svg" alt="compass - locate me " />  */}
+        Find my location
       </button>
     );
   }

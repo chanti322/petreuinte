@@ -50,7 +50,7 @@ router.get("/:id", (req, res) => {
 });
 // Create new Post
 router.post("/uploads", (req, res) => {
-  const { radio, name, type, breed, color, info, img } = req.body;
+  const { radio, name, type, breed, color, markers, info, img } = req.body;
   console.log(img);
 
   /*   if (!type || !pic) {
@@ -64,6 +64,7 @@ router.post("/uploads", (req, res) => {
     type,
     breed,
     color,
+    markers,
     info,
     img: img,
   });
