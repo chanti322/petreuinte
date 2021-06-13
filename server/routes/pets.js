@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const petModel = require("../models/petsModel");
+const petDetailsModel = require("../models/petDetailsModel");
 
 //const upload = require("../middleware/upload");
 router.get("/all", (req, res) => {
@@ -38,16 +39,18 @@ router.get("/found", (req, res) => {
 });
 
 // More details single pet
-router.get("/:id", (req, res) => {
-  let PetId = req.params.id;
-  petModel.finDById(PetId, function (err, user) {
+router.get("/details/:id", (req, res) => {
+  let petId = req.params.id;
+  console.log(petId)
+  petModel.findById(petId).exec(function (err, pet) {
     if (err) {
-      console.log(err);
+      console.log("err")
     } else {
-      console.log(user);
+      console.log("got single pet")
+      res.json(pet)
     }
   });
-});
+})
 // Create new Post
 router.post("/uploads", (req, res) => {
   const { radio, name, type, breed, color, markers, info, img } = req.body;

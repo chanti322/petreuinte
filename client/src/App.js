@@ -10,6 +10,8 @@ import FormPet from "./components/FormPet";
 import GoogleMap from "./components/googleMaps/GoogleMap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContextProvider } from "./context/VariablesContext";
+import ConvertedAddress from "./components/ConvertedAddress"
+import SinglePet from "./views/SinglePet"
 
 function App() {
   return (
@@ -17,13 +19,21 @@ function App() {
       <Router>
         <VariablesContextProvider>
           <MenuAppBar />
-          <GoogleMap />
-          <FormPet />
+        
+         
+          <ConvertedAddress />
           <Switch>
             <Route path="/petsLost" exact component={PetsLost} />
           </Switch>
           <Switch>
             <Route path="/petsFound" exact component={PetsFound} />
+            <Route path="/googleMap" exact component={GoogleMap} />
+            <Route path="/Form" exact component={FormPet} />
+               <Route
+                  exact
+                  path="/details/:id">
+                  <SinglePet />
+                </Route>
           </Switch>
         </VariablesContextProvider>
       </Router>
