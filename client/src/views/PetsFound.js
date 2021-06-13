@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import CardPet from "../components/Card"
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -8,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { VariablesContext } from ".././context/VariablesContext";
+
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +32,8 @@ export default function PetsFound() {
       <p>Did you see a pet?</p>
       {pets.map((pet) => {
         return (
-          <Card className={classes.root} key={`found ${pet._id}`}>
+          <CardPet pet={pet}/>
+        /*   <Card className={classes.root} key={`found ${pet._id}`}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -52,16 +56,17 @@ export default function PetsFound() {
               </CardContent>
             </CardActionArea>
             <CardActions>
+           
               <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
+                <Link to={`details/${pet._id}`}>
+
+                  Learn More
+                    </Link>
               </Button>
             </CardActions>
-          </Card>
+          </Card>*/
         );
       })}
-    </div>
+    </div> 
   );
 }

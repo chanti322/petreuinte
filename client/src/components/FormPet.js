@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
 import { Paper, TextField, TextareaAutosize } from '@material-ui/core';
 let marginInputGroup = {
-  marginTop: 10,
+  //marginTop: 10,
   marginBottom: 15,
   display: "flex",
 

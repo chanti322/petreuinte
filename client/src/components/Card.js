@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import CardPet from "../components/Card"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -9,7 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { VariablesContext } from ".././context/VariablesContext";
 
 const useStyles = makeStyles({
   root: {
@@ -17,22 +15,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PetsLost() {
-  const classes = useStyles();
-  const { pets, setPets } = useContext(VariablesContext);
-  useEffect(() => {
-    fetch("http://localhost:5000/pets/lost")
-      .then((res) => res.json())
-      .then((data) => setPets(data));
-  }, []);
-  return (
-    <div style={{ marginTop: 80 }}>
-      <p>Lost Pets</p>
-      {pets.map((pet) => {
 
+export default function CardPet(props) {
+    let pet= props.pet
+   const classes = useStyles();
         return (
-          <CardPet pet={pet}/>
-         /*  <Card className={classes.root} key={pet._id}>
+          <Card className={classes.root} key={`found ${pet._id}`}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -47,28 +35,22 @@ export default function PetsLost() {
                   {pet.name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.breed} - {pet.type} -{pet._id}
+                  {pet.breed} - {pet.type}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.info} 
+                  {pet.info}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
+           
               <Button size="small" color="primary">
-                Share T
-              </Button>
-              <Button size="small" color="primary">
-          <Link to={`details/${pet._id}`}>
+                <Link to={`details/${pet._id}`}>
 
                   Learn More
                     </Link>
               </Button>
             </CardActions>
-            </Card>
-           */
-        );
-      })}
-    </div>
-  );
+          </Card>)
+      
 }
