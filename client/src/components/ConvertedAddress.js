@@ -42,7 +42,7 @@ export default function ConvertedAddress(props) {
       Geocode.enableDebug();
 
       // Get address from latitude & longitude.
-     Geocode.fromLatLng(lat, lng).then(
+     /* Geocode.fromLatLng(lat, lng).then(
         (response) => {
          const address = response.results[0].formatted_address;
          console.log(address);
@@ -51,12 +51,12 @@ export default function ConvertedAddress(props) {
         (error) => {
           console.error(error);
         }
-      );
+      ); */
 
       // Get formatted address, city, state, country from latitude & longitude when
       // Geocode.setLocationType("ROOFTOP") enabled
       // the below parser will work for most of the countries
-   /*   Geocode.fromLatLng(lat, lng).then(
+     Geocode.fromLatLng(lat, lng).then(
         (response) => {
           const address = response.results[0].formatted_address;
           let city, state, country;
@@ -81,7 +81,7 @@ export default function ConvertedAddress(props) {
         (error) => {
           console.error(error);
         }
-      ); */
+      ); 
 
     // Get latitude & longitude from address.
    /*  Geocode.fromAddress("Eiffel Tower").then(
