@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import ConvertedAddress from "./ConvertedAddress"
 
 const useStyles = makeStyles({
   root: {
@@ -39,7 +40,11 @@ export default function CardPet(props) {
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                   {pet.info}
-                </Typography>
+                        </Typography>
+                         <Typography variant="body2" color="textSecondary" component="p">
+                            <ConvertedAddress markers={pet.markers}/>
+                        </Typography>
+                        
               </CardContent>
             </CardActionArea>
             <CardActions>
