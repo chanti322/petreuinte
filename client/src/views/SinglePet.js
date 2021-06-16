@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ConvertedAddress from "../components/ConvertedAddress"
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -33,7 +34,7 @@ export default function SinglePet(props) {
     }
     singlePetfetch()
   }, [])
-  console.log(onePet)
+  console.log(onePet.markers)
  const classes = useStyles();
 
   return (
@@ -51,11 +52,12 @@ export default function SinglePet(props) {
           <Typography variant="body2" color="textSecondary" component="p">
             {onePet.type}
           </Typography>
-         
             <Typography variant="body2" color="textSecondary" component="p">
             {onePet.info}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            <ConvertedAddress markers={onePet.markers} />
             </Typography>
-           
         </CardContent>
       </CardActionArea>
       <CardActions>
