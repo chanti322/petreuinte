@@ -18,9 +18,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBarColor: {
-    background: "rgb(61,24,228)",
-    background:
-      "linear-gradient(90deg, rgba(61,24,228,1) 2%, rgba(10,134,255,1) 44%, rgba(26,40,186,1) 100%);",
+  backgroundColor:" #ff8c00",
+  background: "linear-gradient(62deg, #ff8c00 0%, #f7ce68 100%)",
+  },
+  loginButton: {
+  padding: 5,
+  textTransform: "uppercase",
+    color: "#FF4500",
+    fontWeight:"bold",
   },
   menuButton: {
     //  marginRight: theme.spacing(1),
@@ -88,7 +93,7 @@ export default function MenuAppBar() {
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBarColor}>
-        <Toolbar>
+        <Toolbar style={{display:"flex", justifyContent:"space-between"}}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -118,6 +123,7 @@ export default function MenuAppBar() {
               <Link to="/Form">Pet registration</Link>
             </MenuItem>
           </Menu>
+          <Link to="/userRegistration"> <button className={classes.loginButton}>Sign in/up</button> </Link>
         </Toolbar>
       </AppBar>
     </div>
