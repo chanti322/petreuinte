@@ -45,6 +45,7 @@ app.use("/uploads", express.static("uploads")); */
 
 //Pets
 app.use("/pets", require("./routes/pets"));
+app.use("/users", require("./routes/users"));
 app.listen(port, () => {
   console.log("Server is running on " + port + "port");
 });
