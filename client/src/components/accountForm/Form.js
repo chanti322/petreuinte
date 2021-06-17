@@ -10,7 +10,7 @@ export default function Form() {
   return (
     <div>
       {!formIsSubmitted ? (
-        <SignUp submitForm={submitForm} />
+        <SignUp submitForm={()=>submitForm} />
       ) : (
         <SignUpSuccess />
       )}
