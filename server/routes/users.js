@@ -6,46 +6,11 @@ const mongoose = require("mongoose");
 const userModel = require("../models/usersModel");
 
 // Create new user
-/* 
-    const register = (req, res, next) => {
-        bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
-            if (err) {
-                res.json({
-                    error: err
-                })
-            }
-            let newUser = new userModel({
-                name: req.body.name,
-                email: req.body.email,
-                password: hashedPass
-            })
-            newUser.save()
-                .then((result) => {
-                    res.status(201).json({
-                        message: "Handling POST requests to /user",
-                        createdUser: result,
-                    });
-                }).catch(err => {
-                    console.log(err);
-                    res.status(400).json({
-                        error: err,
-           
-                    })
-                })
-        })
-   
-    }
-
-module.exports = { register }
-router.post("/signUp", register) */
-module.exports=router
-
-
-/* router.post('/signUp',(req,res)=>{
-  const {name,email,password} = req.body 
-   if(!email || !password || !name){
+router.post('/signUp',(req,res)=>{
+  const {name,email,password,pic} = req.body 
+  if(!name || !email || !password){
      return res.status(422).json({error:"please add all the fields"})
-  } 
+  }
  userModel.findOne({email:email})
   .then((savedUser)=>{
       if(savedUser){
@@ -57,7 +22,7 @@ module.exports=router
                 email,
                 password:hashedpassword,
                 name,
-               
+                pic
             })
     
             user.save()
@@ -79,42 +44,11 @@ module.exports=router
   .catch(err=>{
     console.log(err)
   })
-}) */
+})
 
 
 
-router.post("/signUp", (req, res) => {
-  const {  name, email, password } = req.body;
-  /*  bcrypt.hash(password,12)
-      .then(hashedpassword=>{
-            const user = new userModel({
-                email,
-                password:hashedpassword,
-                name,
-               
-            }) */
-const user = new userModel({
-      name,
-      email,
-    password,
-      
-  }); 
- 
-  user.save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Handling POST requests to /user",
-        createdUser: result,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json({
-        error: err,
-      });
-    });
-}); 
-  
+
 //Login
 /* const login = (req, res, next) => {
     let username = req.body.username

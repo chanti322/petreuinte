@@ -11,7 +11,10 @@ const userSchema = new mongoose.Schema(
  password: {
     type: String,
         },
- 
+    pic: {
+      type: String,
+      default:"https://res.cloudinary.com/cloulau/image/upload/v1624022181/avatar-1577909_640_w8bjgt.png"
+ }
    
   }
   // { timestamps: true }
