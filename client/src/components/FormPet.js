@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
 import { Paper, TextField, TextareaAutosize } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import ConvertedAddress from "./ConvertedAddress"
 let marginInputGroup = {
   //marginTop: 10,
   marginBottom: 15,
@@ -16,16 +18,38 @@ let marginInputGroup = {
     padding:10,
   }
 export default function FormPet() {
-  const [name, setName] = useState("");
+ /*  const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [breed, setBreed] = useState("");
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [info, setInfo] = useState("");
   const [color, setColor] = useState("");
-  const [radio, setRadio] = useState("");
-  const { markers, setMarkers } = useContext(VariablesContext);
+  const [radio, setRadio] = useState("");*/
+  const {   name, 
+        setName,
+        type,
+        setType,
+        breed,
+        setBreed,
+        url,
+        setUrl,
+        info,
+        setInfo,
+        image,
+        setImage,
+        color,
+        setColor,
+        radio,
+        setRadio, markers, setMarkers, } = useContext(VariablesContext);
+  //const [markers, setMarkers] =useState([])
+  console.log("image", image)
+  console.log("markers", markers)
 
+  const onPageChange = (e) => {
+    setRadio(e.currentTarget.value)
+  }
+ 
   //Update image
   useEffect(() => {
     if (url) {
@@ -56,6 +80,7 @@ export default function FormPet() {
   }, [url]);
 
   const postDetails = () => {
+    
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "find-pet");
@@ -73,7 +98,10 @@ export default function FormPet() {
         console.log(err);
       });
   };
-
+ /*  function handleChangeImage(e) {
+    setImage(e.target.value);
+     localStorage.setItem('imageInLocalStorage', e.target.value)
+} */
   return (
     <div style={{ marginTop: 80 }}>
       <Paper style={Paperstyle}>
@@ -83,7 +111,8 @@ export default function FormPet() {
         type="radio"
         id="lost"
         name="situation"
-        value="lost"
+          value="lost"
+          checked={radio==="lost" && true}
         onChange={(e) => setRadio(e.target.value)}
           required
           style={{margin:10}}
@@ -93,7 +122,8 @@ export default function FormPet() {
         type="radio"
         id="found"
         name="situation"
-        value="found"
+          value="found"
+          checked={radio==="found" && true}
         onChange={(e) => setRadio(e.target.value)}
           required
           style={{margin:10}}
@@ -129,7 +159,10 @@ export default function FormPet() {
         onChange={(e) => setColor(e.target.value)}
           />
             </div>
-      <p style={{margin:5}}>Register your location:<Link to="/googleMap">Google Map</Link></p>
+        <p style={{ margin: 5 }}>Register your location:<Link to="/googleMap">Google Map</Link></p>
+      {markers && <p>location selected</p>}
+       
+        
       <div style={marginInputGroup}>
         <label forhtml="info">Write further informations</label>
           <TextareaAutosize
@@ -144,7 +177,7 @@ export default function FormPet() {
         <div>
           <Paper style={{padding:5, margin:5}}>
         <label forhtml="image">Upload Image</label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+            <input type="file" onChange={(e) => setImage(e.target.files[0]) }  />
             </Paper>
       </div>
         <button style={{padding:3}} onClick={() => postDetails()}>Submit</button>

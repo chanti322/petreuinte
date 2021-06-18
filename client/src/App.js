@@ -30,7 +30,7 @@ function App() {
             <Route path="/petsFound" exact component={PetsFound} />
             <Route path="/googleMap" exact component={GoogleMap} />
             <Route path="/Form" exact component={FormPet} />
-            <Route path="/userRegistration" exact component={SignUp} />
+            <Route path="/signUpForm" exact component={SignUp} />
                <Route
                   exact
                   path="/details/:id">

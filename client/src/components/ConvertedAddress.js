@@ -10,9 +10,10 @@ import Geocode from "react-geocode";
 
 
 export default function ConvertedAddress(props) {
-  //  const { markers, setMarkers } = useContext(VariablesContext);
-  let markers = props.markers;
-  const [addressPet, setAddressPet] =useState("")
+ // const { markers, setMarkers } = useContext(VariablesContext);
+ let markers = props.markers;
+  //const{addressPet, setAddressPet}= useContext(VariablesContext)
+ const [addressPet, setAddressPet] =useState("")
     console.log("conv", markers)
   useEffect(() => {
     if (markers) {
@@ -20,6 +21,7 @@ export default function ConvertedAddress(props) {
       let lng = markers[0].lng
       console.log(markers[0].lat)
       console.log(markers[0].lng)
+
       /*   const KEY = "process.env.REACT_APP_GOOGLE_API_KEY";*/
       Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API_KEY);
 
@@ -42,21 +44,22 @@ export default function ConvertedAddress(props) {
       Geocode.enableDebug();
 
       // Get address from latitude & longitude.
-     /* Geocode.fromLatLng(lat, lng).then(
+     Geocode.fromLatLng(lat, lng).then(
         (response) => {
          const address = response.results[0].formatted_address;
-         console.log(address);
+         console.log("address",address);
          setAddressPet(address)
+         console.log("petadd",address)
         },
         (error) => {
           console.error(error);
         }
-      ); */
+      );  
 
       // Get formatted address, city, state, country from latitude & longitude when
       // Geocode.setLocationType("ROOFTOP") enabled
       // the below parser will work for most of the countries
-     Geocode.fromLatLng(lat, lng).then(
+ /*     Geocode.fromLatLng(lat, lng).then(
         (response) => {
           const address = response.results[0].formatted_address;
           let city, state, country;
@@ -77,12 +80,14 @@ export default function ConvertedAddress(props) {
           }
           console.log(city, state, country);
           console.log(address);
+          setAddressPet(address)
+          console.log("petaddre", addressPet)
         },
         (error) => {
           console.error(error);
         }
       ); 
-
+ */
     // Get latitude & longitude from address.
    /*  Geocode.fromAddress("Eiffel Tower").then(
       (response) => {
@@ -96,5 +101,5 @@ export default function ConvertedAddress(props) {
       console.log("no location selected")
     }
   },[])
-    return (<div>{addressPet}</div>)
+    return (<div>{addressPet} test</div>)
 }

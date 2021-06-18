@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { VariablesContext } from "../../context/VariablesContext";
+import {GoBackButtonMap} from "../GoBackButtonMap"
 import {
   GoogleMap,
   useLoadScript,
@@ -168,6 +169,7 @@ export default function Map() {
       },
     });
     return (
+      <div>
       <Combobox
         onSelect={async (address) => {
           setValue(address, false);
@@ -197,6 +199,8 @@ export default function Map() {
             })}
         </ComboboxPopover>
       </Combobox>
+      <GoBackButtonMap style={{position: "absolute", top: 200}} />
+      </div>
     );
   }
 }

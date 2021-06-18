@@ -79,7 +79,7 @@ router.post("/uploads", (req, res) => {
     .then((result) => {
       res.status(201).json({
         message: "Handling POST requests to /pet",
-        createdProduct: result,
+        createdPet: result,
       });
     })
     .catch((err) => {

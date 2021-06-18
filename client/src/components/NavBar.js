@@ -123,7 +123,7 @@ export default function MenuAppBar() {
               <Link to="/Form">Pet registration</Link>
             </MenuItem>
           </Menu>
-          <Link to="/userRegistration"> <button className={classes.loginButton}>Sign in/up</button> </Link>
+          <Link to="/signUpForm"> <button className={classes.loginButton}>Sign in/up</button> </Link>
         </Toolbar>
       </AppBar>
     </div>

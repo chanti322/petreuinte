@@ -5,56 +5,102 @@ const jwt = require('jsonwebtoken')
 const mongoose = require("mongoose");
 const userModel = require("../models/usersModel");
 
-router.get("/all", (req, res) => {
-  userModel.find({}, function (err, pets) {
-    if (err) {
-      res.send(err);
-    } else {
-        res.send(users);
-       
-    }
-  });
-});
 // Create new user
-const register = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
-        if (err) {
-            res.json({
-                error:err
+/* 
+    const register = (req, res, next) => {
+        bcrypt.hash(req.body.password, 10, function (err, hashedPass) {
+            if (err) {
+                res.json({
+                    error: err
+                })
+            }
+            let newUser = new userModel({
+                name: req.body.name,
+                email: req.body.email,
+                password: hashedPass
             })
-        }
-         let newUser = new userModel({
-        name: req.body.name,
-        email: req.body.email,
-        password:hashedPass
-    })
-    newUser.save()
-        .then(user => {
-            res.json({
-            message:"User Added Successfully"
+            newUser.save()
+                .then((result) => {
+                    res.status(201).json({
+                        message: "Handling POST requests to /user",
+                        createdUser: result,
+                    });
+                }).catch(err => {
+                    console.log(err);
+                    res.status(400).json({
+                        error: err,
+           
+                    })
+                })
         })
-        }).catch(err => {
-            res.json({
-            message:"An error occured!"
-        })
-    })
-    })
    
-}
+    }
 
-router.post("/signUp", register)
+module.exports = { register }
+router.post("/signUp", register) */
 module.exports=router
-/* router.post("/signUp", (req, res) => {
+
+
+/* router.post('/signUp',(req,res)=>{
+  const {name,email,password} = req.body 
+   if(!email || !password || !name){
+     return res.status(422).json({error:"please add all the fields"})
+  } 
+ userModel.findOne({email:email})
+  .then((savedUser)=>{
+      if(savedUser){
+        return res.status(422).json({error:"user already exists with that email"})
+      }
+      bcrypt.hash(password,12)
+      .then(hashedpassword=>{
+            const user = new userModel({
+                email,
+                password:hashedpassword,
+                name,
+               
+            })
+    
+            user.save()
+            .then(user=>{
+                // transporter.sendMail({
+                //     to:user.email,
+                //     from:"no-reply@insta.com",
+                //     subject:"signup success",
+                //     html:"<h1>welcome to instagram</h1>"
+                // })
+                res.json({message:"saved successfully"})
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+      })
+     
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+}) */
+
+
+
+router.post("/signUp", (req, res) => {
   const {  name, email, password } = req.body;
-  
-  const user = new userModel({
+  /*  bcrypt.hash(password,12)
+      .then(hashedpassword=>{
+            const user = new userModel({
+                email,
+                password:hashedpassword,
+                name,
+               
+            }) */
+const user = new userModel({
       name,
       email,
-      password,
-  });
+    password,
+      
+  }); 
  
-  user
-    .save()
+  user.save()
     .then((result) => {
       res.status(201).json({
         message: "Handling POST requests to /user",
@@ -67,10 +113,10 @@ module.exports=router
         error: err,
       });
     });
-});
- */
+}); 
+  
 //Login
-const login = (req, res, next) => {
+/* const login = (req, res, next) => {
     let username = req.body.username
     let password = req.body.password
 
@@ -103,6 +149,6 @@ const login = (req, res, next) => {
             })
         }
     })
-}
+} */
 module.exports = router;
-module.exports = { register,login }
+
