@@ -16,7 +16,12 @@ export default function SignIn() {
             type="password"
             placeholder="password"
             value={password}
-            onChange={(e)=>setPasword(e.target.value)}
-            />
+            onChange={(e)=>setPassword(e.target.value)}
+      />
+         <button  className="submit"
+            
+            >
+                SignIn
+            </button>
   </div>)  
 }

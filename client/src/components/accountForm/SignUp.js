@@ -5,7 +5,7 @@ import "../../styles/SignUpForm.css";
 const SignUp  = ()=>{
     const history = useHistory()
     const [name,setName] = useState("")
-    const [password,setPasword] = useState("")
+    const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("")
     const [url,setUrl] = useState(undefined)
@@ -95,7 +95,7 @@ const SignUp  = ()=>{
             type="password"
             placeholder="password"
             value={password}
-            onChange={(e)=>setPasword(e.target.value)}
+            onChange={(e)=>setPassword(e.target.value)}
             />
             <div>
             <div >
@@ -109,10 +109,10 @@ const SignUp  = ()=>{
             <button  className="submit"
             onClick={()=>PostData()}
             >
-                SignUP
+                SignUp
             </button>
             <h5>
-                <Link to="/signIn">Already have an account ?</Link>
+                <Link to="/signInForms">Already have an account ?</Link>
             </h5>
              
                

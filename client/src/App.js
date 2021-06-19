@@ -8,6 +8,7 @@ import PetsLost from "./views/PetsLost";
 import PetsFound from "./views/PetsFound";
 import FormPet from "./components/FormPet";
 import SignUp from "./components/accountForm/SignUp"
+import SignIn from "./components/accountForm/SignIn"
 import GoogleMap from "./components/googleMaps/GoogleMap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContextProvider } from "./context/VariablesContext";
@@ -31,6 +32,7 @@ function App() {
             <Route path="/googleMap" exact component={GoogleMap} />
             <Route path="/Form" exact component={FormPet} />
             <Route path="/signUpForm" exact component={SignUp} />
+               <Route path="/signInForm" exact component={SignIn} />
                <Route
                   exact
                   path="/details/:id">
