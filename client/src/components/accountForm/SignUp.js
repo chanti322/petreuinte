@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
-import {Link,useHistory} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import "../../styles/SignUpForm.css";
 //import M from 'materialize-css'
 const SignUp  = ()=>{
     const history = useHistory()
