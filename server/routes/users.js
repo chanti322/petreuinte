@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
+const secretOrKey = require("../config.js").secretOrKey;
+
+const passport = require("passport");
 const mongoose = require("mongoose");
 const userModel = require("../models/usersModel");
 
@@ -19,20 +22,14 @@ router.post('/signUp',(req,res)=>{
       bcrypt.hash(password,12)
       .then(hashedpassword=>{
             const user = new userModel({
-                email,
-                password:hashedpassword,
                 name,
+              email,
+                password:hashedpassword,
                 pic
             })
     
             user.save()
             .then(user=>{
-                // transporter.sendMail({
-                //     to:user.email,
-                //     from:"no-reply@insta.com",
-                //     subject:"signup success",
-                //     html:"<h1>welcome to instagram</h1>"
-                // })
                 res.json({message:"saved successfully"})
             })
             .catch(err=>{
@@ -50,39 +47,44 @@ router.post('/signUp',(req,res)=>{
 
 
 //Login
-/* const login = (req, res, next) => {
-    let username = req.body.username
-    let password = req.body.password
-
-    userModel.findOne({ $or: [{ email: username }] })
-    .then(user => {
-        if (user) {
-            bcrypt.compare(password.user.password, function (err, result) {
-                if (err) {
-                    res.json({
-                        error:err
-                    })
-                }
-                if (result) {
-                    let token= jwt.sign({name:user.name}, 'verySecretValue',{expiresIn:"1h"})
-                    res.json({
-                   message:"Login successfull!",
-                   token
-               })
-                }
-                else {
-                    res.json({
-                        message: "Password does not matched!"
-                    })
-                }
-            })
-        } else {
-            res.json({
-                
-                message:"No user found!"
-            })
+router.post("/login", (req, res) => {
+  console.log(req.body)
+  const email = req.body.email;
+  const password = req.body.password;
+  userModel.findOne({ email: email }, (err, user) => {
+    if (err) {
+      res.send("Email does not exist");
+    } else {
+      bcrypt.compare(password, user.password, function (err, result) {
+        console.log(result);
+        if (err) {
+          res.send(err);
         }
-    })
-} */
+        if (result) {
+          const options = {
+            id: user._id,
+          };
+          const token = jwt.sign(options, secretOrKey, { expiresIn: "1h" });
+          console.log(token);
+          res.json({
+            success: true,
+            token: token,
+          });
+        } else {
+          res.send("password does not match");
+        }
+      });
+    }
+  });
+});
+
+router.get(
+  "/userProfile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    console.log(req.user);
+    res.send(req.user);
+  }
+); 
 module.exports = router;
 
