@@ -4,7 +4,7 @@ import "../../styles/SignUpForm.css";
 //import M from 'materialize-css'
 const SignUp  = ()=>{
     const history = useHistory()
-    const [name,setName] = useState("")
+    const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("")
@@ -42,7 +42,7 @@ const SignUp  = ()=>{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify({
-                name,
+                username,
                 password,
                 email,
                 pic:url
@@ -80,8 +80,8 @@ const SignUp  = ()=>{
           className="input"
             type="text"
             placeholder="name"
-            value={name}
-            onChange={(e)=>setName(e.target.value)}
+            value={username}
+            onChange={(e)=>setUsername(e.target.value)}
             />
        <input
           className="input"
@@ -112,7 +112,7 @@ const SignUp  = ()=>{
                 SignUp
             </button>
             <h5>
-                <Link to="/signInForms">Already have an account ?</Link>
+                <Link to="/signInForm">Already have an account ?</Link>
             </h5>
              
                
