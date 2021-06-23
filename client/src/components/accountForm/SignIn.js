@@ -5,8 +5,12 @@ export default function SignIn() {
    const [password, setPassword] = useState("")
  
    console.log({ email: email })
-   const accessToken = localStorage.getItem("accessToken")
-   console.log(accessToken) 
+// const accessToken = localStorage.getItem("accessToken")
+  // console.log(accessToken) 
+   const loggedIn = localStorage.getItem("loggedIn")
+   const usernameStorage = localStorage.getItem("usernameStorage")
+console.log(usernameStorage)   
+   //console.log(loggedIn)
 
   let getLogIn = ()=>{
       fetch("http://localhost:5000/users/login", {
@@ -20,8 +24,14 @@ export default function SignIn() {
             })
       }).then(res => res.json())
          .then(data => {
+           // accessToken =""
+            console.log("alldata",data)
             console.log("data", data.token);
-           localStorage.setItem("accessToken",data.token)
+            console.log("user", data.loggedIn)
+            console.log('username', data.user.username)
+          // localStorage.setItem("accessToken",data.token)
+            localStorage.setItem("loggedIn", data.loggedIn)
+            localStorage.setItem("usernameStorage",data.user.username)
          }
          ).catch(err => {
             console.log(err)
