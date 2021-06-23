@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import LogOut from "./accountForm/logOutButton"
 
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -133,8 +134,8 @@ export default function MenuAppBar() {
             </MenuItem>
           </Menu>
 
-          <Link to="/signUpForm"> <button className={classes.loginButton}>Sign in/up</button> </Link>
-          <button className={classes.loginButton}>Log out</button>
+          { !loggedIn ? <Link to="/signUpForm"> <button className={classes.loginButton}>Sign in/up</button> </Link> :
+         <div> <LogOut/> </div>}
         </Toolbar>
       </AppBar>
     </div>
