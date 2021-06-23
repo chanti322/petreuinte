@@ -10,6 +10,7 @@ import FormPet from "./components/FormPet";
 import SignUp from "./components/accountForm/SignUp"
 import SignIn from "./components/accountForm/SignIn"
 import GoogleMap from "./components/googleMaps/GoogleMap";
+import Home from "./views/Home"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContextProvider } from "./context/VariablesContext";
 import ConvertedAddress from "./components/ConvertedAddress"
@@ -28,6 +29,7 @@ function App() {
             <Route path="/petsLost" exact component={PetsLost} />
           </Switch>
           <Switch>
+             <Route path="/" exact component={Home} />
             <Route path="/petsFound" exact component={PetsFound} />
             <Route path="/googleMap" exact component={GoogleMap} />
             <Route path="/Form" exact component={FormPet} />
