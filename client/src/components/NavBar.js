@@ -77,6 +77,12 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const loggedIn = localStorage.getItem("loggedIn")
+  const usernameStorage = localStorage.getItem("usernameStorage")
+ 
+  console.log("namenav",usernameStorage)
+  console.log("nav",loggedIn)
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -103,9 +109,12 @@ export default function MenuAppBar() {
             aria-haspopup="true"
             onClick={handleClick}
           >
+          
             <MenuIcon className={classes.menuIconColor} />
           </IconButton>
-
+          {loggedIn && <p>Ciao <span>{usernameStorage}</span></p>
+          
+}
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -123,7 +132,9 @@ export default function MenuAppBar() {
               <Link to="/Form">Pet registration</Link>
             </MenuItem>
           </Menu>
+
           <Link to="/signUpForm"> <button className={classes.loginButton}>Sign in/up</button> </Link>
+          <button className={classes.loginButton}>Log out</button>
         </Toolbar>
       </AppBar>
     </div>
