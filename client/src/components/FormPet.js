@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
+import Map from "./googleMaps/GoogleMap"
 import { Paper, TextField, TextareaAutosize } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import ConvertedAddress from "./ConvertedAddress"
@@ -159,8 +160,8 @@ export default function FormPet() {
         onChange={(e) => setColor(e.target.value)}
           />
             </div>
-        <p style={{ margin: 5 }}>Register your location:<Link to="/googleMap">Google Map</Link></p>
-      {markers && <p>location selected</p>}
+       {/*  <p style={{ margin: 5 }}>Register your location:<Link to="/googleMap">Google Map</Link></p>
+      {markers && <p>location selected</p>} */}
        
         
       <div style={marginInputGroup}>
@@ -179,8 +180,11 @@ export default function FormPet() {
         <label forhtml="image">Upload Image</label>
             <input type="file" onChange={(e) => setImage(e.target.files[0]) }  />
             </Paper>
-      </div>
-        <button style={{padding:3}} onClick={() => postDetails()}>Submit</button>
+        </div>
+        <p>Register the location where you lost or found the pet</p>
+        <p>If Google Map is not available write the location in the info box</p>
+        <Map />
+        <button style={{ padding: 3, marginTop:20}} onClick={() => postDetails()}>Submit</button>
         </Paper>
     </div>
   );

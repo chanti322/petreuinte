@@ -25,8 +25,9 @@ import mapStyles from "./mapStyles";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "100vh",
-  width: "100vw",
+  height: "80vh",
+  width: "80vw",
+  margin:"0 auto"
 };
 const options = {
   styles: [
@@ -54,10 +55,10 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     libraries,
   });
-  const { markers, setMarkers } = useContext(VariablesContext);
-  //const [markers, setMarkers] = React.useState([]);
+  //const { markers, setMarkers } = useContext(VariablesContext);
+  const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
-
+localStorage.setItem("markers",markers)
   const onMapClick = React.useCallback((e) => {
     setMarkers( [
    
@@ -83,7 +84,7 @@ export default function Map() {
   if (!isLoaded) return "Loading...";
 
   return (
-    <div style={{marginTop:100}}>
+    <div style={{marginTop:20}}>
      {/*  <h1>
         Bears{" "}
         <span role="img" aria-label="tent">
@@ -176,7 +177,7 @@ function Search({ panTo }) {
     },
   });
 
-  // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
+  
 
   const handleInput = (e) => {
     setValue(e.target.value);

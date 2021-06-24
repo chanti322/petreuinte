@@ -20,11 +20,14 @@ const useStyles = makeStyles({
 
 export default function PetsFound() {
   const classes = useStyles();
-  const { pets, setPets } = useContext(VariablesContext);
+  //const { pets, setPets } = useContext(VariablesContext);
+  const [pets,setPets] = useState([])
   useEffect(() => {
     fetch("http://localhost:5000/pets/found")
       .then((res) => res.json())
-      .then((data) => setPets(data));
+      .then((data) => {
+        setPets(data);
+      console.log("petlost",pets)});
   }, []);
   return (
     <div style={{ marginTop: 200 }}>

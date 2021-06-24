@@ -10,23 +10,24 @@ import Geocode from "react-geocode";
 
 
 export default function ConvertedAddress(props) {
- // const { markers, setMarkers } = useContext(VariablesContext);
+ //const { markers, setMarkers } = useContext(VariablesContext);
  // let markers = { props.markersOne.length>0 ? props.markersOne : props.markers };
+  //let markers = localStorage.getItem("markers")
+  //let markers = props.markersOne;
   
-  let markersOne = props.markersOne;
-  console.log("mark", markersOne)
-  let genMarkers = props.markers;
-  let markers;
+  let markers = props.markers;
+  console.log("mark", markers)
+  /*let markers;
   if (markersOne !==undefined) {
    markers = markersOne
   } else {
     markers = genMarkers 
- }
+ } */
   //const{addressPet, setAddressPet}= useContext(VariablesContext)
  const [addressPet, setAddressPet] =useState("")
     console.log("conv", markers)
   useEffect(() => {
-    if (markers) {
+    if (markers !==undefined && markers.length>0) {
       let lat = markers[0].lat
       let lng = markers[0].lng
       console.log(markers[0].lat)

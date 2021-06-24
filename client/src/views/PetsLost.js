@@ -19,12 +19,16 @@ const useStyles = makeStyles({
 
 export default function PetsLost() {
   const classes = useStyles();
-  const { pets, setPets } = useContext(VariablesContext);
+  //const { pets, setPets } = useContext(VariablesContext);
+   const [pets,setPets] = useState([])
 
   useEffect(() => {
     fetch("http://localhost:5000/pets/lost")
       .then((res) => res.json())
-      .then((data) => setPets(data));
+      .then((data) => {
+        setPets(data);
+        console.log("petlost",pets)
+      });
   }, []);
   return (
     <div style={{ marginTop: 80 }}>
