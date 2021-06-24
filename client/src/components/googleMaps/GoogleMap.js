@@ -1,4 +1,6 @@
-import React from "react";
+import React,{useState, useContext} from "react";
+import { VariablesContext } from "../../context/VariablesContext";
+import {GoBackButtonMap} from "../GoBackButtonMap"
 import {
   GoogleMap,
   useLoadScript,
@@ -27,26 +29,38 @@ const mapContainerStyle = {
   width: "100vw",
 };
 const options = {
-  styles: mapStyles,
-  disableDefaultUI: true,
-  zoomControl: true,
+  styles: [
+    {
+      featureType: "administrative.country",
+      elementType: "geometry",
+      stylers: [
+        {
+          visibility: "simplified",
+        },
+        {
+          hue: "#ff0000",
+        },
+      ],
+    },
+  ],
 };
 const center = {
 lat: 52.520008,
   lng: 13.404954,
 };
 
-export default function App() {
+export default function Map() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     libraries,
   });
-  const [markers, setMarkers] = React.useState([]);
+  const { markers, setMarkers } = useContext(VariablesContext);
+  //const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
 
   const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
+    setMarkers( [
+   
       {
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
@@ -62,21 +76,21 @@ export default function App() {
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(16);
   }, []);
 
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
   return (
-    <div>
-      <h1>
+    <div style={{marginTop:100}}>
+     {/*  <h1>
         Bears{" "}
         <span role="img" aria-label="tent">
           ⛺️
         </span>
-      </h1>
-
+      </h1> */}
+ 
       <Locate panTo={panTo} />
       <Search panTo={panTo} />
 
@@ -91,17 +105,18 @@ export default function App() {
       >
         {markers.map((marker) => (
           <Marker
+            key={marker.time.toISOString()}
            // key={`${marker.lat}-${marker.lng}`}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
               setSelected(marker);
             }}
-            icon={{
+       /*      icon={{
               url: `/bear.svg`,
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
               scaledSize: new window.google.maps.Size(30, 30),
-            }}
+            }} */
           />
         ))}
 
@@ -114,10 +129,7 @@ export default function App() {
           >
             <div>
               <h2>
-                <span role="img" aria-label="bear">
-                  🐻
-                </span>{" "}
-                Alert
+                Pet found
               </h2>
               <p>Spotted {formatRelative(selected.time, new Date())}</p>
             </div>
@@ -144,7 +156,8 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img src="/compass.svg" alt="compass" />
+      {/*   <img src="/compass.svg" alt="compass" /> */}
+      Find my location
     </button>
   );
 }

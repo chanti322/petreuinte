@@ -107,8 +107,9 @@ router.get(
 router.post('/logout', passport.authenticate("jwt", { session: false }), async (req, res) => {
   let blacklist = []
   try {
-      console.log("req",req)
-      blacklist.push(req.token)
+    console.log("req", req)
+    console.log("res", res)
+    //  blacklist.push(req.user)
       console.log("newTok", req.token)
       console.log("blacklist",blacklist)
         return res.status(200).json('logout');
