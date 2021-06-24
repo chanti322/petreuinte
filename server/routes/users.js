@@ -68,7 +68,14 @@ router.post("/login", (req, res) => {
           const options = {
             id: user._id,
           };
-          const token = jwt.sign(options, secretOrKey, { expiresIn: "1h" });
+          const token = jwt.sign(options, secretOrKey, { expiresIn: "1m" });
+          /* if (blacklist.indexOf(token) = -1) {
+            return token
+          }
+          else {
+            token = "";
+            console.log("Invalid token")
+          } */
           console.log(token);
          const { pic,username,email} = user;
           res.json({
@@ -97,14 +104,13 @@ router.get(
 
 //Log out
 
-router.post('/logout', passport.authenticate("jwt", { session: false }), async(req, res) => {
-    try{
-        let randomNumberToAppend = toString(Math.floor((Math.random() * 1000) + 1));
-        let randomIndex = Math.floor((Math.random() * 10) + 1);
-        let hashedRandomNumberToAppend = await bcrypt.hash(randomNumberToAppend, 10);
-    
-        // now just concat the hashed random number to the end of the token
-       req.token = req.token + hashedRandomNumberToAppend;
+router.post('/logout', passport.authenticate("jwt", { session: false }), async (req, res) => {
+  let blacklist = []
+  try {
+      console.log("req",req)
+      blacklist.push(req.token)
+      console.log("newTok", req.token)
+      console.log("blacklist",blacklist)
         return res.status(200).json('logout');
     }catch(err){
         return res.status(500).json(err.message);
@@ -112,3 +118,17 @@ router.post('/logout', passport.authenticate("jwt", { session: false }), async(r
 }); 
 module.exports = router;
 
+/* router.post('/logout', passport.authenticate("jwt", { session: false }), async(req, res) => {
+    try{
+        let randomNumberToAppend = toString(Math.floor((Math.random() * 1000) + 1));
+        let randomIndex = Math.floor((Math.random() * 10) + 1);
+        let hashedRandomNumberToAppend = await bcrypt.hash(randomNumberToAppend, 10);
+    
+        // now just concat the hashed random number to the end of the token
+       req.token = req.token + hashedRandomNumberToAppend;
+       console.log("newTok",req.token)
+        return res.status(200).json('logout');
+    }catch(err){
+        return res.status(500).json(err.message);
+    }
+});  */

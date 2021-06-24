@@ -10,7 +10,8 @@ const initContextVariables = {
   image: "",
   color: "",
   radio: "",
-  addressPet:"",
+  addressPet: "",
+  isLoggedIn: false,
 };
 
 export const VariablesContext = createContext(initContextVariables);
@@ -26,7 +27,8 @@ export const VariablesContextProvider = ({ children }) => {
   const [color, setColor] = useState(initContextVariables.color);
   const [radio, setRadio] = useState(initContextVariables.radio);
   const [markers, setMarkers] = useState(initContextVariables.markers);
-    const [addressPet, setAddressPet] = useState(initContextVariables.addressPet);
+  const [addressPet, setAddressPet] = useState(initContextVariables.addressPet);
+     const [isLoggedIn, setIsLoggedIn] = useState(initContextVariables.isLoggedIn);
   console.log("in context", markers);
   return (
     <VariablesContext.Provider
@@ -51,7 +53,9 @@ export const VariablesContextProvider = ({ children }) => {
         setRadio,
         markers,
         setMarkers,
-        addressPet, setAddressPet
+        addressPet, setAddressPet,
+        isLoggedIn,
+        setIsLoggedIn
 
       }}
     >

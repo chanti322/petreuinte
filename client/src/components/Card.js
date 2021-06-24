@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ConvertedAddress from "./ConvertedAddress"
 
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -23,6 +24,7 @@ export default function CardPet(props) {
         return (
           <Card className={classes.root} key={`found ${pet._id}`}>
             <CardActionArea>
+              <Link to={`details/${pet._id}`}>
               <CardMedia
                 component="img"
                 alt="Contemplative Reptile"
@@ -30,7 +32,7 @@ export default function CardPet(props) {
                 image={pet.img}
                 title="Contemplative Reptile"
               />
-
+</Link>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {pet.name}
@@ -38,9 +40,7 @@ export default function CardPet(props) {
                 <Typography variant="body2" color="textSecondary" component="p">
                   {pet.breed} - {pet.type}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.info}
-                        </Typography>
+               
                          <Typography variant="body2" color="textSecondary" component="p">
                             <ConvertedAddress markers={pet.markers}/>
                         </Typography>
@@ -52,7 +52,7 @@ export default function CardPet(props) {
               <Button size="small" color="primary">
                 <Link to={`details/${pet._id}`}>
 
-                  Learn More
+                 More information
                     </Link>
               </Button>
             </CardActions>

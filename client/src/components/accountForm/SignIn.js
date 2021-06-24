@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import "../../styles/SignUpForm.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function SignIn() {
     const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
  
    console.log({ email: email })
-// const accessToken = localStorage.getItem("accessToken")
-  // console.log(accessToken) 
+ const accessToken = localStorage.getItem("accessToken")
+  console.log("signInToken", accessToken) 
    const loggedIn = localStorage.getItem("loggedIn")
    const usernameStorage = localStorage.getItem("usernameStorage")
 console.log(usernameStorage)   
@@ -29,14 +30,19 @@ console.log(usernameStorage)
             console.log("data", data.token);
             console.log("user", data.loggedIn)
             console.log('username', data.user.username)
-          // localStorage.setItem("accessToken",data.token)
+            localStorage.setItem("accessToken",data.token)
             localStorage.setItem("loggedIn", data.loggedIn)
             localStorage.setItem("usernameStorage",data.user.username)
          }
          ).catch(err => {
             console.log(err)
-        })
-  }
+         })
+     
+   }
+   const reloadAndFetch = () => {
+      //window.location.reload();
+      getLogIn()
+   }
 
    return (<div style={{ width:"90%", margin: "0 auto", marginTop: 80 }}>
        <h3>Welcome Back!</h3>
@@ -54,10 +60,10 @@ console.log(usernameStorage)
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
       />
-         <button  className="submit"
-            onClick={getLogIn}
+        <Link to="/"> <button  className="submit"
+            onClick={reloadAndFetch}
             >
                 SignIn
-            </button>
+            </button></Link>
   </div>)  
 }

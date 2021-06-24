@@ -11,7 +11,17 @@ import Geocode from "react-geocode";
 
 export default function ConvertedAddress(props) {
  // const { markers, setMarkers } = useContext(VariablesContext);
- let markers = props.markers;
+ // let markers = { props.markersOne.length>0 ? props.markersOne : props.markers };
+  
+  let markersOne = props.markersOne;
+  console.log("mark", markersOne)
+  let genMarkers = props.markers;
+  let markers;
+  if (markersOne !==undefined) {
+   markers = markersOne
+  } else {
+    markers = genMarkers 
+ }
   //const{addressPet, setAddressPet}= useContext(VariablesContext)
  const [addressPet, setAddressPet] =useState("")
     console.log("conv", markers)

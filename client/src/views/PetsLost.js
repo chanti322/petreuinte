@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 export default function PetsLost() {
   const classes = useStyles();
   const { pets, setPets } = useContext(VariablesContext);
+
   useEffect(() => {
     fetch("http://localhost:5000/pets/lost")
       .then((res) => res.json())
