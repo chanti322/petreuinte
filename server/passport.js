@@ -8,10 +8,14 @@ const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
+
 const jwtVerify = async (payload, next) => {
+  console.log("payload", payload);
+  console.log("next",next)
   try {
     const user = await userModel.findById(payload.id);
-    console.log("user : ", user);
+    console.log("user :> ", user);
+    console.log("next",next)
     if (!user) {
       return next(null, false);
     }

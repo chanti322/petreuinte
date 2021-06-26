@@ -9,7 +9,9 @@ const LogOut = () => {
              headers:{
                  "Authorization": 'Bearer '+ accessToken,
                    "Content-Type":"application/json"
-    }
+            },  body:JSON.stringify({
+               blacklistArray: accessToken
+            })
         }).then(res => res.json())
             .then(data => console.log(data))
     }

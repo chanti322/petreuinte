@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { VariablesContext } from "../context/VariablesContext";
+/* import { VariablesContext } from "../context/VariablesContext";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
-} from "@react-google-maps/api";
+} from "@react-google-maps/api"; */
 import Geocode from "react-geocode";
 
 

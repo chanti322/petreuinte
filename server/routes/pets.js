@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const petModel = require("../models/petsModel");
+const commentModel = require("../models/commentModel");
 const petDetailsModel = require("../models/petDetailsModel");
 
 //const upload = require("../middleware/upload");
@@ -42,7 +43,7 @@ router.get("/found", (req, res) => {
 router.get("/details/:id", (req, res) => {
   let petId = req.params.id;
   console.log(petId)
-  petModel.findById(petId).exec(function (err, pet) {
+  petModel.findById(petId).populate("comments").exec(function (err, pet) {
     if (err) {
       console.log("err")
     } else {
@@ -54,7 +55,7 @@ router.get("/details/:id", (req, res) => {
 // Create new Post
 router.post("/uploads", (req, res) => {
   const { radio, name, type, breed, color, markers, info, img } = req.body;
-  console.log(img);
+
 
   /*   if (!type || !pic) {
     return res.status(422).json({
@@ -89,5 +90,57 @@ router.post("/uploads", (req, res) => {
       });
     });
 });
+// Create a comment
+router.post("/comments", (req, res) => {
+  const { petId, text} = req.body;
 
+
+  /*   if (!type || !pic) {
+    return res.status(422).json({
+      error: "Please write the species/type of the animal and add a picture",
+    });
+  } */
+  const comment = new commentModel({
+    petId,
+    text, 
+  });
+  /*   if (req.file) {
+    pet.avatar = req.file.path;
+  } */
+  comment
+    .save()
+    .then((result) => {
+      res.status(201).json({
+        message: "Handling POST requests to /comment",
+        createdComment: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({
+        error: err,
+      });
+    });
+});
+// comments
+/* router.put('/comment',(req,res)=>{
+    const comment = {
+        text:req.body.text,
+        postedBy:req.user._id
+    }
+    petModel.findByIdAndUpdate(req.body.postId,{
+        $push:{comments:comment}
+    },{
+        new:true
+    })
+    .populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name")
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    })
+}) */
 module.exports = router;

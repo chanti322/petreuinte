@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import ConvertedAddress from "./ConvertedAddress"
 
 
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -19,7 +20,8 @@ const useStyles = makeStyles({
 
 
 export default function CardPet(props) {
-    let pet= props.pet
+  let pet = props.pet
+  console.log("petincard", pet)
    const classes = useStyles();
         return (
           <Card className={classes.root} key={`found ${pet._id}`}>
@@ -55,6 +57,7 @@ export default function CardPet(props) {
                  More information
                     </Link>
               </Button>
+              
             </CardActions>
           </Card>)
       

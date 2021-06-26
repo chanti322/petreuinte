@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {ObjectId} = mongoose.Schema.Types
 const petSchema = new mongoose.Schema(
   {
     
@@ -27,7 +28,13 @@ const petSchema = new mongoose.Schema(
     img: {
       type: String,
     },
-  }
+     comments:[{
+        text:String,
+        postedBy:{type:ObjectId,ref:"User"}
+    }], 
+    /* comments: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]}*/
+  } 
   // { timestamps: true }
 );
 var Pet = mongoose.model("Pet", petSchema);

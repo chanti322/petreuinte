@@ -7,6 +7,8 @@ const secretOrKey = require("../config.js").secretOrKey;
 const passport = require("passport");
 const mongoose = require("mongoose");
 const userModel = require("../models/usersModel");
+const blacklistModel = require("../models/blacklistModel");
+const requireLogin = require("../middleware/requireLogin")
 
 // Create new user
 router.post('/signUp',(req,res)=>{
@@ -68,7 +70,7 @@ router.post("/login", (req, res) => {
           const options = {
             id: user._id,
           };
-          const token = jwt.sign(options, secretOrKey, { expiresIn: "1m" });
+          const token = jwt.sign(options, secretOrKey, { expiresIn: "10m" });
           /* if (blacklist.indexOf(token) = -1) {
             return token
           }
@@ -92,31 +94,58 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.post("/logout", (req, res) => {
+  const { accessToken} = req.body;
+console.log("body0",req.body)
+
+  /*   if (!type || !pic) {
+    return res.status(422).json({
+      error: "Please write the species/type of the animal and add a picture",
+    });
+  } */
+ /*  bcrypt.hash(accessToken, 12)
+    .then(hashedaccessToken => { */
+    const blackList = new blacklistModel({
+   accessToken
+     
+  });
+ 
+  
+
+
+  /*   if (req.file) {
+    pet.avatar = req.file.path;
+  } */
+  blackList
+    .save()
+    .then((result) => {
+      res.status(201).json({
+        message: "Handling POST requests to /blacklist",
+        createdComment: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({
+        error: err,
+      });
+    });
+      // })
+});
+
 router.get(
   "/userProfile",
-  passport.authenticate("jwt", { session: false }),
+ requireLogin,
+/*   passport.authenticate("jwt", { session: false }) */
   (req, res) => {
-    console.log(req.user);
+    console.log("profile",req.user);
     res.send(req.user);
   }
 ); 
 
 
-//Log out
 
-router.post('/logout', passport.authenticate("jwt", { session: false }), async (req, res) => {
-  let blacklist = []
-  try {
-    console.log("req", req)
-    console.log("res", res)
-    //  blacklist.push(req.user)
-      console.log("newTok", req.token)
-      console.log("blacklist",blacklist)
-        return res.status(200).json('logout');
-    }catch(err){
-        return res.status(500).json(err.message);
-    }
-}); 
+
 module.exports = router;
 
 /* router.post('/logout', passport.authenticate("jwt", { session: false }), async(req, res) => {
@@ -133,3 +162,41 @@ module.exports = router;
         return res.status(500).json(err.message);
     }
 });  */
+//Log out
+
+/* router.post('/logout', passport.authenticate("jwt", { session: false }), async (req, res) => {
+  
+  try {
+ 
+    //  const auth =req.headers.authorization
+    console.log("body", req.body)
+    //console.log("res", res)
+   // console.log("new", newA)
+   // console.log("req", req.headers)
+    /*  const blackList = new blacklistModel({
+      blacklistArray: req.body.accessToken
+   
+  });
+ 
+  blackList
+    .save()
+    .then((result) => {
+      res.status(201).json({
+        message: "Handling POST requests to /black",
+        createdComment: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({
+        error: err,
+      });
+    });  
+  
+        return res.status(200).json('logout');
+    }catch(err){
+        return res.status(500).json(err.message);
+    }
+});   */
+
+
