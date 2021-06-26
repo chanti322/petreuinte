@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "redis": "redis-server"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,8 @@
     "multer": "^1.4.2",
     "multer-gridfs-storage": "^4.2.0",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "redis": "^3.1.2",
+    "redis-server": "^1.2.2"
   }
 }
