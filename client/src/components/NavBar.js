@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     fontFamily: "Montserrat",
     fontStyle: "italic",
-    width:"25%",
+  
   },
 
   linkText: {
@@ -72,10 +72,11 @@ const useStyles = makeStyles((theme) => ({
   },
    logOut: {
     fontFamily: "Montserrat",
-    borderRadius: 5,
-    padding: 5,
+
+    padding: 10,
     background: "rgb(2, 48, 32)",
-    color: "white",
+     color: "white",
+    borderRadius:"50%",
   }, 
 }));
 
@@ -120,9 +121,9 @@ console.log(logo)
             <MenuIcon className={classes.menuIconColor} />
             </IconButton>
             </div >
-          {loggedIn && <p className={classes.welcometext}>Welcome <span>{usernameStorage}</span></p>
+         {/*  {loggedIn && <p className={classes.welcometext}>Welcome <span>{usernameStorage}</span></p> }*/}
           
-}
+
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -142,7 +143,7 @@ console.log(logo)
           </Menu>
 
           { !loggedIn ? <Link to="/signUpForm"> <button className={classes.loginButton}>Sign in/up</button> </Link> :
-         <div> <LogOut/> </div>}
+         <div style={{display:"flex", flexDirection:"column"}}> <p className={classes.welcometext}>Welcome <span>{usernameStorage}</span></p><LogOut/> </div>}
         </Toolbar>
       </AppBar>
     </div>
