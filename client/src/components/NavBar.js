@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import LogOut from "./accountForm/logOutButton"
+import logo from "../logo.png"
 
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -26,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
   padding: 5,
   textTransform: "uppercase",
     color: "#FF4500",
-    fontWeight:"bold",
+    fontWeight: "bold",
+    fontSize: 10,
+    marginRight: 50,
   },
   menuButton: {
     //  marginRight: theme.spacing(1),
@@ -56,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     fontFamily: "Montserrat",
     fontStyle: "italic",
+    width:"25%",
   },
 
   linkText: {
@@ -66,13 +70,13 @@ const useStyles = makeStyles((theme) => ({
       color: "green",
     },
   },
-  logOut: {
+   logOut: {
     fontFamily: "Montserrat",
     borderRadius: 5,
     padding: 5,
     background: "rgb(2, 48, 32)",
     color: "white",
-  },
+  }, 
 }));
 
 export default function MenuAppBar() {
@@ -96,11 +100,13 @@ export default function MenuAppBar() {
   function twoFunction() {
     handleClose();
   }
-
+console.log(logo)
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBarColor}>
-        <Toolbar style={{display:"flex", justifyContent:"space-between"}}>
+        <Toolbar style={{ display: "flex", justifyContent: "space-around" }}>
+          <div style={{display:"flex", justifyContent:"flex-start",padding:5}}>
+            <img src={logo} alt="logo" className={classes.logo} />
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -112,8 +118,9 @@ export default function MenuAppBar() {
           >
           
             <MenuIcon className={classes.menuIconColor} />
-          </IconButton>
-          {loggedIn && <p>Ciao <span>{usernameStorage}</span></p>
+            </IconButton>
+            </div >
+          {loggedIn && <p className={classes.welcometext}>Welcome <span>{usernameStorage}</span></p>
           
 }
           <Menu
@@ -124,13 +131,13 @@ export default function MenuAppBar() {
             onClose={handleClose}
           >
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link to="/petsLost">Lost Pets</Link>
+              <Link  className={classes.linkText} to="/petsLost">Lost Pets</Link>
             </MenuItem>
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link to="/petsFound">Found Pets</Link>
+              <Link className={classes.linkText} to="/petsFound">Found Pets</Link>
             </MenuItem>
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link to="/Form">Pet registration</Link>
+              <Link  className={classes.linkText}to="/Form">Pet registration</Link>
             </MenuItem>
           </Menu>
 
