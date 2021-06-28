@@ -70,7 +70,7 @@ router.post("/login", (req, res) => {
           const options = {
             id: user._id,
           };
-          const token = jwt.sign(options, secretOrKey, { expiresIn: "10m" });
+          const token = jwt.sign(options, secretOrKey, { expiresIn: "15m" });
           /* if (blacklist.indexOf(token) = -1) {
             return token
           }
@@ -135,8 +135,8 @@ console.log("body0",req.body)
 
 router.get(
   "/userProfile",
- requireLogin,
-/*   passport.authenticate("jwt", { session: false }) */
+//requireLogin,
+ passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     console.log("profile",req.user);
     res.send(req.user);

@@ -86,8 +86,8 @@ export default function MenuAppBar() {
   const loggedIn = localStorage.getItem("loggedIn")
   const usernameStorage = localStorage.getItem("usernameStorage")
  
-  console.log("namenav",usernameStorage)
-  console.log("nav",loggedIn)
+ // console.log("namenav",usernameStorage)
+//  console.log("nav",loggedIn)
 
 
   const handleClick = (event) => {
@@ -101,7 +101,7 @@ export default function MenuAppBar() {
   function twoFunction() {
     handleClose();
   }
-console.log(logo)
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBarColor}>

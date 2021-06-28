@@ -6,30 +6,35 @@ const express = require("express");
 const router = express.Router();
 
 const blacklistModel = require("../models/blacklistModel");
+//console.log("model", blacklistModel)
 module.exports = (request, response, next) => {
- 
+// console.log("request", request)
 // Take the token from the Authorization header
   const token = request.header('Authorization').replace('Bearer ', '');
+  console.log("iltok", token)
   if (!token) {
     response.status(403).send({
       message: 'No token provided!',
     });
   }
-
-// Verify the token
-    jwt.verify(token, secretOrKey, (error, decoded) => {
-        console.log("tok", token)
-        router.get("/blacklist", (req, res) => {
-              console.log("body1",req.body)
-  blacklistModel.find({  }, function (err, accesstoken) {
+  router.get("/blacklist", (req, res) => {
+              console.log("bodyBlacklist",req.body)
+    blacklistModel.find({}, function (err, accesstoken) {
+  console.log("b", accessToken)
     if (err) {
       res.send(err);
     } else {
-        res.send(accessToken);
-        console.log("acc", res)
+        res.send(accesstoken);
+        console.log("blacklist",res)
     }
   });
-});
+ });
+  module.exports = router; 
+  
+// Verify the token
+    jwt.verify(token, secretOrKey, (error, decoded) => {
+        console.log("tok", token)
+       
     if (error) {
       return response.status(401).send({
         status: 'error',
