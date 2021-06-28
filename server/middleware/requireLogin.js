@@ -15,10 +15,10 @@ module.exports = async (request, response, next) => {
   console.log("iltok", token)
 
   //blacklist
- const black = await  blacklistModel.find({}, function (err, accesstoken) {
+ const black = await  blacklistModel.findOne({}, function (err, accesstoken) {
       //  console.log("b", accesstoken[0])
       accesstoken.forEach(tok => {
-        console.log(tok.accessToken)
+        //console.log(tok.accessToken)
         if (tok.accessToken === token) {
          // token2 = token + "cc";
          // console.log("cc", token2)
@@ -33,34 +33,21 @@ module.exports = async (request, response, next) => {
       })
 
     });
-  console.log("tokendopo",token2)
+ // console.log("tokendopo",token2)
   if (!token) {
     response.status(403).send({
       message: 'No token provided!',
     });
   }
 
- /*  const blacklist = 
-    blacklistModel.find({}, function (err, accesstoken) {
-      //  console.log("b", accesstoken[0])
-      accesstoken.forEach(tok => {
-        console.log(tok.accessToken)
-        if (tok.accessToken === token) {
-          token = token + "cc";
-          console.log("cc", token)
-  
  
-        } else { console.log("valid") }
-      })
-
-    }); */
-    //console.log(blacklist)
   
 // Verify the token
     jwt.verify(token, secretOrKey, (error, decoded) => {
      
     if (error) {
       return response.status(401).send({
+        
         status: 'error',
         message: error.message,
       });
@@ -109,3 +96,18 @@ module.exports = async (request, response, next) => {
  });
   module.exports = router;  */
  // console.log("list", blacklist)
+ /*  const blacklist = 
+    blacklistModel.find({}, function (err, accesstoken) {
+      //  console.log("b", accesstoken[0])
+      accesstoken.forEach(tok => {
+        console.log(tok.accessToken)
+        if (tok.accessToken === token) {
+          token = token + "cc";
+          console.log("cc", token)
+  
+ 
+        } else { console.log("valid") }
+      })
+
+    }); */
+    //console.log(blacklist)
