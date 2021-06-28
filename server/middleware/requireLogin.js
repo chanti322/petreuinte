@@ -7,34 +7,58 @@ const router = express.Router();
 
 const blacklistModel = require("../models/blacklistModel");
 //console.log("model", blacklistModel)
-module.exports = (request, response, next) => {
+module.exports = async (request, response, next) => {
 // console.log("request", request)
 // Take the token from the Authorization header
-  const token = request.header('Authorization').replace('Bearer ', '');
+  let token2 =""
+  let token = request.header('Authorization').replace('Bearer ', '');
   console.log("iltok", token)
+
+  //blacklist
+ const black = await  blacklistModel.find({}, function (err, accesstoken) {
+      //  console.log("b", accesstoken[0])
+      accesstoken.forEach(tok => {
+        console.log(tok.accessToken)
+        if (tok.accessToken === token) {
+         // token2 = token + "cc";
+         // console.log("cc", token2)
+          token = request.header('Authorization').replace('Bearer ', 'c');
+          console.log("+c",token)
+        //  token2=token
+ 
+        } else {
+         // token2 =token
+         // console.log("valid")
+        }
+      })
+
+    });
+  console.log("tokendopo",token2)
   if (!token) {
     response.status(403).send({
       message: 'No token provided!',
     });
   }
-  router.get("/blacklist", (req, res) => {
-              console.log("bodyBlacklist",req.body)
+
+ /*  const blacklist = 
     blacklistModel.find({}, function (err, accesstoken) {
-  console.log("b", accessToken)
-    if (err) {
-      res.send(err);
-    } else {
-        res.send(accesstoken);
-        console.log("blacklist",res)
-    }
-  });
- });
-  module.exports = router; 
+      //  console.log("b", accesstoken[0])
+      accesstoken.forEach(tok => {
+        console.log(tok.accessToken)
+        if (tok.accessToken === token) {
+          token = token + "cc";
+          console.log("cc", token)
+  
+ 
+        } else { console.log("valid") }
+      })
+
+    }); */
+    //console.log(blacklist)
   
 // Verify the token
     jwt.verify(token, secretOrKey, (error, decoded) => {
-        console.log("tok", token)
-       
+     
     if (error) {
       return response.status(401).send({
         status: 'error',
@@ -71,3 +95,17 @@ module.exports = (request, response, next) => {
         })
            })
  */
+/*   router.get("/blacklist", (req, res) => {
+              console.log("bodyBlacklist",req.body)
+    blacklistModel.find({}, function (err, accesstoken) {
+  console.log("b", accessToken)
+    if (err) {
+      res.send(err);
+    } else {
+        res.send(accesstoken);
+        console.log("blacklist",res)
+    }
+  });
+ });
+  module.exports = router;  */
+ // console.log("list", blacklist)
