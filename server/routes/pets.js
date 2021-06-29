@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const petModel = require("../models/petsModel");
 const commentModel = require("../models/commentModel");
 const petDetailsModel = require("../models/petDetailsModel");
+const requireLogin = require("../middleware/requireLogin")
 
 //const upload = require("../middleware/upload");
 router.get("/all", (req, res) => {
@@ -19,7 +20,7 @@ router.get("/all", (req, res) => {
 module.exports = router;
 
 // only Lost Pets
-router.get("/lost", (req, res) => {
+router.get("/lost",/* requireLogin,  */ (req, res) => {
   petModel.find({ radio: "lost" }, function (err, pets) {
     if (err) {
       res.send(err);
@@ -54,7 +55,7 @@ router.get("/details/:id", (req, res) => {
 })
 // Create new Post
 router.post("/uploads", (req, res) => {
-  const { radio, name, type, breed, color, markers, info, img } = req.body;
+  const { radio, name, type, breed, color, markers, info, img, comment } = req.body;
 
 
   /*   if (!type || !pic) {
@@ -71,6 +72,7 @@ router.post("/uploads", (req, res) => {
     markers,
     info,
     img: img,
+    comment,
   });
   /*   if (req.file) {
     pet.avatar = req.file.path;
@@ -91,37 +93,64 @@ router.post("/uploads", (req, res) => {
     });
 });
 // Create a comment
-router.post("/comments", (req, res) => {
-  const { petId, text} = req.body;
+router.put('/comments', (req, res) => {
+
+    const comment = {
+      text: req.body.text,
+      avatar: req.body.avatar,
+      username: req.body.username,
+      
+  }
+    console.log(req.body)
+  console.log("be comment",comment)
+    petModel.findByIdAndUpdate(req.body.petId,{
+        $push:{comments:comment}
+    },/* {
+        new:true
+    } */)
+    /* .populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name")*/
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }else{
+            res.json(result)
+        }
+    }) 
+})
+
+module.exports = router;
+/* router.post("/comments", (req, res) => {
+  const { petId, userId, comment } = req.body;
+  console.log("comment", comment)
+  
+
+ // petModel.findOneAndUpdate({ petId: petId }, function (req, res) {
+  
 
 
-  /*   if (!type || !pic) {
-    return res.status(422).json({
-      error: "Please write the species/type of the animal and add a picture",
+    const commentPet = new commentModel({
+      userId,
+      comment,
     });
-  } */
-  const comment = new commentModel({
-    petId,
-    text, 
-  });
-  /*   if (req.file) {
-    pet.avatar = req.file.path;
-  } */
-  comment
+  
+    commentPet
     .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Handling POST requests to /comment",
-        createdComment: result,
+      .then((result) => {
+        res.status(201).json({
+          message: "Handling POST requests to /comment",
+          createdComment: result,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json({
+          error: err,
+        });
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json({
-        error: err,
-      });
-    });
-});
+ // });
+ 
+
 // comments
 /* router.put('/comment',(req,res)=>{
     const comment = {
@@ -142,5 +171,4 @@ router.post("/comments", (req, res) => {
             res.json(result)
         }
     })
-}) */
-module.exports = router;
+}) */ 

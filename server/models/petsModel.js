@@ -20,7 +20,7 @@ const petSchema = new mongoose.Schema(
       type: String,
     },
     markers: {
-      type:Array,
+      type: Array,
     },
     info: {
       type: String,
@@ -28,13 +28,25 @@ const petSchema = new mongoose.Schema(
     img: {
       type: String,
     },
-     comments:[{
-        text:String,
-        postedBy:{type:ObjectId,ref:"User"}
-    }], 
+    comments: [
+      {
+        text: {
+          type: String,
+        },
+        avatar: {
+          type: String
+        },
+        username: {
+          type:String
+        }
+       
+      }
+    ]
+  }
+     , 
     /* comments: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]}*/
-  } 
+  
   // { timestamps: true }
 );
 var Pet = mongoose.model("Pet", petSchema);

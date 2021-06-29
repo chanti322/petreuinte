@@ -70,7 +70,7 @@ router.post("/login", (req, res) => {
           const options = {
             id: user._id,
           };
-          const token = jwt.sign(options, secretOrKey, { expiresIn: "15m" });
+          const token = jwt.sign(options, secretOrKey, { expiresIn: "7h" });
           /* if (blacklist.indexOf(token) = -1) {
             return token
           }
@@ -78,7 +78,7 @@ router.post("/login", (req, res) => {
             token = "";
             console.log("Invalid token")
           } */
-          console.log(token);
+          console.log("islogin",token);
          const { pic,username,email} = user;
           res.json({
             loggedIn:true,
@@ -96,7 +96,8 @@ router.post("/login", (req, res) => {
 
 router.post("/logout", (req, res) => {
   const { accessToken} = req.body;
-console.log("body0",req.body)
+  console.log("body0", req.body)
+  console.log("body tok", accessToken)
 
   /*   if (!type || !pic) {
     return res.status(422).json({
@@ -109,13 +110,7 @@ console.log("body0",req.body)
    accessToken
      
   });
- 
-  
 
-
-  /*   if (req.file) {
-    pet.avatar = req.file.path;
-  } */
   blackList
     .save()
     .then((result) => {
@@ -135,10 +130,10 @@ console.log("body0",req.body)
 
 router.get(
   "/userProfile",
-//requireLogin,
- passport.authenticate("jwt", { session: false }), 
+requireLogin,
+ //passport.authenticate("jwt", { session: false }), 
   (req, res) => {
-    console.log("profile",req.user);
+  //  console.log("profile",req.user);
     res.send(req.user);
   }
 ); 

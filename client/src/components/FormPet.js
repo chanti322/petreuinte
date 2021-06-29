@@ -19,15 +19,18 @@ let marginInputGroup = {
     padding:10,
   }
 export default function FormPet() {
- /*  const [name, setName] = useState("");
+   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [breed, setBreed] = useState("");
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [info, setInfo] = useState("");
   const [color, setColor] = useState("");
-  const [radio, setRadio] = useState("");*/
-  const {   name, 
+  const [radio, setRadio] = useState("");
+  //const [markers, setMarkers] = useState([])
+  const [comment, setComment] = useState([])
+  
+  /* const { name,
         setName,
         type,
         setType,
@@ -42,8 +45,9 @@ export default function FormPet() {
         color,
         setColor,
         radio,
-        setRadio, markers, setMarkers, } = useContext(VariablesContext);
-  //const [markers, setMarkers] =useState([])
+        setRadio, markers, setMarkers, } = useContext(VariablesContext);*/
+  const{markers, setMarkers}= useContext(VariablesContext)
+ 
   console.log("image", image)
   console.log("markers", markers)
 
@@ -68,6 +72,7 @@ export default function FormPet() {
           markers,
           info,
           img: url,
+          comment
         }),
       })
         .then((res) => res.json())

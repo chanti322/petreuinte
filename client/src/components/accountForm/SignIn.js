@@ -5,12 +5,12 @@ export default function SignIn() {
     const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
  
-   console.log({ email: email })
+  // console.log({ email: email })
  const accessToken = localStorage.getItem("accessToken")
   console.log("signInToken", accessToken) 
    const loggedIn = localStorage.getItem("loggedIn")
    const usernameStorage = localStorage.getItem("usernameStorage")
-console.log(usernameStorage)   
+
    //console.log(loggedIn)
 
   let getLogIn = ()=>{
@@ -32,7 +32,8 @@ console.log(usernameStorage)
             console.log('username', data.user.username)
             localStorage.setItem("accessToken",data.token)
             localStorage.setItem("loggedIn", data.loggedIn)
-            localStorage.setItem("usernameStorage",data.user.username)
+            localStorage.setItem("usernameStorage", data.user.username)
+            localStorage.setItem ("userAvatar", data.user.pic)
          }
          ).catch(err => {
             console.log(err)
