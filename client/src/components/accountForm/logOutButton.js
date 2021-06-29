@@ -7,7 +7,7 @@ const LogOut = () => {
     let logoutButton = {
         padding: 5,
         textTransform: "uppercase",
-        color: "#FF4500",
+        color: "orange",
         fontWeight: "bold",
         fontSize: 10,
         marginRight: 30,

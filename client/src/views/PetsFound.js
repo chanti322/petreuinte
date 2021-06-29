@@ -27,47 +27,16 @@ export default function PetsFound() {
       .then((res) => res.json())
       .then((data) => {
         setPets(data);
-      console.log("petlost",pets)});
+      console.log("petfound",pets)});
   }, []);
   return (
-    <div style={{ marginTop: 200 }}>
-      <h2>Pets that were saw on the street</h2>
-      <p>Did you see a pet?</p>
+    <div style={{marginTop:80}}>
+      <h2 style={{marginBottom:20}}>Animals spotted on the street</h2>
+   
       {pets.map((pet) => {
         return (
           <CardPet pet={pet}/>
-        /*   <Card className={classes.root} key={`found ${pet._id}`}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="Contemplative Reptile"
-                height="140"
-                image={pet.img}
-                title="Contemplative Reptile"
-              />
-
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {pet.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.breed} - {pet.type}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.info}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-           
-              <Button size="small" color="primary">
-                <Link to={`details/${pet._id}`}>
-
-                  Learn More
-                    </Link>
-              </Button>
-            </CardActions>
-          </Card>*/
+       
         );
       })}
     </div> 

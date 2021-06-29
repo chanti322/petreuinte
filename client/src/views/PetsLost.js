@@ -20,15 +20,27 @@ const useStyles = makeStyles({
 export default function PetsLost() {
   const classes = useStyles();
   //const { pets, setPets } = useContext(VariablesContext);
-   const [pets,setPets] = useState([])
+  const [pets, setPets] = useState([])
+  const accessToken = localStorage.getItem("accessToken")
+  console.log("tokeninLost", accessToken)
 
   useEffect(() => {
-    fetch("http://localhost:5000/pets/lost")
-      .then((res) => res.json())
-      .then((data) => {
-        setPets(data);
-        console.log("petlost",pets)
-      });
+    if (accessToken) {
+      fetch("http://localhost:5000/pets/lost", {
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("accessToken")
+        } 
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPets(data);
+          console.log("petlost", pets)
+        }).catch(err => {
+          console.log(err)
+        })
+    }else {
+      console.log("You have to logIn")
+    } 
   }, []);
   return (
     <div style={{ marginTop: 80 }}>

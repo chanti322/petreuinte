@@ -15,6 +15,10 @@ import ConvertedAddress from "./ConvertedAddress"
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    display: "flex",
+    flexDirection: "column",
+
+    margin:5
   },
 });
 
@@ -25,8 +29,9 @@ export default function CardPet(props) {
    const classes = useStyles();
         return (
           <Card className={classes.root} key={`found ${pet._id}`}>
+             <Link style={{textDecoration:"none"}} to={`details/${pet._id}`}>
             <CardActionArea>
-              <Link to={`details/${pet._id}`}>
+             
               <CardMedia
                 component="img"
                 alt="Contemplative Reptile"
@@ -34,25 +39,28 @@ export default function CardPet(props) {
                 image={pet.img}
                 title="Contemplative Reptile"
               />
-</Link>
+
               <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {pet.name}
+                <Typography gutterBottom variant="h5" component="h2" style={{color:"black"}}>
+                 {pet.name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.breed} - {pet.type}
+                 <span style={{fontWeight:"bold"}}>Breed:</span> {pet.breed} 
                 </Typography>
-               
+                <Typography variant="body2" color="textSecondary" component="p">
+            <span  style={{fontWeight:"bold"}}>Specie: </span>  {pet.type}
+                  </Typography>
                          <Typography variant="body2" color="textSecondary" component="p">
                             <ConvertedAddress markers={pet.markers}/>
                         </Typography>
                         
               </CardContent>
-            </CardActionArea>
+              </CardActionArea>
+              </Link>
             <CardActions>
            
               <Button size="small" color="primary">
-                <Link to={`details/${pet._id}`}>
+                <Link style={{textDecoration:"none", color:"orange"}} to={`details/${pet._id}`}>
 
                  More information
                     </Link>
