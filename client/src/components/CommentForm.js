@@ -2,10 +2,15 @@ import React, { useState } from "react";
 
 
 const Comment = (props) => {
-    const [text, setText] = useState("")
-    const [data,setData] = useState([])
+    const [text , setText] = useState("")
+    const [data, setData] = useState([])
+    const avatar = localStorage.getItem("userAvatar");
+  //  console.log("avatarCommForm", avatar)
+    const username = localStorage.getItem("usernameStorage")
+     // console.log("nameCommForm", username)
     let petId = props.petId
-    console.log("petIdcomm", petId)
+   // console.log("petIdcomm", petId)
+    //console.log("commText",text)
    /*  const handleChange = (e) => {
         e.preventDefault();
         setText(e.target.value)
@@ -13,23 +18,25 @@ const Comment = (props) => {
         
     } */
 
-   /*  let commentFetch = () => {
+    let commentFetch = () => {
         fetch("http://localhost:5000/pets/comments", {
-            method: "POST",
+            method: "put",
             headers: {
                 "Content-Type":"Application/json"
             },
              body: JSON.stringify({
-                 petId,
+                petId,
                  text,
+                 avatar,
+              username,
         }),
         }).then(res => res.json())
             .then((data) => {
-            console.log("comment",data)
+            console.log("commentdata",data)
         })
-    } */
+    } 
 
-    const commentFetch = (text,postId)=>{
+    /* const commentFetch = (text,postId)=>{
           fetch('/comment',{
               method:"put",
               headers:{
@@ -54,10 +61,22 @@ const Comment = (props) => {
           }).catch(err=>{
               console.log(err)
           })
-    }
+    } */
     return (
         <div>
-            {data ?
+            <input type="text" placeholder="add a comment" value={text}  onChange={(e) => setText(e.target.value)} />
+            <button onClick={commentFetch}>Send</button>
+        </div>
+        
+    )
+    
+       
+    
+   
+}
+            export default Comment;
+
+  {/*   {data ?
         data.map(item => {
             return (
 
@@ -84,11 +103,4 @@ const Comment = (props) => {
                                 }}>
                                   <input type="text" placeholder="add a comment" />  
                                 </form>}
-        </div>
-    )
-    
-       
-    
-   
-}
-export default Comment;
+        </div> */}
