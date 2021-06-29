@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Link, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Comment from "../components/CommentForm"
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -17,10 +19,21 @@ import DisplayComment from "./displayComment"
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    margin: "0 auto"
   },
   media: {
     height: 140,
   },
+  paperElem: {
+    fontSize: 20,
+    margin: "15px 5px 15px 5px",
+    padding: 7,
+  },
+  goBackBtn: {
+    padding: 5,
+    backgroundColor: "orange",
+    borderRadius:5,
+  }
 });
 
 export default function SinglePet(props) {
@@ -40,27 +53,38 @@ export default function SinglePet(props) {
     }
     singlePetfetch()
   }, [])
-  console.log("onePettype",onePet.type)
-  console.log("onePetmarker",onePet.markers)
- const classes = useStyles();
-
+ // console.log("onePettype",onePet.type)
+ // console.log("onePetmarker", onePet.markers)
+  console.log("onePetcomments",onePet.comments)
+  const classes = useStyles();
+ 
   return (<div style={{marginTop:90}}>
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
+          style={{borderRadius:15}}
           className={classes.media}
           image={onePet.img}
           title="Pet"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography style={{ fontWeight:"bold", backgroundColor:"orange"} }gutterBottom variant="h5" component="h2">
            {onePet.name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {onePet.type} - {onePet.breed}
-          </Typography>
+          <div style={{display:"flex", justifyContent: "space-around"}}>
+          <Paper className={classes.paperElem} variant="body2" color="textSecondary" component="p">
+          <span style={{fontWeight:"bold"}}> Species: </span>{onePet.type}
+          </Paper>
+           <Paper className={classes.paperElem} variant="body2" color="textSecondary" component="p">
+           <span style={{fontWeight:"bold"}}>Breed:</span> {onePet.breed}
+            </Paper>
+            </div>
             <Typography variant="body2" color="textSecondary" component="p">
-            {onePet.info}
+           <span style={{fontWeight:"bold", display:"block", fontSize:20}}>Further Information:</span>  {onePet.info}
+          </Typography>
+      
+              <Typography variant="body2" color="textSecondary" component="p">
+  
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             <ConvertedAddress markersOne={onePet.markers} />
@@ -68,14 +92,17 @@ export default function SinglePet(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-     
-        <button onClick={ () => history.goBack() }>
+     <button className={classes.goBackBtn} onClick={ () => history.goBack() }>
        Go Back
         </button>
-        <Comment petId={id} />
       </CardActions>
     </Card>
-    <DisplayComment petId={id}/>
+    <div>
+      <DisplayComment petComments={onePet.comments} petId={onePet._id}/>
+      
+        <Comment petId={id} />
+    </div>
+   
     </div>
   );
 }

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles({
+
+  commentBtn: {backgroundColor:"orange", padding:5, borderRadius: 4, marginLeft:7, fontStyle:"italic"}
+});
 
 
 const Comment = (props) => {
+       const classes = useStyles();
     const [text , setText] = useState("")
     const [data, setData] = useState([])
     const avatar = localStorage.getItem("userAvatar");
@@ -64,8 +70,8 @@ const Comment = (props) => {
     } */
     return (
         <div>
-            <input type="text" placeholder="add a comment" value={text}  onChange={(e) => setText(e.target.value)} />
-            <button onClick={commentFetch}>Send</button>
+            <input style={{marginTop:10, marginBottom: 15, width:"60%", padding:7}} type="text" placeholder="add a comment" value={text}  onChange={(e) => setText(e.target.value)} />
+            <button className={classes.commentBtn} onClick={commentFetch}>Send</button>
         </div>
         
     )
