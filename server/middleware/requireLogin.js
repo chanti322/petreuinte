@@ -6,18 +6,40 @@ const express = require("express");
 const router = express.Router();
 
 const blacklistModel = require("../models/blacklistModel");
-//console.log("model", blacklistModel)
-module.exports = async (request, response, next) => {
-// console.log("request", request)
-// Take the token from the Authorization header
-  let token2 =""
-  let token = request.header('Authorization').replace('Bearer ', '');
-  console.log("iltok", token)
 
-  //blacklist
- const black = await  blacklistModel.findOne({}, function (err, accesstoken) {
-      //  console.log("b", accesstoken[0])
-      accesstoken.forEach(tok => {
+module.exports = async (request, response, next) => {
+
+// Take the token from the Authorization header
+
+  let token = request.header('Authorization').replace('Bearer ', '');
+  
+  //Checking if token exists
+  
+    if (!token) {
+    response.status(403).send({
+      message: 'No token provided!',
+    });
+  }
+
+    //blacklist
+    const black = await blacklistModel.findOne({ accessToken: token }, function (err, accesstoken) {
+    console.log("b", accesstoken)
+      if (accesstoken !== null) {
+        console.log("tokinblacklist", accesstoken.accessToken)
+        response.status(401).send({
+
+        status: 'error',
+        message: "not allowed",
+      });
+         
+     //  response.write("<p>Hello World</p>");
+ // response.end();
+     
+        
+      } else {
+        console.log("no logout")
+      } 
+      /* accesstoken.forEach(tok => {
         //console.log(tok.accessToken)
         if (tok.accessToken === token) {
          // token2 = token + "cc";
@@ -30,15 +52,12 @@ module.exports = async (request, response, next) => {
          // token2 =token
          // console.log("valid")
         }
-      })
+      }) */
 
     });
- // console.log("tokendopo",token2)
-  if (!token) {
-    response.status(403).send({
-      message: 'No token provided!',
-    });
-  }
+  
+
+
 
  
   
@@ -47,7 +66,7 @@ module.exports = async (request, response, next) => {
      
     if (error) {
       return response.status(401).send({
-        
+
         status: 'error',
         message: error.message,
       });
@@ -57,7 +76,8 @@ module.exports = async (request, response, next) => {
     request.userId = decoded.id;
    // request.tokenExp = decoded.exp;
    // request.token = token;
-    next();
+   //   next();
+     
   });
 };
 
