@@ -23,9 +23,9 @@ module.exports = async (request, response, next) => {
 
     //blacklist
     const black = await blacklistModel.findOne({ accessToken: token }, function (err, accesstoken) {
-    console.log("b", accesstoken)
+   // console.log("b", accesstoken)
       if (accesstoken !== null) {
-        console.log("tokinblacklist", accesstoken.accessToken)
+    // 
         response.status(401).send({
 
         status: 'error',
@@ -38,6 +38,7 @@ module.exports = async (request, response, next) => {
         
       } else {
         console.log("no logout")
+     
       } 
       /* accesstoken.forEach(tok => {
         //console.log(tok.accessToken)
@@ -70,13 +71,14 @@ module.exports = async (request, response, next) => {
         status: 'error',
         message: error.message,
       });
-    }
+    } 
+      
 
 // Append the parameters to the request object
     request.userId = decoded.id;
    // request.tokenExp = decoded.exp;
    // request.token = token;
-   //   next();
+    next();
      
   });
 };

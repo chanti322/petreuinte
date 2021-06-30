@@ -20,7 +20,7 @@ router.get("/all", (req, res) => {
 module.exports = router;
 
 // only Lost Pets
-router.get("/lost",/* requireLogin,  */ (req, res) => {
+router.get("/lost", requireLogin,   (req, res) => {
   petModel.find({ radio: "lost" }, function (err, pets) {
     if (err) {
       res.send(err);
@@ -118,6 +118,32 @@ router.put('/comments', (req, res) => {
         }
     }) 
 })
+//Delete Comment
+router.delete('/deleteComment/:commentId', (req, res) => {
+  console.log("reqRem", req.params.commentId)
+ // console.log("req", req)
+/*   petModel.findOneAndDelete({ _id: req.params.commentId }, function (err) {
+     if(err) console.log("err",err);
+        console.log("This object will get deleted ");*/
+
+
+ 
+  petModel.findOne({ _id: req.params.commentId })
+  
+    .exec((err,comment)=>{
+        if(err || !comment){
+            return res.status(422).json({error:err})
+        }
+     // if(post.postedBy._id.toString() === req.user._id.toString()){
+              comment.remove()
+              .then(result=>{
+                  res.json(result)
+              }).catch(err=>{
+                  console.log(err)
+              })
+       // } 
+    })    }); 
+
 
 module.exports = router;
 /* router.post("/comments", (req, res) => {
