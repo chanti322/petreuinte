@@ -112,5 +112,5 @@ export default function ConvertedAddress(props) {
       console.log("no location selected")
     }
   },[])
-    return (<div>{addressPet} test</div>)
+    return (<div><span style={{fontWeight:"bold"}}>Address: </span>{addressPet}</div>)
 }

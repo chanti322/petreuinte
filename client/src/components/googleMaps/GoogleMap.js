@@ -55,8 +55,8 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     libraries,
   });
-  //const { markers, setMarkers } = useContext(VariablesContext);
-  const [markers, setMarkers] = React.useState([]);
+  const { markers, setMarkers } = useContext(VariablesContext);
+  //const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
 localStorage.setItem("markers",markers)
   const onMapClick = React.useCallback((e) => {
