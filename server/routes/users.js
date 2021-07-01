@@ -79,12 +79,12 @@ router.post("/login", (req, res) => {
             console.log("Invalid token")
           } */
           console.log("islogin",token);
-         const { pic,username,email} = user;
+         const { pic,username,email,_id} = user;
           res.json({
             loggedIn:true,
             success: true,
             token: token,
-          user:{pic,username,email}
+          user:{pic,username,email, _id}
           });
         } else {
           res.send("password does not match");

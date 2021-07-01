@@ -13,6 +13,7 @@ const Comment = (props) => {
     const avatar = localStorage.getItem("userAvatar");
   //  console.log("avatarCommForm", avatar)
     const username = localStorage.getItem("usernameStorage")
+    const userId = localStorage.getItem("userId")
      // console.log("nameCommForm", username)
     let petId = props.petId
    // console.log("petIdcomm", petId)
@@ -34,7 +35,8 @@ const Comment = (props) => {
                 petId,
                  text,
                  avatar,
-              username,
+                 username,
+              userId
         }),
         }).then(res => res.json())
             .then((data) => {

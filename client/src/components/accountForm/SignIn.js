@@ -29,11 +29,13 @@ export default function SignIn() {
             console.log("alldata",data)
             console.log("data", data.token);
             console.log("user", data.loggedIn)
-            console.log('username', data.user.username)
+           
             localStorage.setItem("accessToken",data.token)
             localStorage.setItem("loggedIn", data.loggedIn)
             localStorage.setItem("usernameStorage", data.user.username)
-            localStorage.setItem ("userAvatar", data.user.pic)
+            localStorage.setItem("userAvatar", data.user.pic)
+            localStorage.setItem("userId", data.user._id)
+            console.log(data.user._id)
          }
          ).catch(err => {
             console.log(err)

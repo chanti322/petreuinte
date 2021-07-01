@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles({
 
   buttonRemove: {
@@ -11,15 +12,21 @@ const useStyles = makeStyles({
   }
 });
 
-const RemoveComment = (prop) => {
+const RemoveComment = (props) => {
     const [data, setData] = useState([])
-    const [confirm, setConfirm]= useState(false)
-    let commentId = prop.commentId
-    console.log("commIdRem", commentId)
+    const [confirm, setConfirm] = useState(false)
+    const [idButton, setIdButton] = useState("")
+    let userId = localStorage.getItem("userId")
+    let userCommentId = props.userID
+
+    let commentId = props.commentId
+   
 
     let confirmation = () => {
         setConfirm(true)
     }
+
+
         const deleteComment = ()=>{
         fetch(`http://localhost:5000/pets/deleteComment/${commentId}`,{
             method:"delete",
@@ -35,7 +42,8 @@ const RemoveComment = (prop) => {
     }
       const classes = useStyles();
     return (<div>
-        <button className={classes.buttonRemove} onClick={deleteComment}>Remove</button>
+        {userId === userCommentId && <input type="button" value={"Remove"}
+            className={classes.buttonRemove} onClick={deleteComment} />}
         
     </div>)
 }

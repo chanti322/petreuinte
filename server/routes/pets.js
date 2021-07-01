@@ -99,6 +99,7 @@ router.put('/comments', (req, res) => {
       text: req.body.text,
       avatar: req.body.avatar,
       username: req.body.username,
+      userId: req.body.userId
       
   }
     console.log(req.body)

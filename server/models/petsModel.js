@@ -38,6 +38,9 @@ const petSchema = new mongoose.Schema(
         },
         username: {
           type:String
+        },
+        userId: {
+          type:String,
         }
        
       }
