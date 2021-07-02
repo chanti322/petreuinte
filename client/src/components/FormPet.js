@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
 import Map from "./googleMaps/GoogleMap"
 import { Paper, TextField, TextareaAutosize } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import Typography from '@material-ui/core/Typography';
 import ConvertedAddress from "./ConvertedAddress"
 let marginInputGroup = {
@@ -27,8 +28,12 @@ export default function FormPet() {
   const [info, setInfo] = useState("");
   const [color, setColor] = useState("");
   const [radio, setRadio] = useState("");
+  const [inSave,setInSave] =useState(false)
+  console.log("radioin form", radio)
   //const [markers, setMarkers] = useState([])
   const [comment, setComment] = useState([])
+  const [submitted, setSubmitted] = useState(false)
+    let userId = localStorage.getItem("userId")
   
   /* const { name,
         setName,
@@ -48,12 +53,12 @@ export default function FormPet() {
         setRadio, markers, setMarkers, } = useContext(VariablesContext);*/
   const{markers, setMarkers}= useContext(VariablesContext)
  
-  console.log("image", image)
-  console.log("markers", markers)
+ // console.log("image", image)
+ // console.log("markers", markers)
 
-  const onPageChange = (e) => {
+ /*  const onPageChange = (e) => {
     setRadio(e.currentTarget.value)
-  }
+  } */
  
   //Update image
   useEffect(() => {
@@ -72,7 +77,9 @@ export default function FormPet() {
           markers,
           info,
           img: url,
-          comment
+          comment,
+          userId,
+          inSave
         }),
       })
         .then((res) => res.json())
@@ -104,10 +111,13 @@ export default function FormPet() {
         console.log(err);
       });
   };
- /*  function handleChangeImage(e) {
-    setImage(e.target.value);
-     localStorage.setItem('imageInLocalStorage', e.target.value)
-} */
+  let postSubmitted = () => {
+    setSubmitted(true);
+}
+  let saveTheForm = () => {
+    postDetails();
+    postSubmitted();
+}
   return (
     <div style={{ marginTop: 80 }}>
       <Paper style={Paperstyle}>
@@ -189,8 +199,19 @@ export default function FormPet() {
         <p>Register the location where you lost or found the pet</p>
         <p>If Google Map is not available write the location in the info box</p>
         <Map />
-        <button style={{ padding: 3, marginTop:20}} onClick={() => postDetails()}>Submit</button>
-        </Paper>
+
+        
+          <button style={{ padding: 3, marginTop: 20 }} onClick={() => saveTheForm()}>Submit</button>
+      </Paper>
+      {submitted && <Alert severity="info" style={{ position:" absolute",
+    bottom: -400,
+    width: 300,
+    height: 300,
+    display:"flex",
+    textAlign: "center",
+    alignContent:"flex-start",
+    justifyContent: "center",
+    alignItems: "center", }}> <p>Post added with success!</p><Link to="/">Back to home page</Link></Alert>}
     </div>
   );
 }
