@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import { VariablesContext } from "../context/VariablesContext";
 const useStyles = makeStyles({
 
   commentBtn: {backgroundColor:"orange", padding:5, borderRadius: 4, marginLeft:7, fontStyle:"italic"}
@@ -7,23 +8,21 @@ const useStyles = makeStyles({
 
 
 const Comment = (props) => {
-       const classes = useStyles();
+    const classes = useStyles();
+ let  { countComment,setCountComment } = useContext(VariablesContext);
     const [text , setText] = useState("")
-    const [data, setData] = useState([])
+  
+    const loggedIn = localStorage.getItem("loggedIn")
+    
     const avatar = localStorage.getItem("userAvatar");
   //  console.log("avatarCommForm", avatar)
     const username = localStorage.getItem("usernameStorage")
     const userId = localStorage.getItem("userId")
      // console.log("nameCommForm", username)
     let petId = props.petId
-   // console.log("petIdcomm", petId)
-    //console.log("commText",text)
-   /*  const handleChange = (e) => {
-        e.preventDefault();
-        setText(e.target.value)
-        console.log("comment", text)
-        
-    } */
+    let addToCount = () => {
+      setCountComment(countComment +=1)
+  }
 
     let commentFetch = () => {
         fetch("http://localhost:5000/pets/comments", {
@@ -43,8 +42,27 @@ const Comment = (props) => {
             console.log("commentdata",data)
         })
     } 
+    let fetchAndCount = () => {
+        commentFetch();
+        addToCount();
+}
+ 
+    return (
+        <div>{
+            loggedIn && <div>
+            <input style={{marginTop:10, marginBottom: 15, width:"60%", padding:7}} type="text" placeholder="add a comment" value={text}  onChange={(e) => setText(e.target.value)} />
+            <button className={classes.commentBtn} onClick={fetchAndCount}>Send</button></div>}
+        </div>
+        
+    )
+    
+       
+    
+   
+}
+            export default Comment;
 
-    /* const commentFetch = (text,postId)=>{
+ /* const commentFetch = (text,postId)=>{
           fetch('/comment',{
               method:"put",
               headers:{
@@ -70,45 +88,3 @@ const Comment = (props) => {
               console.log(err)
           })
     } */
-    return (
-        <div>
-            <input style={{marginTop:10, marginBottom: 15, width:"60%", padding:7}} type="text" placeholder="add a comment" value={text}  onChange={(e) => setText(e.target.value)} />
-            <button className={classes.commentBtn} onClick={commentFetch}>Send</button>
-        </div>
-        
-    )
-    
-       
-    
-   
-}
-            export default Comment;
-
-  {/*   {data ?
-        data.map(item => {
-            return (
-
-                <div>
-                       {
-                                    item.comments.map(record=>{
-                                        return(
-                                        <h6 key={record._id}> {record.text}</h6>
-                                        )
-                                    })
-                                }
-                    <form onSubmit={(e)=>{
-                                    e.preventDefault()
-                                    commentFetch(e.target[0].value,item._id)
-                                }}>
-                                  <input type="text" placeholder="add a comment" />  
-                                </form>
-      
-                </div>)
-        })
-    :  <form onSubmit={(e)=>{
-                                    e.preventDefault()
-                                    commentFetch(e.target[0].value)
-                                }}>
-                                  <input type="text" placeholder="add a comment" />  
-                                </form>}
-        </div> */}

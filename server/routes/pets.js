@@ -120,8 +120,7 @@ router.put('/comments', (req, res) => {
     },/* {
         new:true
     } */)
-    /* .populate("comments.postedBy","_id name")
-    .populate("postedBy","_id name")*/
+    
     .exec((err,result)=>{
         if(err){
             return res.status(422).json({error:err})
@@ -182,15 +181,19 @@ router.put('/atHome', (req, res) => {
 router.delete('/deleteComment/:petId/:commentId', (req, res) => {
   console.log("reqRem", req.params)
 
-petModel.findOneAndUpdate({"petId":req.params.petId,"comments": req.params.commentId },
-    { $pull: { comments: req.params.commentId } }, (err) => {
-        if (err) {
-            return res.status(404).json({ message: 'Error' });
+petModel.findOneAndUpdate(req.params.petId,
+  { $pull: { comments:{_id : req.params.commentId} } }, { new: true , useFindAndModify: false}, function(err,data) {
+    if (err) {
+      return res.status(404).json({ message: 'Error' });
+    } else {
+      res.send(data.comments)
+    
+    
         }
-        return res.status(200).json({
+      /*   return res.status(200).json({
             success: true,
             message: 'success'
-        });
+        }); */
     }
 );
 
