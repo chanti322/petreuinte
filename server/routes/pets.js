@@ -39,7 +39,16 @@ router.get("/found", (req, res) => {
     }
   });
 });
-
+//only in Save pets
+router.get("/inSave", (req, res) => {
+  petModel.find({ inSave: true }, function (err, pets) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(pets);
+    }
+  });
+});
 // More details single pet
 router.get("/details/:id", (req, res) => {
   let petId = req.params.id;
@@ -55,7 +64,7 @@ router.get("/details/:id", (req, res) => {
 })
 // Create new Post
 router.post("/uploads", (req, res) => {
-  const { radio, name, type, breed, color, markers, info, img, comment } = req.body;
+  const { radio, name, type, breed, color, markers, info, img, comment,userId, inSave } = req.body;
 
 
   /*   if (!type || !pic) {
@@ -73,6 +82,8 @@ router.post("/uploads", (req, res) => {
     info,
     img: img,
     comment,
+    userId,
+    inSave
   });
   /*   if (req.file) {
     pet.avatar = req.file.path;
@@ -119,16 +130,71 @@ router.put('/comments', (req, res) => {
         }
     }) 
 })
+
+// Assign inSave == true and radio ==" " to the post
+router.put('/atHome', (req, res) => {
+
+  const inSavePet = {
+    inSave: req.body.inSavePet,
+      
+      
+  }
+  console.log(req.body)
+  console.log("in Save", inSavePet)
+  petModel.findByIdAndUpdate(req.body.petId,
+    { $set: { inSave: req.body.inSavePet, radio : " " } },
+    { upsert: true }, function
+    (err, result) {
+    if(err) {
+      return res.status(422).json({ error: err })
+    }else{
+      res.json(result)
+    }
+  }
+  )
+})
 //Delete Comment
-router.delete('/deleteComment/:commentId', (req, res) => {
-  console.log("reqRem", req.params.commentId)
- // console.log("req", req)
-/*   petModel.findOneAndDelete({ _id: req.params.commentId }, function (err) {
-     if(err) console.log("err",err);
-        console.log("This object will get deleted ");*/
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.delete('/deleteComment/:petId/:commentId', (req, res) => {
+  console.log("reqRem", req.params)
+
+petModel.findOneAndUpdate({"petId":req.params.petId,"comments": req.params.commentId },
+    { $pull: { comments: req.params.commentId } }, (err) => {
+        if (err) {
+            return res.status(404).json({ message: 'Error' });
+        }
+        return res.status(200).json({
+            success: true,
+            message: 'success'
+        });
+    }
+);
+
+/*  
   petModel.findOne({ _id: req.params.commentId })
   
     .exec((err,comment)=>{
@@ -143,7 +209,7 @@ router.delete('/deleteComment/:commentId', (req, res) => {
                   console.log(err)
               })
        // } 
-    })    }); 
+    })  */   }); 
 
 
 module.exports = router;

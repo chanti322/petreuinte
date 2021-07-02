@@ -7,6 +7,9 @@ const petSchema = new mongoose.Schema(
     radio: {
       type: String,
     },
+    userId: {
+      type:String,
+    },
     name: {
       type: String,
     },
@@ -28,6 +31,9 @@ const petSchema = new mongoose.Schema(
     img: {
       type: String,
     },
+    inSave: {
+      type: Boolean,
+      },
     comments: [
       {
         text: {
