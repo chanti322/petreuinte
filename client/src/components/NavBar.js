@@ -138,7 +138,10 @@ export default function MenuAppBar() {
               <Link className={classes.linkText} to="/petsFound">Found Pets</Link>
             </MenuItem>
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link  className={classes.linkText}to="/Form">Pet registration</Link>
+              <Link className={classes.linkText} to="/inSave">Solved Cases</Link>
+            </MenuItem>
+            <MenuItem className={classes.menuIt} onClick={twoFunction}>
+              {loggedIn && <Link className={classes.linkText} to="/Form">Pet registration</Link>}
             </MenuItem>
           </Menu>
 

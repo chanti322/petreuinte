@@ -11,6 +11,7 @@ import SignUp from "./components/accountForm/SignUp"
 import SignIn from "./components/accountForm/SignIn"
 import GoogleMap from "./components/googleMaps/GoogleMap";
 import Home from "./views/Home"
+import InSavePet from "./views/InSavePets"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContextProvider } from "./context/VariablesContext";
 import ConvertedAddress from "./components/ConvertedAddress"
@@ -34,6 +35,7 @@ function App() {
             <Route path="/googleMap" exact component={GoogleMap} />
             <Route path="/Form" exact component={FormPet} />
             <Route path="/signUpForm" exact component={SignUp} />
+              <Route path="/inSave" exact component={InSavePet} />
                <Route path="/signInForm" exact component={SignIn} />
                <Route
                   exact
