@@ -131,6 +131,9 @@ export default function MenuAppBar() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
+              <MenuItem className={classes.menuIt} onClick={twoFunction}>
+              <Link  className={classes.linkText} to="/">Home</Link>
+            </MenuItem>
             <MenuItem className={classes.menuIt} onClick={twoFunction}>
               <Link  className={classes.linkText} to="/petsLost">Lost Pets</Link>
             </MenuItem>
