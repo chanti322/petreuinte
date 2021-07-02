@@ -20,12 +20,12 @@ module.exports = async (request, response, next) => {
       message: 'No token provided!',
     });
   }
-
+let errore = false
     //blacklist
     const black = await blacklistModel.findOne({ accessToken: token }, function (err, accesstoken) {
    // console.log("b", accesstoken)
       if (accesstoken !== null) {
-    // 
+       errore = true;
         response.status(401).send({
 
         status: 'error',
@@ -40,20 +40,7 @@ module.exports = async (request, response, next) => {
         console.log("no logout")
      
       } 
-      /* accesstoken.forEach(tok => {
-        //console.log(tok.accessToken)
-        if (tok.accessToken === token) {
-         // token2 = token + "cc";
-         // console.log("cc", token2)
-          token = request.header('Authorization').replace('Bearer ', 'c');
-          console.log("+c",token)
-        //  token2=token
- 
-        } else {
-         // token2 =token
-         // console.log("valid")
-        }
-      }) */
+  
 
     });
   
@@ -78,12 +65,30 @@ module.exports = async (request, response, next) => {
     request.userId = decoded.id;
    // request.tokenExp = decoded.exp;
    // request.token = token;
-    next();
+      if (!errore) {
+            next();
+      }
+
      
   });
 };
 
   
+
+    /* accesstoken.forEach(tok => {
+        //console.log(tok.accessToken)
+        if (tok.accessToken === token) {
+         // token2 = token + "cc";
+         // console.log("cc", token2)
+          token = request.header('Authorization').replace('Bearer ', 'c');
+          console.log("+c",token)
+        //  token2=token
+ 
+        } else {
+         // token2 =token
+         // console.log("valid")
+        }
+      }) */
   
     
     /*const token = authorization.replace("Bearer ","")
