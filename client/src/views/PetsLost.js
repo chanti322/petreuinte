@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import CardPet from "../components/Card"
 import RegisterPet from "../components/RegisterPetButton";
 
+import { VariablesContext } from ".././context/VariablesContext";
+
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +26,7 @@ const useStyles = makeStyles({
 
 export default function PetsLost() {
   const classes = useStyles();
-  //const { pets, setPets } = useContext(VariablesContext);
+  let  { countInSave,setCountInSave } = useContext(VariablesContext);
   const [pets, setPets] = useState([])
   const accessToken = localStorage.getItem("accessToken")
   console.log("tokeninLost", accessToken)
@@ -46,14 +48,14 @@ export default function PetsLost() {
     }else {
       console.log("You have to logIn")
     } 
-  }, []);
+  }, [countInSave]);
   return (
     <div style={{ marginTop: 80 }}>
       <h2 className={classes.title}>Lost Pets</h2>
       <p className={classes.description}>Animals that have been lost</p>
       <RegisterPet />
       <p></p>
-      {pets.map((pet) => {
+      {pets.length>0 && pets.map((pet) => {
 
         return (
           <CardPet pet={pet}/>
