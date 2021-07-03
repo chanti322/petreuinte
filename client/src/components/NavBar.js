@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   welcometext: {
-    margin: "auto 10px",
+    margin: "10px",
     color: "white",
     fontWeight: 600,
     fontFamily: "Montserrat",
@@ -105,7 +105,7 @@ export default function MenuAppBar() {
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBarColor}>
-        <Toolbar style={{ display: "flex", justifyContent: "space-around" }}>
+        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{display:"flex", justifyContent:"flex-start",padding:5}}>
             <img src={logo} alt="logo" className={classes.logo} />
           <IconButton
@@ -125,27 +125,28 @@ export default function MenuAppBar() {
           
 
           <Menu
+           
             id="simple-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-              <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link  className={classes.linkText} to="/">Home</Link>
-            </MenuItem>
-            <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link  className={classes.linkText} to="/petsLost">Lost Pets</Link>
-            </MenuItem>
-            <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link className={classes.linkText} to="/petsFound">Found Pets</Link>
-            </MenuItem>
-            <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              <Link className={classes.linkText} to="/inSave">Solved Cases</Link>
-            </MenuItem>
-            <MenuItem className={classes.menuIt} onClick={twoFunction}>
-              {loggedIn && <Link className={classes.linkText} to="/Form">Pet registration</Link>}
-            </MenuItem>
+              <Link  className={classes.linkText} to="/"><MenuItem  style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
+              Home
+            </MenuItem></Link>
+            <Link  className={classes.linkText} to="/petsLost"> <MenuItem style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
+             Lost Pets
+            </MenuItem></Link>
+             <Link className={classes.linkText} to="/petsFound"><MenuItem style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
+             Found Pets
+            </MenuItem></Link>
+              <Link className={classes.linkText} to="/inSave"><MenuItem style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
+            Solved Cases
+            </MenuItem></Link>
+           {loggedIn && <Link className={classes.linkText} to="/Form"> <MenuItem style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
+              Pet registration
+            </MenuItem></Link>}
           </Menu>
 
           { !loggedIn ? <Link to="/signUpForm"> <button className={classes.loginButton}>Sign in/up</button> </Link> :
