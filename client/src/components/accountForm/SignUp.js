@@ -1,14 +1,16 @@
 import React,{useState,useEffect} from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import "../../styles/SignUpForm.css";
-//import M from 'materialize-css'
+
 const SignUp  = ()=>{
     const history = useHistory()
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("")
-    const [url,setUrl] = useState(undefined)
+    const [url, setUrl] = useState(undefined)
+    const [error, setError] = useState([])
+   // console.log("errori", error)
     useEffect(()=>{
         if(url){
             uploadFields()
@@ -28,12 +30,12 @@ const SignUp  = ()=>{
            setUrl(data.url)
         })
         .catch(err=>{
-            console.log(err)
+                console.log(err)
         })
     }
     const uploadFields = ()=>{
         if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
-         //   M.toast({html: "invalid email",classes:"#c62828 red darken-3"})
+    
             return
         }
         fetch("http://localhost:5000/users/signUp",{
@@ -48,16 +50,17 @@ const SignUp  = ()=>{
                 pic:url
             })
         }).then(res=>res.json())
-        .then(data=>{
+            .then(data => {
+           console.log(data)
            if(data.error){
-            //  M.toast({html: data.error,classes:"#c62828 red darken-3"})
+              setError(data.error)
            }
            else{
-             //  M.toast({html:data.message,classes:"#43a047 green darken-1"})
-               history.push('/signUp')
+           
+               history.push('/signUpSuccess')
            }
         }).catch(err=>{
-            console.log(err)
+            console.log(err.response)
         })
     }
     const PostData = ()=>{
@@ -68,13 +71,41 @@ const SignUp  = ()=>{
         }
        
     }
+    const checkAndSignup = () => {
+        PostData();
+   
+    }
+    console.log("ee",error)
+   /*  const checkError = () => {
+        if (username.length < 2) {
+            setError(currentArray => [...currentArray, "username required"])
+        } else if (username.length > 2) {
+          setError(error.splice(error.indexOf("username required",1))) 
+        }
+         if (email.length < 2) {
+            setError(currentArray => [...currentArray, "email required"])
+        } else if (username.length > 2) {
+          setError(error.splice(error.indexOf("email required",1))) 
+        }
+         if (password.length < 6) {
+            setError(currentArray => [...currentArray, "password required"])
+        } else if (username.length > 5) {
+          setError(error.splice(error.indexOf("password required",1))) 
+        }
 
+    
+            
+    
+    } */
+   
+   
    return (
      <div className="container">
        <div className="app-wrapper">
           <div className="card auth-card input-field">
               <h2 className="welcome">Welcome!</h2>
-          <h2 className="title">Create an Account</h2>
+                   <h2 className="title">Create an Account</h2>
+                   <p>{error}</p>
         </div>
        <input
           className="input"
@@ -82,7 +113,8 @@ const SignUp  = ()=>{
             placeholder="name"
             value={username}
             onChange={(e)=>setUsername(e.target.value)}
-            />
+               />
+           
        <input
           className="input"
             type="text"
@@ -107,12 +139,12 @@ const SignUp  = ()=>{
             </div>
             </div>
             <button  className="submit"
-            onClick={()=>PostData()}
+            onClick={()=>checkAndSignup()}
             >
                 SignUp
             </button>
             <h5>
-                <Link to="/signInForm">Already have an account ?</Link>
+                <Link style={{marginTop: 20}} to="/signInForm">Already have an account ?</Link>
             </h5>
              
                
