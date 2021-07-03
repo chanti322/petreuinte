@@ -33,6 +33,7 @@ export default function FormPet() {
   //const [markers, setMarkers] = useState([])
   const [comment, setComment] = useState([])
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
     let userId = localStorage.getItem("userId")
   
   /* const { name,
@@ -87,7 +88,8 @@ export default function FormPet() {
           console.log("data", data);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("err", err);
+          setError(true)
         });
     }
   }, [url]);
@@ -108,7 +110,8 @@ export default function FormPet() {
         setUrl(data.url);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("err", err);
+        setError(true)
       });
   };
   let postSubmitted = () => {
@@ -193,7 +196,7 @@ export default function FormPet() {
         <div>
           <Paper style={{padding:5, margin:5}}>
         <label forhtml="image">Upload Image</label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0]) }  />
+            <input type="file" onChange={(e) => setImage(e.target.files[0]) } required />
             </Paper>
         </div>
         <p>Register the location where you lost or found the pet</p>
@@ -203,7 +206,7 @@ export default function FormPet() {
         
           <button style={{ padding: 3, marginTop: 20 }} onClick={() => saveTheForm()}>Submit</button>
       </Paper>
-      {submitted && <Alert severity="info" style={{ position:" absolute",
+      {submitted && !error && <Alert severity="info" style={{ position:" absolute",
     bottom: -400,
     width: 300,
     height: 300,

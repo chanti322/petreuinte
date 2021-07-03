@@ -12,6 +12,8 @@ const initContextVariables = {
   radio: "",
   addressPet: "",
   isLoggedIn: false,
+  countComment: 0,
+  countInSave:0
 };
 
 export const VariablesContext = createContext(initContextVariables);
@@ -28,7 +30,10 @@ export const VariablesContextProvider = ({ children }) => {
   const [radio, setRadio] = useState(initContextVariables.radio);
   const [markers, setMarkers] = useState(initContextVariables.markers);
   const [addressPet, setAddressPet] = useState(initContextVariables.addressPet);
-     const [isLoggedIn, setIsLoggedIn] = useState(initContextVariables.isLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(initContextVariables.isLoggedIn);
+  const [countComment, setCountComment] = useState(initContextVariables.countComment);
+  const [countInSave, setCountInSave ] = useState(initContextVariables.countInSave
+    );
   console.log("in context", markers);
   return (
     <VariablesContext.Provider
@@ -55,7 +60,11 @@ export const VariablesContextProvider = ({ children }) => {
         setMarkers,
         addressPet, setAddressPet,
         isLoggedIn,
-        setIsLoggedIn
+        setIsLoggedIn,
+        countComment,
+        setCountComment,
+        countInSave,
+        setCountInSave
 
       }}
     >

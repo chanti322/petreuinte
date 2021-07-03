@@ -1,13 +1,28 @@
-import React, {useState} from "react"
+import React, { useState, useContext } from "react"
+import { VariablesContext } from "../context/VariablesContext";
 
 export default function BackAtHome(props) {
     let userIdOfThePost = props.userIdOfThePost
-    let petId= props.petId
+    let petId = props.petId
+    let petInSave =props.inSave
     let userId = localStorage.getItem("userId")
-    const [inSavePet, setInSavePet] = useState(false)
+    const [inSavePet, setInSavePet] = useState(true)
+    const [showCheck, setShowCheck] = useState(false)
+    let  { countInSave,setCountInSave } = useContext(VariablesContext);
+    
     let inSaveTrue = () => {
-    setInSavePet(true)
-}
+        setInSavePet(true)
+  
+    }
+    let addCount = () => {
+              setCountInSave(countInSave +=1)
+    }
+    let showCheckText = () => {
+        setShowCheck(true)
+    }
+    let hideCheckText = () => {
+        setShowCheck(false)
+    }
     let inSaveFetch = () => {
         fetch("http://localhost:5000/pets/atHome", {
             method: "put",
@@ -23,9 +38,10 @@ export default function BackAtHome(props) {
             console.log("InSavedata",data)
         })
     }
-    let addSaveAndFetch =  () => {
-  inSaveTrue()
-        inSaveFetch()
+  function  addSaveAndFetch ()  {
+//inSaveTrue()
+      inSaveFetch()
+       addCount()
     }
     //Style
     let buttonStyle = {
@@ -36,6 +52,26 @@ export default function BackAtHome(props) {
         color:"white"
             
     }
-    return (<div>  {userId ===userIdOfThePost && <button onClick={addSaveAndFetch } style={buttonStyle}>Back at home</button>}  </div>)
+    let buttonYes = {
+        padding: 5,
+        fontWeight:"bold",
+        margin: 5,
+        marginRight:25,
+        color:"green"
+    }
+    let buttonNo = {
+        padding: 5,
+           fontWeight:"bold",
+        margin: 5,
+        color:"red"
+    }
+    return (<div>  {userId === userIdOfThePost && !petInSave && <button onClick={showCheckText} style={buttonStyle}>Back at home</button>}
+         {showCheck && <div>
+           <p style={{margin:10}}>Is it your Pet back at home?</p> 
+            <button style={buttonYes} onClick={addSaveAndFetch}>
+Yes
+            </button>
+            <button style={buttonNo} onClick={hideCheckText}>No</button>
+        </div>} </div>)
    
 }

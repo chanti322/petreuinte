@@ -1,10 +1,10 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState,  useEffect, useContext } from "react";
 import { BrowserRouter as Router, Link, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Comment from "../components/CommentForm"
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
-
+import { VariablesContext } from "../context/VariablesContext";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -39,6 +39,7 @@ const useStyles = makeStyles({
 export default function SinglePet(props) {
     let history = useHistory();
   const [onePet, setOnePet] = useState([])
+  const  { countComment, setCountComment } = useContext(VariablesContext);
   let { id } = useParams();
   console.log("id", id)
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function SinglePet(props) {
         })
     }
     singlePetfetch()
-  }, [])
+  }, [countComment])
  // console.log("onePettype",onePet.type)
  // console.log("onePetmarker", onePet.markers)
   console.log("onePetcomments",onePet.comments)

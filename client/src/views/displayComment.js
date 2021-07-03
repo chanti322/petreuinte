@@ -32,9 +32,11 @@ const useStyles = makeStyles({
 
 const DisplayComment = (props) => {
   const classes = useStyles();
-
   let  petComments  = props.petComments;
-  console.log("petdisp ", petComments)
+ 
+  
+  //console.log("petdisp ", petComments)
+  //console.log("propps", props.petId)
 
   return (<div style={{marginTop:10}}>
           <ul>
@@ -51,7 +53,7 @@ const DisplayComment = (props) => {
                 <p className={classes.textComment} >{link.text}</p>
               </Grid>
               <Grid item xs={2} style={{ display: "flex", alignItems: "flex-end" }}>
-                < RemoveComment commentId={link._id} userID={link.userId} />
+                < RemoveComment commentId={link._id} userID={link.userId} petID={props.petId}/>
               </Grid>
             </Grid>
           </div></li>
