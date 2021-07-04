@@ -3,7 +3,7 @@ const {check, validationResult}= require('express-validator')
 
 exports.userValidationResult = (req, res, next) => {
     const result = validationResult(req) //error are here
-    console.log(result)
+   // console.log(result)
     if (!result.isEmpty()) {
       //  console.log(res)
         const error = result.array()[0].msg;
