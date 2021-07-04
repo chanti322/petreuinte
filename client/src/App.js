@@ -16,10 +16,12 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContextProvider } from "./context/VariablesContext";
 import ConvertedAddress from "./components/ConvertedAddress"
 import SinglePet from "./views/SinglePet"
+import Footer from "./components/Footer"
+import SignUpSuccess from "./components/accountForm/SignUpSuccess"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{width:"fit-content"}}>
       <Router>
         <VariablesContextProvider>
           <MenuAppBar />
@@ -36,13 +38,15 @@ function App() {
             <Route path="/Form" exact component={FormPet} />
             <Route path="/signUpForm" exact component={SignUp} />
               <Route path="/inSave" exact component={InSavePet} />
-               <Route path="/signInForm" exact component={SignIn} />
+            <Route path="/signInForm" exact component={SignIn} />
+            <Route path="/signUpSuccess" exact component={SignUpSuccess} />
                <Route
                   exact
                   path="/details/:id">
                   <SinglePet />
                 </Route>
           </Switch>
+          <Footer />
         </VariablesContextProvider>
       </Router>
     </div>

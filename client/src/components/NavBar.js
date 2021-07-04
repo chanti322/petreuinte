@@ -26,10 +26,11 @@ const useStyles = makeStyles((theme) => ({
   loginButton: {
   padding: 5,
   textTransform: "uppercase",
-    color: "#FF4500",
+    color: "green",
     fontWeight: "bold",
     fontSize: 10,
     marginRight: 50,
+    borderRadius:5
   },
   menuButton: {
     //  marginRight: theme.spacing(1),

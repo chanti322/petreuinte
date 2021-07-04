@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   registerButtonDiv: {
     margin:15,
     display: "flex",
-    justifyContent: "flex-end",
+   justifyContent: "flex-end",
     maxWidth:"80%"
   },
   registrButton: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     color: "white",
     padding: 5,
     borderRadius: 5,
-  
+  justifyContent:"flex-end",
        fontWeight: "bold",
       
 
@@ -35,6 +35,8 @@ const useStyles = makeStyles({
   logInRequest: {
     fontStyle: "italic",
     fontWeight: "bold",
+  
+    
   
   }
 });

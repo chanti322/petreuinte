@@ -41,7 +41,7 @@ export default function PetsFound() {
   }, [countInSave]);
   
   return (
-    <div style={{ marginTop: 80 }}>
+    <div style={{ marginTop: 80, width:"100vw", textAlign:"center" }}>
       <h2 className={classes.title}>Spotted Pets</h2>
       <p className={classes.description}>List of animals spotted on the street by users</p>
       <RegisterPet />

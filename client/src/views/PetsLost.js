@@ -13,11 +13,12 @@ const useStyles = makeStyles({
   },
   description: {
     fontStyle: "italic",
-    textAlign:"center"
+    textAlign: "center",
+    padding:20
   },
   title: {
     backgroundColor: "rgba(255,165,0,0.7)",
-    marginBottom: 20,
+    marginBottom: 40,
     color: "white",
     textShadow: "2px 2px 2px rgba(150, 150, 150, 1)",
     padding:5
@@ -50,50 +51,16 @@ export default function PetsLost() {
     } 
   }, [countInSave]);
   return (
-    <div style={{ marginTop: 80 }}>
+    <div style={{ marginTop: 80, width:"100vw", textAlign:"center" }}>
       <h2 className={classes.title}>Lost Pets</h2>
       <p className={classes.description}>Animals that have been lost</p>
-      <RegisterPet />
-      <p></p>
+       <RegisterPet /> 
+     
       {pets.length>0 && pets.map((pet) => {
 
         return (
           <CardPet pet={pet}/>
-         /*  <Card className={classes.root} key={pet._id}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                alt="Contemplative Reptile"
-                height="140"
-                image={pet.img}
-                title="Contemplative Reptile"
-              />
-
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {pet.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.breed} - {pet.type} -{pet._id}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {pet.info} 
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share T
-              </Button>
-              <Button size="small" color="primary">
-          <Link to={`details/${pet._id}`}>
-
-                  Learn More
-                    </Link>
-              </Button>
-            </CardActions>
-            </Card>
-           */
+        
         );
       })}
     </div>

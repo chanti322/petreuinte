@@ -59,7 +59,7 @@ export default function SinglePet(props) {
   console.log("onePetcomments",onePet.comments)
   const classes = useStyles();
  
-  return (<div style={{marginTop:90}}>
+  return (<div style={{marginTop:90,width:"100vw"}}>
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia

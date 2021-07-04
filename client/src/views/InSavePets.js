@@ -45,7 +45,7 @@ export default function InSavePet() {
   }, []);
   
   return (
-    <div style={{ marginTop: 80 }}>
+    <div style={{ marginTop: 80,width:"100vw", textAlign:"center" }}>
       <h2 className={classes.title}> Pets back at home</h2>
       <p className={classes.description}>List of animals that are in safe at home again</p>
       <RegisterPet />
