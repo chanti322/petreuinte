@@ -14,8 +14,9 @@
   margin-top: 20px;
 }
 .app-wrapper {
+  margin-top:50px;
   background-color: #fff;
-  min-width: 350px;
+  width: fit-content;
   min-height: 650px;
   padding: 30px;
   box-sizing: border-box;

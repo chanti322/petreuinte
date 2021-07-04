@@ -3,19 +3,25 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 const secretOrKey = require("../config.js").secretOrKey;
+const {body,check, validationResult}= require('express-validator')
 
 const passport = require("passport");
 const mongoose = require("mongoose");
 const userModel = require("../models/usersModel");
 const blacklistModel = require("../models/blacklistModel");
 const requireLogin = require("../middleware/requireLogin")
-
+const {userValidationResult, userValidator} =require("../middleware/userValidator")
 // Create new user
-router.post('/signUp',(req,res)=>{
+router.post('/signUp',  [
+    check('username').trim().not().isEmpty().withMessage("Name is required").isLength({ min: 3, max: 15 }).withMessage("Name must have between 3 and 15 characters"),
+    check('email').trim().not().isEmpty().withMessage("Email is required").isEmail().withMessage("Please provide a valid Email"),
+     check('password').trim().not().isEmpty().withMessage("Password is required").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long"),
+],userValidationResult, (req,res)=>{
   const {username,email,password,pic} = req.body 
   if(!username || !email || !password){
      return res.status(422).json({error:"please add all the fields"})
-  }
+    } 
+   
  userModel.findOne({email:email})
   .then((savedUser)=>{
       if(savedUser){
@@ -55,42 +61,39 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
    if(!email || !password){
        return res.status(422).json({error:"please add email or password"})
-    }
-  userModel.findOne({ email: email }, (err, user) => {
+    } 
+  userModel.findOne({ email: email },  (err, user) => {
     if (err) {
       res.send("Email does not exist");
     } else {
+     
       bcrypt.compare(password, user.password, function (err, result) {
-        console.log("us",user);
+        console.log("us", user);
         if (err) {
           res.send(err);
         }
         if (result) {
-          console.log("res",result)
+          console.log("res", result)
           const options = {
             id: user._id,
           };
           const token = jwt.sign(options, secretOrKey, { expiresIn: "7h" });
-          /* if (blacklist.indexOf(token) = -1) {
-            return token
-          }
-          else {
-            token = "";
-            console.log("Invalid token")
-          } */
-          console.log("islogin",token);
-         const { pic,username,email,_id} = user;
+         
+          console.log("islogin", token);
+          const { pic, username, email, _id } = user;
           res.json({
-            loggedIn:true,
+            loggedIn: true,
             success: true,
             token: token,
-          user:{pic,username,email, _id}
+            user: { pic, username, email, _id }
           });
         } else {
           res.send("password does not match");
         }
       });
     }
+  
+
   });
 });
 

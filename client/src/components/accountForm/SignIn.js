@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function SignIn() {
     const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
- 
+ const [errorText,setErrorText]= useState("")
   // console.log({ email: email })
  const accessToken = localStorage.getItem("accessToken")
-  console.log("signInToken", accessToken) 
+ // console.log("signInToken", accessToken) 
    const loggedIn = localStorage.getItem("loggedIn")
    const usernameStorage = localStorage.getItem("usernameStorage")
 
-   //console.log(loggedIn)
+   
 
   let getLogIn = ()=>{
       fetch("http://localhost:5000/users/login", {
@@ -25,30 +25,40 @@ export default function SignIn() {
             })
       }).then(res => res.json())
          .then(data => {
-           // accessToken =""
+          
             console.log("alldata",data)
             console.log("data", data.token);
             console.log("user", data.loggedIn)
            
             localStorage.setItem("accessToken",data.token)
-            localStorage.setItem("loggedIn", data.loggedIn)
+           if(data.token !=undefined){ localStorage.setItem("loggedIn", data.loggedIn)}
             localStorage.setItem("usernameStorage", data.user.username)
             localStorage.setItem("userAvatar", data.user.pic)
             localStorage.setItem("userId", data.user._id)
             console.log(data.user._id)
+            console.log(data.token)
+            if (accessToken !=undefined){
+        setErrorText("")
+            } 
          }
+           
          ).catch(err => {
-            console.log(err)
+            console.log("err", err)
+            if (err) {
+               setErrorText("password or email are invalid")
+            }
+           
          })
      
    }
    const reloadAndFetch = () => {
-      //window.location.reload();
+     
       getLogIn()
    }
 
    return (<div style={{ width:"90%", margin: "0 auto", marginTop: 80 }}>
-       <h3>Welcome Back!</h3>
+      <h3 className="title" style={{ fontSize: 30 }}>Welcome Back!</h3>
+      <p>{errorText}</p>
        <input
           className="input"
             type="text"
@@ -63,10 +73,10 @@ export default function SignIn() {
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
       />
-        <Link to="/"> <button  className="submit"
+      <button style={{marginTop:20}}  className="submit"
             onClick={reloadAndFetch}
             >
                 SignIn
-            </button></Link>
+            </button>
   </div>)  
 }

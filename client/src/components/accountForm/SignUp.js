@@ -75,33 +75,13 @@ const SignUp  = ()=>{
         PostData();
    
     }
-    console.log("ee",error)
-   /*  const checkError = () => {
-        if (username.length < 2) {
-            setError(currentArray => [...currentArray, "username required"])
-        } else if (username.length > 2) {
-          setError(error.splice(error.indexOf("username required",1))) 
-        }
-         if (email.length < 2) {
-            setError(currentArray => [...currentArray, "email required"])
-        } else if (username.length > 2) {
-          setError(error.splice(error.indexOf("email required",1))) 
-        }
-         if (password.length < 6) {
-            setError(currentArray => [...currentArray, "password required"])
-        } else if (username.length > 5) {
-          setError(error.splice(error.indexOf("password required",1))) 
-        }
-
     
-            
-    
-    } */
+  
    
    
    return (
-     <div className="container">
-       <div className="app-wrapper">
+    
+       <div className="app-wrapper" >
           <div className="card auth-card input-field">
               <h2 className="welcome">Welcome!</h2>
                    <h2 className="title">Create an Account</h2>
@@ -131,7 +111,7 @@ const SignUp  = ()=>{
             />
             <div>
             <div >
-                <span>Upload pic</span>
+                <p style={{margin:10}}>Upload a profile picture</p>
                 <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
             </div>
             <div >
@@ -144,14 +124,14 @@ const SignUp  = ()=>{
                 SignUp
             </button>
             <h5>
-                <Link style={{marginTop: 20}} to="/signInForm">Already have an account ?</Link>
+                <Link  to="/signInForm"><p style={{marginTop: 30}}>Already have an account ?</p></Link>
             </h5>
              
                
          
             
     </div>
-        </div>
+    //  </div>
      // </div>
    )
 }
