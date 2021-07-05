@@ -102,13 +102,7 @@ router.post("/logout", (req, res) => {
   console.log("body0", req.body)
   console.log("body tok", accessToken)
 
-  /*   if (!type || !pic) {
-    return res.status(422).json({
-      error: "Please write the species/type of the animal and add a picture",
-    });
-  } */
- /*  bcrypt.hash(accessToken, 12)
-    .then(hashedaccessToken => { */
+ 
     const blackList = new blacklistModel({
    accessToken
      
@@ -128,10 +122,26 @@ router.post("/logout", (req, res) => {
         error: err,
       });
     });
-      // })
+     
 });
 
-router.get(
+
+// Get all the post of a user
+router.get("/userProfile/:userId",  (req, res) => {
+  console.log(req.params.userId)
+  let userId = req.params.userId
+      userModel.find({_id: userId })
+      .populate({path:"pets"})
+        .exec((err, user) => {
+            if(err) {
+                res.status(400).json(`Error: ${err}`);
+            } else {
+              res.json(user);
+              console.log(user)
+            }
+        });
+});
+/* router.get(
   "/userProfile",
 requireLogin,
  //passport.authenticate("jwt", { session: false }), 
@@ -139,8 +149,9 @@ requireLogin,
   //  console.log("profile",req.user);
     res.send(req.user);
   }
-); 
+);  */
 
+ 
 
 
 

@@ -7,9 +7,9 @@ const petSchema = new mongoose.Schema(
     radio: {
       type: String,
     },
-    userId: {
+   /*  userId: {
       type:String,
-    },
+    }, */
     name: {
       type: String,
     },
@@ -50,13 +50,13 @@ const petSchema = new mongoose.Schema(
         }
        
       }
-    ]
+    ], userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   }
      , 
-    /* comments: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]}*/
+
   
-  // { timestamps: true }
+   { timestamps: true }
 );
-var Pet = mongoose.model("Pet", petSchema);
+//let Pet = mongoose.model("Pet", petSchema);
 module.exports = mongoose.model("Pet", petSchema);
+//module.exports ={Pet}

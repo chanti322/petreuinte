@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-
+const userModel = require("../models/usersModel");
 const petModel = require("../models/petsModel");
 const commentModel = require("../models/commentModel");
 const petDetailsModel = require("../models/petDetailsModel");
@@ -89,11 +89,21 @@ router.post("/uploads", (req, res) => {
   pet
     .save()
     .then((result) => {
-      res.status(201).json({
+      console.log(result._id)
+  userModel.findOneAndUpdate(userId,  { $push: {pets: result._id  } },function (error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(success);
+        }
+    });
+  
+ res.status(201).json({
         message: "Handling POST requests to /pet",
         createdPet: result,
-      });
-    })
+      })
+  
+   })
     .catch((err) => {
       console.log(err);
       res.status(400).json({
