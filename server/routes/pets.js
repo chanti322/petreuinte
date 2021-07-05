@@ -67,11 +67,11 @@ router.post("/uploads", (req, res) => {
   const { radio, name, type, breed, color, markers, info, img, comment,userId, inSave } = req.body;
 
 
-  /*   if (!type || !pic) {
+  if (!type || !img || !radio) {
     return res.status(422).json({
-      error: "Please write the species/type of the animal and add a picture",
+      error: "Please write the species/type of the animal,if your lost or your found it and add a picture",
     });
-  } */
+  } 
   const pet = new petModel({
     radio,
     name,
@@ -85,9 +85,7 @@ router.post("/uploads", (req, res) => {
     userId,
     inSave
   });
-  /*   if (req.file) {
-    pet.avatar = req.file.path;
-  } */
+ 
   pet
     .save()
     .then((result) => {
@@ -103,6 +101,8 @@ router.post("/uploads", (req, res) => {
       });
     });
 });
+
+
 // Create a comment
 router.put('/comments', (req, res) => {
 
@@ -153,30 +153,6 @@ router.put('/atHome', (req, res) => {
   )
 })
 //Delete Comment
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 router.delete('/deleteComment/:petId/:commentId', (req, res) => {
   console.log("reqRem", req.params)

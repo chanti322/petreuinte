@@ -34,6 +34,7 @@ export default function FormPet() {
   const [comment, setComment] = useState([])
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage]=useState("")
     let userId = localStorage.getItem("userId")
   
   /* const { name,
@@ -86,10 +87,18 @@ export default function FormPet() {
         .then((res) => res.json())
         .then((data) => {
           console.log("data", data);
+           if (data.error == undefined) {
+      setError(false)
+           setErrorMessage("")
+           } else {
+              setError(true)
+              setErrorMessage(data.error)
+          }
+             
         })
         .catch((err) => {
-          console.log("err", err);
-          setError(true)
+         // console.log("err", err);
+          //setError(true)
         });
     }
   }, [url]);
@@ -106,8 +115,10 @@ export default function FormPet() {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.error)
         console.log(data.url);
         setUrl(data.url);
+      
       })
       .catch((err) => {
         console.log("err", err);
@@ -122,8 +133,9 @@ export default function FormPet() {
     postSubmitted();
 }
   return (
-    <div style={{ marginTop: 80 }}>
+    <div style={{ marginTop: 80, marginBottom: "10vh" }}>
       <Paper style={Paperstyle}>
+       
         <h2>Please fill all the information about the pet:</h2>
       <label forhtml="lost">Lost</label>
       <input
@@ -206,7 +218,7 @@ export default function FormPet() {
         
           <button style={{ padding: 3, marginTop: 20 }} onClick={() => saveTheForm()}>Submit</button>
       </Paper>
-      {submitted && !error && <Alert severity="info" style={{ position:" absolute",
+      {submitted && !error ? <Alert severity="info" style={{ position:" absolute",
     bottom: -400,
     width: 300,
     height: 300,
@@ -214,7 +226,8 @@ export default function FormPet() {
     textAlign: "center",
     alignContent:"flex-start",
     justifyContent: "center",
-    alignItems: "center", }}> <p>Post added with success!</p><Link to="/">Back to home page</Link></Alert>}
+        alignItems: "center",
+      }}> <p>Post added with success!</p><Link to="/">Back to home page</Link></Alert> : <Alert><p>{errorMessage}</p></Alert>}
     </div>
   );
 }
