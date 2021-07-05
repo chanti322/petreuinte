@@ -80,8 +80,8 @@ export default function FormPet() {
           info,
           img: url,
           comment,
+          inSave,
           userId,
-          inSave
         }),
       })
         .then((res) => res.json())

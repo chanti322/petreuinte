@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
@@ -85,10 +85,9 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const loggedIn = localStorage.getItem("loggedIn")
+  
   const usernameStorage = localStorage.getItem("usernameStorage")
  
- // console.log("namenav",usernameStorage)
-//  console.log("nav",loggedIn)
 
 
   const handleClick = (event) => {
@@ -144,6 +143,10 @@ export default function MenuAppBar() {
             </MenuItem></Link>
               <Link className={classes.linkText} to="/inSave"><MenuItem style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
             Solved Cases
+            </MenuItem></Link>
+             
+              <Link className={classes.linkText} to="/userProfile"><MenuItem style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
+            My Profile
             </MenuItem></Link>
            {loggedIn && <Link className={classes.linkText} to="/Form"> <MenuItem style={{ color:"orange"}} className={classes.menuIt} onClick={twoFunction}>
               Pet registration

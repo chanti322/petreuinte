@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import "../../styles/SignUpForm.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
 export default function SignIn() {
+      const history = useHistory()
     const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
  const [errorText,setErrorText]= useState("")
-  // console.log({ email: email })
+ 
  const accessToken = localStorage.getItem("accessToken")
- // console.log("signInToken", accessToken) 
+
    const loggedIn = localStorage.getItem("loggedIn")
    const usernameStorage = localStorage.getItem("usernameStorage")
 
@@ -38,7 +39,8 @@ export default function SignIn() {
             console.log(data.user._id)
             console.log(data.token)
             if (accessToken !=undefined){
-        setErrorText("")
+               setErrorText("");
+                 history.push('/Form')
             } 
          }
            
@@ -47,7 +49,10 @@ export default function SignIn() {
             if (err) {
                setErrorText("password or email are invalid")
             }
+           else{
            
+               history.push('/')
+           }
          })
      
    }

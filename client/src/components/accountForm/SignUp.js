@@ -10,7 +10,7 @@ const SignUp  = ()=>{
     const [image,setImage] = useState("")
     const [url, setUrl] = useState(undefined)
     const [error, setError] = useState([])
-   // console.log("errori", error)
+   
     useEffect(()=>{
         if(url){
             uploadFields()

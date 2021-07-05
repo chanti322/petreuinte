@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     padding:7,
   },
   liComment: {
- 
+ listStyle:"none",
     borderBottom:"1px solid black",
   },
   avatarPic: {
@@ -32,7 +32,8 @@ const useStyles = makeStyles({
 
 const DisplayComment = (props) => {
   const classes = useStyles();
-  let  petComments  = props.petComments;
+  let petComments = props.petComments;
+  console.log(petComments)
  
   
   //console.log("petdisp ", petComments)

@@ -45,7 +45,11 @@ export default function CardPet(props) {
     
     <Card  className = { classes.root } key={`found ${pet._id}`}>
      
-        <Link style={{ textDecoration: "none" }} to={`details/${pet._id}`}>
+      <Link style={{ textDecoration: "none" }} to={`details/${pet._id}`}>
+        <div style={{display:"flex", margin:10, justifyContent:"space-between"}}>
+          <img src={pet.userId.pic} style={{ width: 50, height: 50, borderRadius:100 }} />
+          <p style={{fontSize:20, fontWeight:"bold",fontStyle:"italic"}}>{pet.userId.username}</p>
+          </div>
           <CardActionArea>
              {pet.inSave === true && < div className={classes.mask} ><p style={{color:"white",marginTop: 100, fontWeight:"bold", fontSize:30}}>Back at Home</p></div>} 
             <CardMedia

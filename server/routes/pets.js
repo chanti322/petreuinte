@@ -27,7 +27,7 @@ router.get("/lost", requireLogin,   (req, res) => {
     } else {
       res.send(pets);
     }
-  });
+  }).populate('userId');
 });
 //only Found pets
 router.get("/found", (req, res) => {
@@ -53,7 +53,7 @@ router.get("/inSave", (req, res) => {
 router.get("/details/:id", (req, res) => {
   let petId = req.params.id;
   console.log(petId)
-  petModel.findById(petId).populate("comments").exec(function (err, pet) {
+  petModel.findById(petId).exec(function (err, pet) {
     if (err) {
       console.log("err")
     } else {
@@ -89,7 +89,7 @@ router.post("/uploads", (req, res) => {
   pet
     .save()
     .then((result) => {
-      console.log(result._id)
+     // console.log(result._id)
   userModel.findOneAndUpdate(userId,  { $push: {pets: result._id  } },function (error, success) {
         if (error) {
             console.log(error);

@@ -18,6 +18,7 @@ import ConvertedAddress from "./components/ConvertedAddress"
 import SinglePet from "./views/SinglePet"
 import Footer from "./components/Footer"
 import SignUpSuccess from "./components/accountForm/SignUpSuccess"
+import UserProfile from "./views/userProfile"
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               <Route path="/inSave" exact component={InSavePet} />
             <Route path="/signInForm" exact component={SignIn} />
             <Route path="/signUpSuccess" exact component={SignUpSuccess} />
+              <Route path="/userProfile" exact component={UserProfile} />
                <Route
                   exact
                   path="/details/:id">
