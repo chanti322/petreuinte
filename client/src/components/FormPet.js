@@ -34,25 +34,12 @@ export default function FormPet() {
   const [comment, setComment] = useState([])
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(false)
-  const [errorMessage, setErrorMessage]=useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+  const [urlError, setUrlError]=useState("")
+  
     let userId = localStorage.getItem("userId")
   
-  /* const { name,
-        setName,
-        type,
-        setType,
-        breed,
-        setBreed,
-        url,
-        setUrl,
-        info,
-        setInfo,
-        image,
-        setImage,
-        color,
-        setColor,
-        radio,
-        setRadio, markers, setMarkers, } = useContext(VariablesContext);*/
+ 
   const{markers, setMarkers}= useContext(VariablesContext)
  
  // console.log("image", image)
@@ -97,8 +84,8 @@ export default function FormPet() {
              
         })
         .catch((err) => {
-         // console.log("err", err);
-          //setError(true)
+         console.log("err", err);
+      
         });
     }
   }, [url]);
@@ -115,16 +102,28 @@ export default function FormPet() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.error)
-        console.log(data.url);
-        setUrl(data.url);
+        console.log("data error url", data.error)
+     /*    if (data.error !==undefined || data.error !==null) {
+          setUrlError("Please add a picture")
+        } else {setUrlError("")
+          
+        } */
+        
       
+        console.log(data.url);
+      
+        setUrl(data.url);
+   
       })
       .catch((err) => {
         console.log("err", err);
-        setError(true)
+    
       });
   };
+ 
+  console.log("mess", errorMessage)
+  console.log("url", urlError)
+  console.log("urlvalue",url)
   let postSubmitted = () => {
     setSubmitted(true);
 }
@@ -218,7 +217,7 @@ export default function FormPet() {
         
           <button style={{ padding: 3, marginTop: 20 }} onClick={() => saveTheForm()}>Submit</button>
       </Paper>
-      {submitted && !error ? <Alert severity="info" style={{ position:" absolute",
+      {submitted && !error && (url !==undefined) ? <Alert severity="info" style={{ position:" absolute",
     bottom: -400,
     width: 300,
     height: 300,
@@ -231,3 +230,20 @@ export default function FormPet() {
     </div>
   );
 }
+
+ /* const { name,
+        setName,
+        type,
+        setType,
+        breed,
+        setBreed,
+        url,
+        setUrl,
+        info,
+        setInfo,
+        image,
+        setImage,
+        color,
+        setColor,
+        radio,
+        setRadio, markers, setMarkers, } = useContext(VariablesContext);*/
