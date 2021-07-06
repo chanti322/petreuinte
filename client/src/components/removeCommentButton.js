@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { VariablesContext } from "../context/VariablesContext";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const useStyles = makeStyles({
 
@@ -9,11 +10,7 @@ const useStyles = makeStyles({
     height:"fit-content",
         marginBottom: "5px",
         marginRight: 20,
-        fontSize: 15,
-        fontWeight: "bold",
-        borderRadius: 100,
-        backgroundColor: "red",
-        color:"white"
+       
   }
 });
 
@@ -55,7 +52,7 @@ const RemoveComment = (props) => {
 
     }
     return (<div>
-        {userId === userCommentId && <button  className={classes.buttonRemove} onClick={fetchAndRemove}>C</button>
+        {userId === userCommentId && <button  className={classes.buttonRemove} onClick={fetchAndRemove}><DeleteForeverIcon/></button>
             }
         
     </div>)
