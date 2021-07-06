@@ -33,7 +33,10 @@ const petSchema = new mongoose.Schema(
     },
     inSave: {
       type: Boolean,
-      },
+    },
+    favorite: {
+      type: Number,
+    },
     comments: [
       {
         text: {

@@ -6,6 +6,8 @@ import { Paper, TextField, TextareaAutosize } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Typography from '@material-ui/core/Typography';
 import ConvertedAddress from "./ConvertedAddress"
+
+//Style
 let marginInputGroup = {
   //marginTop: 10,
   marginBottom: 15,
@@ -15,10 +17,23 @@ let marginInputGroup = {
   width: "80%",
   margin: "0 auto",
 };
-//Style
+
   const Paperstyle = {
     padding:10,
-  }
+}
+let alertPopup = {
+  position:" absolute",
+    bottom: -400,
+    width: 300,
+    height: 300,
+    display:"flex",
+    textAlign: "center",
+    alignContent:"flex-start",
+    justifyContent: "center",
+        alignItems: "center",
+    
+}
+  
 export default function FormPet() {
    const [name, setName] = useState("");
   const [type, setType] = useState("");
@@ -32,6 +47,7 @@ export default function FormPet() {
   console.log("radioin form", radio)
   //const [markers, setMarkers] = useState([])
   const [comment, setComment] = useState([])
+  const [favorite, setFavorite]=useState(0)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
@@ -69,6 +85,7 @@ export default function FormPet() {
           comment,
           inSave,
           userId,
+          favorite,
         }),
       })
         .then((res) => res.json())
@@ -226,7 +243,7 @@ export default function FormPet() {
     alignContent:"flex-start",
     justifyContent: "center",
         alignItems: "center",
-      }}> <p>Post added with success!</p><Link to="/">Back to home page</Link></Alert> : <Alert><p>{errorMessage}</p></Alert>}
+      }}> <p>Post added with success!</p><Link to="/">Back to home page</Link></Alert> : <Alert ><p>{errorMessage}</p></Alert>}
     </div>
   );
 }

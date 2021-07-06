@@ -5,7 +5,7 @@ const userModel = require("../models/usersModel");
 const petModel = require("../models/petsModel");
 const commentModel = require("../models/commentModel");
 const petDetailsModel = require("../models/petDetailsModel");
-const requireLogin = require("../middleware/requireLogin")
+const requireLogin = require("../middleware/requireLogin");
 
 //const upload = require("../middleware/upload");
 router.get("/all", (req, res) => {
@@ -20,24 +20,28 @@ router.get("/all", (req, res) => {
 module.exports = router;
 
 // only Lost Pets
-router.get("/lost", requireLogin,   (req, res) => {
-  petModel.find({ radio: "lost" }, function (err, pets) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(pets);
-    }
-  }).populate('userId');
+router.get("/lost", requireLogin, (req, res) => {
+  petModel
+    .find({ radio: "lost" }, function (err, pets) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(pets);
+      }
+    })
+    .populate("userId");
 });
 //only Found pets
 router.get("/found", (req, res) => {
-  petModel.find({ radio: "found" }, function (err, pets) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(pets);
-    }
-  });
+  petModel
+    .find({ radio: "found" }, function (err, pets) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(pets);
+      }
+    })
+    .populate("userId");
 });
 //only in Save pets
 router.get("/inSave", (req, res) => {
@@ -52,26 +56,39 @@ router.get("/inSave", (req, res) => {
 // More details single pet
 router.get("/details/:id", (req, res) => {
   let petId = req.params.id;
-  console.log(petId)
+  console.log(petId);
   petModel.findById(petId).exec(function (err, pet) {
     if (err) {
-      console.log("err")
+      console.log("err");
     } else {
-      console.log("got single pet")
-      res.json(pet)
+      console.log("got single pet");
+      res.json(pet);
     }
   });
-})
+});
 // Create new Post
 router.post("/uploads", (req, res) => {
-  const { radio, name, type, breed, color, markers, info, img, comment,userId, inSave } = req.body;
-
+  const {
+    radio,
+    name,
+    type,
+    breed,
+    color,
+    markers,
+    info,
+    img,
+    comment,
+    userId,
+    inSave,
+    favorite,
+  } = req.body;
 
   if (!type || !img || !radio) {
     return res.status(422).json({
-      error: "Please write the species/type of the animal,if your lost or your found it and add a picture",
+      error:
+        "Please write the species/type of the animal,if your lost or your found it and add a picture",
     });
-  } 
+  }
   const pet = new petModel({
     radio,
     name,
@@ -83,27 +100,31 @@ router.post("/uploads", (req, res) => {
     img: img,
     comment,
     userId,
-    inSave
+    inSave,
+    favorite,
   });
- 
+
   pet
     .save()
     .then((result) => {
-     // console.log(result._id)
-  userModel.findOneAndUpdate(userId,  { $push: {pets: result._id  } },function (error, success) {
-        if (error) {
+      // console.log(result._id)
+      userModel.findOneAndUpdate(
+        userId,
+        { $push: { pets: result._id } },
+        function (error, success) {
+          if (error) {
             console.log(error);
-        } else {
+          } else {
             console.log(success);
+          }
         }
-    });
-  
- res.status(201).json({
+      );
+
+      res.status(201).json({
         message: "Handling POST requests to /pet",
         createdPet: result,
-      })
-  
-   })
+      });
+    })
     .catch((err) => {
       console.log(err);
       res.status(400).json({
@@ -112,95 +133,151 @@ router.post("/uploads", (req, res) => {
     });
 });
 
-
 // Create a comment
-router.put('/comments', (req, res) => {
-
-    const comment = {
-      text: req.body.text,
-      avatar: req.body.avatar,
-      username: req.body.username,
-      userId: req.body.userId
-      
-  }
-    console.log(req.body)
-  console.log("be comment",comment)
-    petModel.findByIdAndUpdate(req.body.petId,{
-        $push:{comments:comment}
-    },/* {
+router.put("/comments", (req, res) => {
+  const comment = {
+    text: req.body.text,
+    avatar: req.body.avatar,
+    username: req.body.username,
+    userId: req.body.userId,
+  };
+  console.log(req.body);
+  console.log("be comment", comment);
+  petModel
+    .findByIdAndUpdate(
+      req.body.petId,
+      {
+        $push: { comments: comment },
+      } /* {
         new:true
-    } */)
-    
-    .exec((err,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
-            res.json(result)
-        }
-    }) 
-})
+    } */
+    )
+
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
+});
 
 // Assign inSave == true and radio ==" " to the post
-router.put('/atHome', (req, res) => {
-
+router.put("/atHome", (req, res) => {
   const inSavePet = {
     inSave: req.body.inSavePet,
-      
-      
-  }
-  console.log(req.body)
-  console.log("in Save", inSavePet)
-  petModel.findByIdAndUpdate(req.body.petId,
-    { $set: { inSave: req.body.inSavePet, radio : " " } },
-    { upsert: true }, function
-    (err, result) {
-    if(err) {
-      return res.status(422).json({ error: err })
-    }else{
-      res.json(result)
+  };
+  console.log(req.body);
+  console.log("in Save", inSavePet);
+  petModel.findByIdAndUpdate(
+    req.body.petId,
+    { $set: { inSave: req.body.inSavePet, radio: " " } },
+    { upsert: true },
+    function (err, result) {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
     }
-  }
-  )
-})
+  );
+});
 //Delete Comment
 
-router.delete('/deleteComment/:petId/:commentId', (req, res) => {
-  console.log("reqRem", req.params)
+router.delete("/deleteComment/:petId/:commentId", (req, res) => {
+  console.log("reqRem", req.params);
 
-petModel.findOneAndUpdate(req.params.petId,
-  { $pull: { comments:{_id : req.params.commentId} } }, { new: true , useFindAndModify: false}, function(err,data) {
-    if (err) {
-      return res.status(404).json({ message: 'Error' });
-    } else {
-      res.send(data.comments)
-    
-    
-        }
+  petModel.findOneAndUpdate(
+    req.params.petId,
+    { $pull: { comments: { _id: req.params.commentId } } },
+    { new: true, useFindAndModify: false },
+    function (err, data) {
+      if (err) {
+        return res.status(404).json({ message: "Error" });
+      } else {
+        res.send(data.comments);
+      }
       /*   return res.status(200).json({
             success: true,
             message: 'success'
         }); */
     }
-);
+  );
+});
 
-/*  
-  petModel.findOne({ _id: req.params.commentId })
-  
-    .exec((err,comment)=>{
-        if(err || !comment){
-            return res.status(422).json({error:err})
+//Add favorite to post
+router.post("/addFavorite", (req, res) => {
+  let favorite = req.body.favorite;
+  let userIdReal = req.body.userId;
+  console.log("userBE", req.body.userId);
+
+  petModel
+    .findByIdAndUpdate(
+      req.body.petId,
+      { $inc: { favorite: favorite } },
+      { new: true },
+      function (err, result) {
+        console.log("userinResult", userIdReal);
+        console.log("result", result);
+
+        if (err) {
+          return res.status(422).json({ error: err });
+        } else {
+          res.json({ message: result.favorite });
         }
-     // if(post.postedBy._id.toString() === req.user._id.toString()){
-              comment.remove()
-              .then(result=>{
-                  res.json(result)
-              }).catch(err=>{
-                  console.log(err)
-              })
-       // } 
-    })  */   }); 
+      }
+    )
+    .then(() => {
+      console.log("real", userIdReal);
+      userModel.findOneAndUpdate(
+        userIdReal,
+        { $push: { favorites: req.body.petId } },
+        function (error, success) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("success", success);
+          }
+        }
+      );
 
+      //
+    });
+});
+//Delete Favorites
+router.post("/removeFavorite", (req, res) => {
+  let favorite = req.body.favorite;
+  console.log("user", req.body.userId);
 
+  petModel.findByIdAndUpdate(
+    req.body.petId,
+    { $inc: { favorite: favorite } },
+    { new: true },
+    function (err, result) {
+      //
+
+      userModel.findOneAndUpdate(
+        req.body.userId,
+        { $pull: { favorites: req.body.petId } },
+        { new: true, useFindAndModify: false },
+        function (error, success) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(success);
+          }
+        }
+      );
+
+      //
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json({ message: result.favorite });
+      }
+    }
+  );
+});
 module.exports = router;
 /* router.post("/comments", (req, res) => {
   const { petId, userId, comment } = req.body;
@@ -253,4 +330,21 @@ module.exports = router;
             res.json(result)
         }
     })
-}) */ 
+}) */
+
+/*  
+  petModel.findOne({ _id: req.params.commentId })
+  
+    .exec((err,comment)=>{
+        if(err || !comment){
+            return res.status(422).json({error:err})
+        }
+     // if(post.postedBy._id.toString() === req.user._id.toString()){
+              comment.remove()
+              .then(result=>{
+                  res.json(result)
+              }).catch(err=>{
+                  console.log(err)
+              })
+       // } 
+    })  */
