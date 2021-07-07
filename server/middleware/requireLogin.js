@@ -1,6 +1,6 @@
- const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 const secretOrKey = require("../config.js").secretOrKey;
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 const userModel = require("../models/usersModel");
 const express = require("express");
 const router = express.Router();
@@ -8,74 +8,63 @@ const router = express.Router();
 const blacklistModel = require("../models/blacklistModel");
 
 module.exports = async (request, response, next) => {
-
-// Take the token from the Authorization header
-
-  let token = request.header('Authorization').replace('Bearer ', '');
-  
+  // Take the token from the Authorization header
+  console.log("response", response.status);
+  let token = request.header("Authorization").replace("Bearer ", "");
+  console.log("tok", token);
   //Checking if token exists
-  
-    if (!token) {
+  let errore = false;
+  if (token == null) {
+    console.log("no token");
     response.status(403).send({
-      message: 'No token provided!',
+      message: "No token provided!",
     });
+  } else if (token) {
+    const black = await blacklistModel.findOne(
+      { accessToken: token },
+      function (err, accesstoken) {
+        // console.log("b", accesstoken)
+        if (accesstoken !== null) {
+          errore = true;
+          response.status(401).send({
+            status: "error",
+            message: "not allowed",
+          });
+
+          //  response.write("<p>Hello World</p>");
+          // response.end();
+        } else if (token != null && accesstoken == null) {
+          console.log("");
+        }
+        if (err) {
+          console.log("err", err);
+        }
+      }
+    );
   }
-let errore = false
-    //blacklist
-    const black = await blacklistModel.findOne({ accessToken: token }, function (err, accesstoken) {
-   // console.log("b", accesstoken)
-      if (accesstoken !== null) {
-       errore = true;
-        response.status(401).send({
 
-        status: 'error',
-        message: "not allowed",
-      });
-         
-     //  response.write("<p>Hello World</p>");
- // response.end();
-     
-        
-      } else {
-        console.log("no logout")
-     
-      } 
-  
+  //blacklist
 
-    });
-  
-
-
-
- 
-  
-// Verify the token
-    jwt.verify(token, secretOrKey, (error, decoded) => {
-     
+  // Verify the token
+  jwt.verify(token, secretOrKey, (error, decoded) => {
     if (error) {
       return response.status(401).send({
-
-        status: 'error',
-        message: error.message,
+        status: "error",
+        message: error.message + " You have to log in",
       });
-    } 
-      
+    }
 
-// Append the parameters to the request object
+    // Append the parameters to the request object
     request.userId = decoded.id;
-   // request.tokenExp = decoded.exp;
-   // request.token = token;
-      if (!errore) {
-            next();
-      }
-
-     
+    // request.tokenExp = decoded.exp;
+    // request.token = token;
+    if (!errore) {
+      next();
+    }
   });
 };
 
-  
-
-    /* accesstoken.forEach(tok => {
+/* accesstoken.forEach(tok => {
         //console.log(tok.accessToken)
         if (tok.accessToken === token) {
          // token2 = token + "cc";
@@ -89,9 +78,8 @@ let errore = false
          // console.log("valid")
         }
       }) */
-  
-    
-    /*const token = authorization.replace("Bearer ","")
+
+/*const token = authorization.replace("Bearer ","")
     //authorization === Bearer ewefwegwrherhe
     if(!authorization){
        return res.status(401).json({error:"you must be logged in"})
@@ -122,8 +110,8 @@ let errore = false
   });
  });
   module.exports = router;  */
- // console.log("list", blacklist)
- /*  const blacklist = 
+// console.log("list", blacklist)
+/*  const blacklist = 
     blacklistModel.find({}, function (err, accesstoken) {
       //  console.log("b", accesstoken[0])
       accesstoken.forEach(tok => {
@@ -137,4 +125,4 @@ let errore = false
       })
 
     }); */
-    //console.log(blacklist)
+//console.log(blacklist)

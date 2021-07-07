@@ -83,6 +83,7 @@ router.post(
 router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log("pass", password);
   if (!email || !password) {
     return res.status(422).json({ error: "please add email or password" });
   }
@@ -162,7 +163,7 @@ router.get("/userProfile/:userId", (req, res) => {
 });
 
 //Get all the favorites of a user
-router.get("/userProfile/favorites/:userId", (req, res) => {
+router.get("/userProfile/favorites/:userId", requireLogin, (req, res) => {
   console.log(req.params.userId);
   let userId = req.params.userId;
   userModel

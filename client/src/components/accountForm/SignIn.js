@@ -48,8 +48,8 @@ export default function SignIn() {
         console.log(data.token);
         if (accessToken != undefined) {
           setErrorText("");
-          history.push("/Form");
         }
+        history.push("/Form");
       })
       .catch((err) => {
         console.log("err", err);
