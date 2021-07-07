@@ -38,10 +38,12 @@ const useStyles = makeStyles({
 
 export default function CardPet(props) {
   let pet = props.pet;
+  console.log("pet", pet.userId);
+  console.log("name", pet.userId.username);
   const { heart, setHeart } = useContext(VariablesContext);
   let favoriteUser = localStorage.getItem("userFavorites");
   const userId = localStorage.getItem("userId");
-  // console.log("userCard", userId);
+  console.log("userCard", userId);
   console.log("heart in card", heart);
   const [userProfile, setUserProfile] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
@@ -67,7 +69,7 @@ export default function CardPet(props) {
         .then((data) => {
           setUserProfile(data);
           setUserFavorites(data[0].favorites);
-          console.log("postcard", data[0].favorites);
+          console.log("postcard", data[0]);
         })
         .catch((err) => {
           console.log(err);
@@ -153,7 +155,7 @@ export default function CardPet(props) {
           </CardContent>
         </CardActionArea>
       </Link>
-      <CardActions>
+      <CardActions style={{ justifyContent: "space-evenly" }}>
         <Button size="small" color="primary">
           <Link
             style={{ textDecoration: "none", color: "orange" }}
@@ -170,6 +172,7 @@ export default function CardPet(props) {
         ) : (
           <ManageFavorite petId={pet._id} />
         )}
+        <p style={{ fontSize: 25 }}>{pet.favorite}</p>
         <p>{errorMessage}</p>
         <BackAtHome
           userIdOfThePost={pet.userId}

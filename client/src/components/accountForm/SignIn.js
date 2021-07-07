@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { VariablesContext } from "../../context/VariablesContext";
 import "../../styles/SignUpForm.css";
 import {
   BrowserRouter as Router,
@@ -12,7 +13,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
-
+  const { isLoggedIn, setIsLoggedIn } = useContext(VariablesContext);
   const accessToken = localStorage.getItem("accessToken");
 
   const loggedIn = localStorage.getItem("loggedIn");
@@ -31,10 +32,10 @@ export default function SignIn() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("alldata", data);
-        console.log("data", data.token);
-        console.log("user", data.loggedIn);
-        console.log("favor", data.favorites);
+        //   console.log("alldata", data);
+        //  console.log("data", data.token);
+        //  console.log("user", data.loggedIn);
+        //  console.log("favor", data.favorites);
 
         localStorage.setItem("accessToken", data.token);
         if (data.token != undefined) {
@@ -47,9 +48,10 @@ export default function SignIn() {
         console.log(data.user._id);
         console.log(data.token);
         if (accessToken != undefined) {
+          console.log("toksinin", accessToken);
           setErrorText("");
+          //     history.push("/Form");
         }
-        history.push("/Form");
       })
       .catch((err) => {
         console.log("err", err);
@@ -60,8 +62,12 @@ export default function SignIn() {
         }
       });
   };
+  /* let changeLogIn = () => {
+    setIsLoggedIn(true);
+  }; */
   const reloadAndFetch = () => {
     getLogIn();
+    //  changeLogIn();
   };
 
   return (

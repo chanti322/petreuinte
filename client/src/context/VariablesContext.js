@@ -11,10 +11,11 @@ const initContextVariables = {
   color: "",
   radio: "",
   addressPet: "",
-  isLoggedIn: false,
+
   countComment: 0,
   countInSave: 0,
   heart: false,
+  isLoggedIn: false,
 };
 
 export const VariablesContext = createContext(initContextVariables);

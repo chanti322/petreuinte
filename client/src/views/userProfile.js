@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-
+import { VariablesContext } from "../context/VariablesContext";
 import ConvertedAddress from "../components/ConvertedAddress";
 import Card from "@material-ui/core/Card";
 import { Paper } from "@material-ui/core";
@@ -13,12 +13,14 @@ import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
+import ManageFavorite from "../components/Favorite";
+import RemoveFavorite from "../components/RemoveFavorite";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     marginBottom: 15,
-    boxShadow: "10px 10px 5px -1px rgba(0,0,0,0.46)",
+    boxShadow: "10px 10px 5px 0px rgba(204,117,33,0.75)",
   },
   media: {
     width: "80%",
@@ -74,17 +76,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function UserProfile() {
   const classes = useStyles();
-
+  const { heart, setHeart } = useContext(VariablesContext);
   const [expanded, setExpanded] = React.useState(false);
 
   const accessToken = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("userId");
   console.log(userId);
   const [userProfilePosts, setUserProfilePosts] = useState([]);
-
+  useEffect(() => {
+    let profileFetch = () => {
+      fetch(`http://localhost:5000/users/userProfile/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setUserProfilePosts(data);
+        });
+    };
+    profileFetch();
+  }, [heart]);
+  // console.log("fav", userProfilePosts[0].favorites[0].name);
   return (
-    <div style={{ marginTop: 70, marginBottom: "10vh", width: "100vw" }}>
-      <h2>Your Post</h2>
+    <div style={{ marginTop: 70, marginBottom: "12vh", width: "100vw" }}>
+      <h2
+        style={{
+          margin: 15,
+          fontSize: 20,
+          fontWeight: "bold",
+          textDecoration: "underline",
+        }}
+      >
+        Your Posts
+      </h2>
       <div>
         {userProfilePosts.length > 0 &&
           userProfilePosts[0].pets.map((post) => {
@@ -176,7 +203,7 @@ export default function UserProfile() {
                     <Link to={`details/${post._id}`}>
                       <button className={classes.seeMoreButton}>
                         See more
-                      </button>{" "}
+                      </button>
                     </Link>
                   </div>
                 </CardActions>
@@ -184,6 +211,42 @@ export default function UserProfile() {
             );
           })}
       </div>
+      <h2
+        style={{
+          margin: 15,
+          fontSize: 20,
+          fontWeight: "bold",
+          textDecoration: "underline",
+        }}
+      >
+        Your favorite Posts
+      </h2>
+      <ul>
+        {userProfilePosts.length > 0 &&
+          userProfilePosts[0].favorites.map((fav) => {
+            return (
+              <li>
+                <div
+                  style={{
+                    display: "flex",
+                    width: "90%",
+                    justifyContent: "space-around",
+                    padding: 5,
+                    boxShadow: "10px 10px 5px 0px rgba(204,117,33,0.75)",
+                  }}
+                >
+                  <img
+                    style={{ width: 60, height: 60, borderRadius: 5 }}
+                    src={fav.img}
+                    alt="pet"
+                  />
+                  <p>{fav.name}</p>
+                  <RemoveFavorite petId={fav._id} />
+                </div>
+              </li>
+            );
+          })}
+      </ul>
     </div>
   );
 }

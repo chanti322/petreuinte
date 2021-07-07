@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   blockDiv: {
     width: 300,
     height: "210px",
-
+    margin: "0 auto",
     marginBottom: 20,
 
     display: "flex",
@@ -77,7 +77,7 @@ const Home = () => {
                   marginBotton: 5,
                 }}
               >
-                LostPets
+                Lost Pets
               </h2>
               <p
                 style={{
@@ -91,7 +91,8 @@ const Home = () => {
                 }}
               >
                 Has your beloved animal disappeared? Register its profile in the
-                app and let the FindMyPet community help you bring him home.
+                app and let the FindMyPet community help you bring your pet at
+                home.
               </p>
             </div>
           </div>

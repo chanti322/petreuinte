@@ -45,13 +45,15 @@ router.get("/found", (req, res) => {
 });
 //only in Save pets
 router.get("/inSave", (req, res) => {
-  petModel.find({ inSave: true }, function (err, pets) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(pets);
-    }
-  });
+  petModel
+    .find({ inSave: true }, function (err, pets) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(pets);
+      }
+    })
+    .populate("userId");
 });
 // More details single pet
 router.get("/details/:id", (req, res) => {
@@ -107,10 +109,12 @@ router.post("/uploads", (req, res) => {
   pet
     .save()
     .then((result) => {
-      // console.log(result._id)
-      userModel.findOne(
-        { _id: userId },
+      let userIdReal = req.body.userId;
+      console.log("res", result._id);
+      userModel.findByIdAndUpdate(
+        userIdReal,
         { $push: { pets: result._id } },
+        { new: true },
         function (error, success) {
           if (error) {
             console.log(error);
@@ -247,15 +251,6 @@ router.put("/removeFavorite", requireLogin, async (req, res) => {
       req.body.petId,
       { $inc: { favorite: favorite } },
       { new: true }
-      /*     function (err, result) {
-        console.log("result", result);
-
-        if (err) {
-          return res.status(422).json({ error: err });
-        } else {
-          res.json({ message: result.favorite });
-        }
-      }*/
     );
     const removeFavInUser = await userModel.updateOne(
       { _id: userIdReal },
@@ -265,7 +260,6 @@ router.put("/removeFavorite", requireLogin, async (req, res) => {
     res
       .status(200)
       .json({ removeFavUser: removeFavInUser, removeOneFav: removeOneFav });
-    // res.json({ message: res });
   } catch (err) {
     console.log(err);
   }

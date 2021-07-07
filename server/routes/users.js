@@ -148,6 +148,7 @@ router.post("/logout", (req, res) => {
 router.get("/userProfile/:userId", (req, res) => {
   console.log(req.params.userId);
   let userId = req.params.userId;
+  console.log("usProf", userId);
   userModel
     .find({ _id: userId })
     .populate({ path: "pets" })
