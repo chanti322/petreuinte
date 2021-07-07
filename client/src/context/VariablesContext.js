@@ -13,7 +13,8 @@ const initContextVariables = {
   addressPet: "",
   isLoggedIn: false,
   countComment: 0,
-  countInSave:0
+  countInSave: 0,
+  heart: false,
 };
 
 export const VariablesContext = createContext(initContextVariables);
@@ -31,10 +32,15 @@ export const VariablesContextProvider = ({ children }) => {
   const [markers, setMarkers] = useState(initContextVariables.markers);
   const [addressPet, setAddressPet] = useState(initContextVariables.addressPet);
   const [isLoggedIn, setIsLoggedIn] = useState(initContextVariables.isLoggedIn);
-  const [countComment, setCountComment] = useState(initContextVariables.countComment);
-  const [countInSave, setCountInSave ] = useState(initContextVariables.countInSave
-    );
-  console.log("in context", markers);
+  const [countComment, setCountComment] = useState(
+    initContextVariables.countComment
+  );
+  const [countInSave, setCountInSave] = useState(
+    initContextVariables.countInSave
+  );
+  const [heart, setHeart] = useState(initContextVariables.heart);
+  console.log("in context heart", heart);
+
   return (
     <VariablesContext.Provider
       value={{
@@ -58,14 +64,16 @@ export const VariablesContextProvider = ({ children }) => {
         setRadio,
         markers,
         setMarkers,
-        addressPet, setAddressPet,
+        addressPet,
+        setAddressPet,
         isLoggedIn,
         setIsLoggedIn,
         countComment,
         setCountComment,
         countInSave,
-        setCountInSave
-
+        setCountInSave,
+        heart,
+        setHeart,
       }}
     >
       {children}

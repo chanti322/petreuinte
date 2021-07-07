@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { VariablesContext } from "../context/VariablesContext";
 import BackAtHome from "./BackAtHomeButton";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -37,48 +38,55 @@ const useStyles = makeStyles({
 
 export default function CardPet(props) {
   let pet = props.pet;
+  const { heart, setHeart } = useContext(VariablesContext);
   let favoriteUser = localStorage.getItem("userFavorites");
   const userId = localStorage.getItem("userId");
-  console.log("userCard", userId);
-
+  // console.log("userCard", userId);
+  console.log("heart in card", heart);
   const [userProfile, setUserProfile] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
   const [idFavorites, setIdFavorites] = useState([]);
-  console.log("favRealUser", favoriteUser);
-  console.log("pet", pet);
-  console.log("favoriteUser", pet.userId.favorites);
-  console.log("petincard", pet);
+  const [errorMessage, setErrorMessage] = useState("");
+  // console.log("favRealUser", favoriteUser);
+  // console.log("pet", pet);
+  // console.log("favoriteUser", pet.userId.favorites);
+  // console.log("petincard", pet);
+
   const classes = useStyles();
+  let accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
-    // if (accessToken) {
-    fetch(`http://localhost:5000/users/userProfile/favorites/${userId}`, {
-      /*   headers: {
-          "Authorization": "Bearer " + localStorage.getItem("accessToken")
-        }  */
-    })
-      .then((res) => {
-        return res.json();
+    if (accessToken) {
+      fetch(`http://localhost:5000/users/userProfile/favorites/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
       })
-      .then((data) => {
-        setUserProfile(data);
-        setUserFavorites(data[0].favorites);
-        console.log("postcard", data[0].favorites);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    /*   }else {
-      console.log("You have to logIn")
-    }  */
-  }, []);
-  useEffect(() => {
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setUserProfile(data);
+          setUserFavorites(data[0].favorites);
+          console.log("postcard", data[0].favorites);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log("You have to logIn");
+      setErrorMessage("You have to login to add a like");
+    }
+  }, [heart]);
+  console.log(userFavorites);
+  useEffect(() => {}, [heart]);
+  /*   useEffect(() => {
     let getIdfavorites = () => {
       userFavorites.map((fav) => {
         setIdFavorites((prev) => [...prev, fav._id]);
       });
     };
     getIdfavorites();
-  }, []);
+  }, [heart]); */
   console.log("iddd", idFavorites);
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
@@ -134,6 +142,9 @@ export default function CardPet(props) {
               <span style={{ fontWeight: "bold" }}>Breed:</span> {pet.breed}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
+              <span style={{ fontWeight: "bold" }}>ID:</span> {pet._id}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
               <span style={{ fontWeight: "bold" }}>Specie: </span> {pet.type}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -151,19 +162,15 @@ export default function CardPet(props) {
             More information
           </Link>
         </Button>
-        {idFavorites !== undefined && idFavorites.includes(pet._id) ? (
+        {userFavorites !== undefined &&
+        userFavorites.filter(function (e) {
+          return e._id === pet._id;
+        }).length > 0 ? (
           <RemoveFavorite petId={pet._id} />
         ) : (
           <ManageFavorite petId={pet._id} />
         )}
-        {/* <div>
-          
-        </div>
-
-        <div>
-         
-        </div> */}
-
+        <p>{errorMessage}</p>
         <BackAtHome
           userIdOfThePost={pet.userId}
           petId={pet._id}

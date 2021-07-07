@@ -108,8 +108,8 @@ router.post("/uploads", (req, res) => {
     .save()
     .then((result) => {
       // console.log(result._id)
-      userModel.findOneAndUpdate(
-        userId,
+      userModel.findOne(
+        { _id: userId },
         { $push: { pets: result._id } },
         function (error, success) {
           if (error) {
@@ -206,17 +206,16 @@ router.delete("/deleteComment/:petId/:commentId", (req, res) => {
 });
 
 //Add favorite to post
-router.post("/addFavorite", (req, res) => {
+router.put("/addFavorite", requireLogin, async (req, res) => {
   let favorite = req.body.favorite;
   let userIdReal = req.body.userId;
   console.log("userBE", req.body.userId);
-
-  petModel
-    .findByIdAndUpdate(
+  try {
+    const addOneFav = await petModel.findByIdAndUpdate(
       req.body.petId,
       { $inc: { favorite: favorite } },
-      { new: true },
-      function (err, result) {
+      { new: true }
+      /*   function (err, result) {
         console.log("userinResult", userIdReal);
         console.log("result", result);
 
@@ -225,58 +224,51 @@ router.post("/addFavorite", (req, res) => {
         } else {
           res.json({ message: result.favorite });
         }
-      }
-    )
-    .then(() => {
-      console.log("real", userIdReal);
-      userModel.findOneAndUpdate(
-        userIdReal,
-        { $push: { favorites: req.body.petId } },
-        function (error, success) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log("success", success);
-          }
-        }
-      );
-
-      //
-    });
+      } */
+    );
+    const addFavInUser = await userModel.updateOne(
+      { _id: userIdReal },
+      { $addToSet: { favorites: req.body.petId } },
+      { new: true, upsert: true }
+    );
+    res.status(200).json({ addFavUser: addFavInUser, addOneFav: addOneFav });
+    //  res.json({ message: res.favorite });
+  } catch (err) {
+    console.log({ err: err });
+  }
 });
 //Delete Favorites
-router.post("/removeFavorite", (req, res) => {
+router.put("/removeFavorite", requireLogin, async (req, res) => {
   let favorite = req.body.favorite;
+  let userIdReal = req.body.userId;
   console.log("user", req.body.userId);
+  try {
+    const removeOneFav = await petModel.findByIdAndUpdate(
+      req.body.petId,
+      { $inc: { favorite: favorite } },
+      { new: true }
+      /*     function (err, result) {
+        console.log("result", result);
 
-  petModel.findByIdAndUpdate(
-    req.body.petId,
-    { $inc: { favorite: favorite } },
-    { new: true },
-    function (err, result) {
-      //
-
-      userModel.findOneAndUpdate(
-        req.body.userId,
-        { $pull: { favorites: req.body.petId } },
-        { new: true, useFindAndModify: false },
-        function (error, success) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log(success);
-          }
+        if (err) {
+          return res.status(422).json({ error: err });
+        } else {
+          res.json({ message: result.favorite });
         }
-      );
-
-      //
-      if (err) {
-        return res.status(422).json({ error: err });
-      } else {
-        res.json({ message: result.favorite });
-      }
-    }
-  );
+      }*/
+    );
+    const removeFavInUser = await userModel.updateOne(
+      { _id: userIdReal },
+      { $pull: { favorites: req.body.petId } },
+      { new: true, upsert: true }
+    );
+    res
+      .status(200)
+      .json({ removeFavUser: removeFavInUser, removeOneFav: removeOneFav });
+    // res.json({ message: res });
+  } catch (err) {
+    console.log(err);
+  }
 });
 module.exports = router;
 /* router.post("/comments", (req, res) => {

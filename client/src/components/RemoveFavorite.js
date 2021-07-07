@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { VariablesContext } from "../context/VariablesContext";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 export default function RemoveFavorite(props) {
   const [favorite, setFavorite] = useState(0);
-  const [heart, setHeart] = useState(false);
+  const { heart, setHeart } = useContext(VariablesContext);
 
   const petId = props.petId;
   const userId = localStorage.getItem("userId");
@@ -13,12 +14,13 @@ export default function RemoveFavorite(props) {
   function heartButton() {
     setHeart((prev) => !prev);
   }
-
-  let addFavorite = () => {
+  console.log("heartRem", heart);
+  let removeFavorite = () => {
     fetch("http://localhost:5000/pets/removeFavorite", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "Application/json",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
       body: JSON.stringify({
         favorite: -1,
@@ -31,14 +33,14 @@ export default function RemoveFavorite(props) {
         console.log("favorites", data);
       });
   };
-  let addFavoriteAndFetch = () => {
-    addFavorite();
-    //  heartButton();
+  let removeFavoriteAndFetch = () => {
+    removeFavorite();
+    heartButton();
   };
 
   return (
     <div>
-      <button onClick={addFavoriteAndFetch}>
+      <button onClick={removeFavoriteAndFetch}>
         <FavoriteIcon />
       </button>
     </div>
