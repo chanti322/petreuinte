@@ -1,68 +1,86 @@
 import React, { useState, useEffect, useContext } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import { VariablesContext } from "../context/VariablesContext";
 const useStyles = makeStyles({
-
-  commentBtn: {backgroundColor:"orange", padding:5, borderRadius: 4, marginLeft:7, fontStyle:"italic"}
+  commentBtn: {
+    backgroundColor: "orange",
+    padding: 5,
+    borderRadius: 4,
+    marginLeft: 7,
+    fontStyle: "italic",
+  },
 });
 
-
 const Comment = (props) => {
-    const classes = useStyles();
- let  { countComment,setCountComment } = useContext(VariablesContext);
-    const [text , setText] = useState("")
-  
-    const loggedIn = localStorage.getItem("loggedIn")
-    
-    const avatar = localStorage.getItem("userAvatar");
+  const classes = useStyles();
+  let { countComment, setCountComment } = useContext(VariablesContext);
+  const [text, setText] = useState("");
+
+  const loggedIn = localStorage.getItem("loggedIn");
+
+  const avatar = localStorage.getItem("userAvatar");
   //  console.log("avatarCommForm", avatar)
-    const username = localStorage.getItem("usernameStorage")
-    const userId = localStorage.getItem("userId")
-     // console.log("nameCommForm", username)
-    let petId = props.petId
-    let addToCount = () => {
-      setCountComment(countComment +=1)
-  }
+  const username = localStorage.getItem("usernameStorage");
+  const userId = localStorage.getItem("userId");
+  // console.log("nameCommForm", username)
+  let petId = props.petId;
+  let addToCount = () => {
+    setCountComment((countComment += 1));
+  };
 
-    let commentFetch = () => {
-        fetch("http://localhost:5000/pets/comments", {
-            method: "put",
-            headers: {
-                "Content-Type":"Application/json"
-            },
-             body: JSON.stringify({
-                petId,
-                 text,
-                 avatar,
-                 username,
-              userId
-        }),
-        }).then(res => res.json())
-            .then((data) => {
-            console.log("commentdata",data)
-        })
-    } 
-    let fetchAndCount = () => {
-        commentFetch();
-        addToCount();
-}
- 
-    return (
-        <div>{
-            loggedIn && <div>
-            <input style={{marginTop:10, marginBottom: 15, width:"60%", padding:7}} type="text" placeholder="add a comment" value={text}  onChange={(e) => setText(e.target.value)} />
-            <button className={classes.commentBtn} onClick={fetchAndCount}>Send</button></div>}
+  let commentFetch = () => {
+    fetch("http://localhost:5000/pets/comments", {
+      method: "put",
+      headers: {
+        "Content-Type": "Application/json",
+      },
+      body: JSON.stringify({
+        petId,
+        text,
+        avatar,
+        username,
+        userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("commentdata", data);
+      });
+  };
+  let fetchAndCount = () => {
+    commentFetch();
+    addToCount();
+  };
+
+  return (
+    <div style={{ marginBottom: "12vh" }}>
+      {loggedIn ? (
+        <div>
+          <input
+            style={{
+              marginTop: 10,
+              marginBottom: 15,
+              width: "60%",
+              padding: 7,
+            }}
+            type="text"
+            placeholder="add a comment"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button className={classes.commentBtn} onClick={fetchAndCount}>
+            Send
+          </button>
         </div>
-        
-    )
-    
-       
-    
-   
-}
-            export default Comment;
+      ) : (
+        <p>Please Log in to write a comment</p>
+      )}
+    </div>
+  );
+};
+export default Comment;
 
- /* const commentFetch = (text,postId)=>{
+/* const commentFetch = (text,postId)=>{
           fetch('/comment',{
               method:"put",
               headers:{
