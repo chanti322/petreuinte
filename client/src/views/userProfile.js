@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     marginBottom: 15,
+    marginTop: 15,
     boxShadow: "10px 10px 5px 0px rgba(204,117,33,0.75)",
   },
   media: {
@@ -82,6 +83,8 @@ export default function UserProfile() {
   const accessToken = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("userId");
   console.log(userId);
+  const username = localStorage.getItem("usernameStorage");
+  const userEmail = localStorage.getItem("userEmail");
   const [userProfilePosts, setUserProfilePosts] = useState([]);
   useEffect(() => {
     let profileFetch = () => {
@@ -102,16 +105,27 @@ export default function UserProfile() {
   // console.log("fav", userProfilePosts[0].favorites[0].name);
   return (
     <div style={{ marginTop: 70, marginBottom: "12vh", width: "100vw" }}>
+      <h2>Your Details:</h2>
+      <Paper style={{ padding: 10, margin: 10 }}>
+        <p>
+          <span style={{ fontWeight: "bold" }}>Name:</span> {username}
+        </p>
+        <p>
+          <span style={{ fontWeight: "bold" }}>Email:</span> {userEmail}
+        </p>
+      </Paper>
+      <hr></hr>
       <h2
         style={{
           margin: 15,
           fontSize: 20,
           fontWeight: "bold",
-          textDecoration: "underline",
+          textTransform: "uppercase",
         }}
       >
         Your Posts
       </h2>
+      <hr></hr>
       <div>
         {userProfilePosts.length > 0 &&
           userProfilePosts[0].pets.map((post) => {
@@ -211,16 +225,18 @@ export default function UserProfile() {
             );
           })}
       </div>
+      <hr style={{ marginTop: 30 }}></hr>
       <h2
         style={{
           margin: 15,
           fontSize: 20,
           fontWeight: "bold",
-          textDecoration: "underline",
+          textTransform: "uppercase",
         }}
       >
         Your favorite Posts
       </h2>
+      <hr></hr>
       <ul>
         {userProfilePosts.length > 0 &&
           userProfilePosts[0].favorites.map((fav) => {
@@ -228,9 +244,11 @@ export default function UserProfile() {
               <li>
                 <div
                   style={{
+                    marginTop: 10,
                     display: "flex",
                     width: "90%",
                     justifyContent: "space-around",
+                    alignItems: "center",
                     padding: 5,
                     boxShadow: "10px 10px 5px 0px rgba(204,117,33,0.75)",
                   }}
