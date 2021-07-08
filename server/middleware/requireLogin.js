@@ -34,7 +34,7 @@ module.exports = async (request, response, next) => {
           //  response.write("<p>Hello World</p>");
           // response.end();
         } else if (token != null && accesstoken == null) {
-          console.log("");
+          console.log("token is not in the blacklists");
         }
         if (err) {
           console.log("err", err);

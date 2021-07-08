@@ -4,6 +4,7 @@ import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 export default function Footer() {
   let userAvatar = localStorage.getItem("userAvatar");
+  let userName = localStorage.getItem("usernameStorage");
   let history = useHistory();
   let footerStyle = {
     display: "flex",

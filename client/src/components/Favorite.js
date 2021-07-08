@@ -13,7 +13,7 @@ export default function ManageFavorite(props) {
   console.log("userFav", userFavorites);
 
   function heartButton() {
-    setHeart((prev) => !prev);
+    setHeart((prev) => (prev += 1));
   }
 
   let addFavorite = () => {

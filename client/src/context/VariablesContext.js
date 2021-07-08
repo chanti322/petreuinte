@@ -14,7 +14,7 @@ const initContextVariables = {
 
   countComment: 0,
   countInSave: 0,
-  heart: false,
+  heart: 0,
   isLoggedIn: false,
   removePost: false,
 };

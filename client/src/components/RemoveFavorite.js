@@ -12,7 +12,7 @@ export default function RemoveFavorite(props) {
   console.log("userFav", userFavorites);
 
   function heartButton() {
-    setHeart((prev) => !prev);
+    setHeart((prev) => (prev -= 1));
   }
   console.log("heartRem", heart);
   let removeFavorite = () => {

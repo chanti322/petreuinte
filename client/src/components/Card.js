@@ -39,8 +39,8 @@ const useStyles = makeStyles({
 
 export default function CardPet(props) {
   let pet = props.pet;
-  console.log("pet", pet.userId);
-  console.log("name", pet.userId.username);
+  // console.log("pet", pet.userId);
+  // console.log("name", pet.userId.username);
   const { heart, setHeart, removePost, setRemovePost } =
     useContext(VariablesContext);
   let favoriteUser = localStorage.getItem("userFavorites");
@@ -70,7 +70,7 @@ export default function CardPet(props) {
           return res.json();
         })
         .then((data) => {
-          console.log("data", data);
+          // console.log("data", data);
           setUserProfile(data);
           setUserFavorites(data[0].favorites);
 
@@ -84,17 +84,17 @@ export default function CardPet(props) {
       setErrorMessage("You have to login to add a like");
     }
   }, [heart, removePost]);
-  console.log(userFavorites);
-  useEffect(() => {}, [heart]);
-  /*   useEffect(() => {
+  console.log("heart", heart);
+
+  /*  useEffect(() => {
     let getIdfavorites = () => {
       userFavorites.map((fav) => {
         setIdFavorites((prev) => [...prev, fav._id]);
       });
     };
     getIdfavorites();
-  }, [heart]); */
-  console.log("iddd", idFavorites);
+  }, [heart]);
+  console.log("iddd", idFavorites); */
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
       <div
