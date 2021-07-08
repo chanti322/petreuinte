@@ -8,11 +8,15 @@ export default function RemovePost(props) {
   console.log("postId", postId);
   console.log("userId", userId);
   let deletePostFetch = () => {
-    fetch(`http://localhost:5000/pets/deletePost/${postId}/${userId}`, {
+    fetch("http://localhost:5000/pets/deletePost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        postId,
+        userId,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {

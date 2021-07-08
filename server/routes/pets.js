@@ -245,7 +245,7 @@ router.put("/addFavorite", requireLogin, async (req, res) => {
 router.put("/removeFavorite", requireLogin, async (req, res) => {
   let favorite = req.body.favorite;
   let userIdReal = req.body.userId;
-  console.log("user", req.body.userId);
+  // console.log("user", req.body.userId);
   try {
     const removeOneFav = await petModel.findByIdAndUpdate(
       req.body.petId,
@@ -265,21 +265,19 @@ router.put("/removeFavorite", requireLogin, async (req, res) => {
   }
 });
 //Delete Post
-router.post("/deletePost/:postId/:userId", function (req, res) {
-  petModel.findOneAndRemove(
-    { _id: req.params.postId },
-    function (err, response) {
-      if (err) throw err;
-      userModel.update(
-        { pets: req.params.postId },
-        { $pull: { pets: req.params.postId } },
-        function (err, res) {
-          if (err) throw err;
-          // res.json(res);
-        }
-      );
-    }
-  );
+router.post("/deletePost", function (req, res) {
+  let postIdt = req.body.postId;
+  console.log(postIdt);
+  petModel.findOneAndRemove({ _id: req.body.postId }, function (err, response) {
+    if (err) throw err;
+    userModel.updateOne(
+      { pets: req.body.postId },
+      { $pull: { pets: req.body.postId } },
+      function (err, res) {
+        if (err) throw err;
+      }
+    );
+  });
 });
 //Delete Post
 /* router.delete("/deletePost/:postId/:userId", async (req, res) => {
