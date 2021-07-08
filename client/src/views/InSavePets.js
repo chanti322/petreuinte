@@ -33,7 +33,8 @@ const useStyles = makeStyles({
 export default function InSavePet() {
   const classes = useStyles();
   const loggedIn = localStorage.getItem("loggedIn");
-  const { heart, setHeart } = useContext(VariablesContext);
+  const { heart, setHeart, removePost, setRemovePost } =
+    useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/pets/inSave")
@@ -42,7 +43,7 @@ export default function InSavePet() {
         setPets(data);
         console.log("inSave", pets);
       });
-  }, [heart]);
+  }, [heart, removePost]);
 
   return (
     <div style={{ marginTop: 80, width: "100vw", textAlign: "center" }}>

@@ -16,6 +16,7 @@ const initContextVariables = {
   countInSave: 0,
   heart: false,
   isLoggedIn: false,
+  removePost: false,
 };
 
 export const VariablesContext = createContext(initContextVariables);
@@ -36,6 +37,7 @@ export const VariablesContextProvider = ({ children }) => {
   const [countComment, setCountComment] = useState(
     initContextVariables.countComment
   );
+  const [removePost, setRemovePost] = useState(initContextVariables.removePost);
   const [countInSave, setCountInSave] = useState(
     initContextVariables.countInSave
   );
@@ -75,6 +77,8 @@ export const VariablesContextProvider = ({ children }) => {
         setCountInSave,
         heart,
         setHeart,
+        removePost,
+        setRemovePost,
       }}
     >
       {children}

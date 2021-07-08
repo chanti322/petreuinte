@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
 import BackAtHome from "./BackAtHomeButton";
+import RemovePost from "./RemovePostButton";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -40,13 +41,15 @@ export default function CardPet(props) {
   let pet = props.pet;
   console.log("pet", pet.userId);
   console.log("name", pet.userId.username);
-  const { heart, setHeart } = useContext(VariablesContext);
+  const { heart, setHeart, removePost, setRemovePost } =
+    useContext(VariablesContext);
   let favoriteUser = localStorage.getItem("userFavorites");
   const userId = localStorage.getItem("userId");
   console.log("userCard", userId);
   console.log("heart in card", heart);
   const [userProfile, setUserProfile] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
+
   const [idFavorites, setIdFavorites] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   // console.log("favRealUser", favoriteUser);
@@ -67,8 +70,10 @@ export default function CardPet(props) {
           return res.json();
         })
         .then((data) => {
+          console.log("data", data);
           setUserProfile(data);
           setUserFavorites(data[0].favorites);
+
           console.log("postcard", data[0]);
         })
         .catch((err) => {
@@ -78,7 +83,7 @@ export default function CardPet(props) {
       console.log("You have to logIn");
       setErrorMessage("You have to login to add a like");
     }
-  }, [heart]);
+  }, [heart, removePost]);
   console.log(userFavorites);
   useEffect(() => {}, [heart]);
   /*   useEffect(() => {
@@ -92,22 +97,32 @@ export default function CardPet(props) {
   console.log("iddd", idFavorites);
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
-      <Link style={{ textDecoration: "none" }} to={`details/${pet._id}`}>
-        <div
-          style={{
-            display: "flex",
-            margin: 10,
-            justifyContent: "space-between",
-          }}
-        >
+      <div
+        style={{
+          display: "flex",
+          margin: 10,
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "flex" }}>
           <img
             src={pet.userId.pic}
             style={{ width: 50, height: 50, borderRadius: 100 }}
           />
-          <p style={{ fontSize: 20, fontWeight: "bold", fontStyle: "italic" }}>
+          <p
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              fontStyle: "italic",
+              marginLeft: 5,
+            }}
+          >
             {pet.userId.username}
           </p>
         </div>
+        {pet.userId._id === userId && <RemovePost petId={pet._id} />}
+      </div>
+      <Link style={{ textDecoration: "none" }} to={`details/${pet._id}`}>
         <CardActionArea>
           {pet.inSave === true && (
             <div className={classes.mask}>

@@ -264,6 +264,43 @@ router.put("/removeFavorite", requireLogin, async (req, res) => {
     console.log(err);
   }
 });
+//Delete Post
+router.post("/deletePost/:postId/:userId", function (req, res) {
+  petModel.findOneAndRemove(
+    { _id: req.params.postId },
+    function (err, response) {
+      if (err) throw err;
+      userModel.update(
+        { pets: req.params.postId },
+        { $pull: { pets: req.params.postId } },
+        function (err, res) {
+          if (err) throw err;
+          // res.json(res);
+        }
+      );
+    }
+  );
+});
+//Delete Post
+/* router.delete("/deletePost/:postId/:userId", async (req, res) => {
+  console.log("postId", req.params.postId);
+  try {
+    const deletePost = await petModel
+      .deleteOne({
+        _id: req.params.postId,
+      })
+      .exec();
+
+    res.status(200).json({ deletePost: deletePost });
+    const findUser = await userModel.updateOne(
+      { pets: req.params.postId },
+      { $pull: { pets: req.body.postId } },
+      { new: true, upsert: true }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}); */
 module.exports = router;
 /* router.post("/comments", (req, res) => {
   const { petId, userId, comment } = req.body;

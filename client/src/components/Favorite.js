@@ -21,7 +21,7 @@ export default function ManageFavorite(props) {
       method: "PUT",
       headers: {
         "Content-Type": "Application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        /* Authorization: "Bearer " + localStorage.getItem("accessToken"), */
       },
       body: JSON.stringify({
         favorite: 1,

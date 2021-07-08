@@ -25,7 +25,8 @@ const useStyles = makeStyles({
 });
 
 export default function PetsFound() {
-  let { countInSave, setCountInSave } = useContext(VariablesContext);
+  let { countInSave, setCountInSave, removePost, setRemovePost } =
+    useContext(VariablesContext);
   const classes = useStyles();
   const loggedIn = localStorage.getItem("loggedIn");
   const userId = localStorage.getItem("userId");
@@ -39,7 +40,7 @@ export default function PetsFound() {
         setPets(data);
         console.log("petfound", pets);
       });
-  }, [countInSave]);
+  }, [countInSave, removePost]);
   useEffect(() => {
     // if (accessToken) {
     fetch(`http://localhost:5000/users/userProfile/${userId}`, {
