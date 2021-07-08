@@ -18,7 +18,7 @@ export default function SignIn() {
 
   const loggedIn = localStorage.getItem("loggedIn");
   const usernameStorage = localStorage.getItem("usernameStorage");
-
+  console.log(password);
   let getLogIn = () => {
     fetch("http://localhost:5000/users/login", {
       method: "POST",
@@ -50,7 +50,7 @@ export default function SignIn() {
         if (accessToken != undefined) {
           console.log("toksinin", accessToken);
           setErrorText("");
-          //     history.push("/Form");
+          history.push("/Form");
         }
       })
       .catch((err) => {
@@ -59,6 +59,7 @@ export default function SignIn() {
           setErrorText("password or email are invalid");
         } else {
           history.push("/");
+          setErrorText("");
         }
       });
   };

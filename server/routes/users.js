@@ -83,38 +83,44 @@ router.post(
 router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+
   console.log("pass", password);
   if (!email || !password) {
     return res.status(422).json({ error: "please add email or password" });
   }
   userModel.findOne({ email: email }, (err, user) => {
+    console.log("user", user);
     if (err) {
       res.send("Email does not exist");
     } else {
-      bcrypt.compare(password, user.password, function (err, result) {
-        console.log("us", user);
-        if (err) {
-          res.send(err);
-        }
-        if (result) {
-          console.log("res", result);
-          const options = {
-            id: user._id,
-          };
-          const token = jwt.sign(options, secretOrKey, { expiresIn: "7h" });
+      if (user) {
+        bcrypt.compare(password, user.password, function (err, result) {
+          console.log("us", user);
+          if (err) {
+            res.send(err);
+          }
+          if (result) {
+            console.log("res", result);
+            const options = {
+              id: user._id,
+            };
+            const token = jwt.sign(options, secretOrKey, { expiresIn: "7h" });
 
-          console.log("islogin", token);
-          const { pic, username, email, _id } = user;
-          res.json({
-            loggedIn: true,
-            success: true,
-            token: token,
-            user: { pic, username, email, _id },
-          });
-        } else {
-          res.send("password does not match");
-        }
-      });
+            console.log("islogin", token);
+            const { pic, username, email, _id } = user;
+            res.json({
+              loggedIn: true,
+              success: true,
+              token: token,
+              user: { pic, username, email, _id },
+            });
+          } else {
+            res.send("password does not match");
+          }
+        });
+      } else {
+        return res.status(422).json({ error: "please add email or password" });
+      }
     }
   });
 });
@@ -164,21 +170,24 @@ router.get("/userProfile/:userId", (req, res) => {
 });
 
 //Get all the favorites of a user
-router.get("/userProfile/favorites/:userId", requireLogin, (req, res) => {
-  console.log(req.params.userId);
-  let userId = req.params.userId;
-  userModel
-    .find({ _id: userId })
-    .populate({ path: "favorites", select: "_id" })
-    .exec((err, user) => {
-      if (err) {
-        res.status(400).json(`Error: ${err}`);
-      } else {
-        res.json(user);
-        console.log(user);
-      }
-    });
-});
+router.get(
+  "/userProfile/favorites/:userId",
+  /*  requireLogin, */ (req, res) => {
+    console.log(req.params.userId);
+    let userId = req.params.userId;
+    userModel
+      .find({ _id: userId })
+      .populate({ path: "favorites", select: "_id" })
+      .exec((err, user) => {
+        if (err) {
+          res.status(400).json(`Error: ${err}`);
+        } else {
+          res.json(user);
+          console.log(user);
+        }
+      });
+  }
+);
 /* router.get(
   "/userProfile",
 requireLogin,
