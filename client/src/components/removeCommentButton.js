@@ -28,15 +28,11 @@ const RemoveComment = (props) => {
   };
 
   const deleteComment = () => {
-    fetch(serverURL + "/pets/deleteComment/", {
-      method: "POST",
+    fetch(`${serverURL}/pets/deleteComment/${petId}/${commentId}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        petId,
-        commentId,
-      }),
     })
       .then((res) => res.json())
       .then((result) => {
