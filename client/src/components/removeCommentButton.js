@@ -30,9 +30,6 @@ const RemoveComment = (props) => {
   const deleteComment = () => {
     fetch(`${serverURL}/pets/deleteComment/${petId}/${commentId}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
       .then((res) => res.json())
       .then((result) => {
