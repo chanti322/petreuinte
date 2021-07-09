@@ -8,6 +8,7 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
+const serverURL = require("../../config.js").serverURL;
 export default function SignIn() {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export default function SignIn() {
 
   const loggedIn = localStorage.getItem("loggedIn");
   const usernameStorage = localStorage.getItem("usernameStorage");
-  const serverURL = require("../../config.js").serverURL;
+
   let getLogIn = () => {
     fetch(serverURL + "/users/login", {
       method: "POST",
