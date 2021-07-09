@@ -3,9 +3,6 @@ import { useHistory } from "react-router-dom";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 export default function Footer() {
-  useEffect(() => {
-    let userAvatar = localStorage.getItem("userAvatar");
-  }, []);
   let userAvatar = localStorage.getItem("userAvatar");
   let userName = localStorage.getItem("usernameStorage");
   let history = useHistory();
@@ -47,7 +44,7 @@ export default function Footer() {
         <p style={footerText}> FindMyPet</p>
 
         <p style={footerText}> | Created by Laura Tronchin |</p>
-        {userAvatar && (
+        {/* {userAvatar && (
           <Link to="userProfile">
             <img
               src={userAvatar}
@@ -61,7 +58,7 @@ export default function Footer() {
               alt="avatar"
             />
           </Link>
-        )}
+        )} */}
       </div>
     </div>
   );
