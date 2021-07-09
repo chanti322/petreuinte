@@ -64,9 +64,10 @@ export default function FormPet() {
   } */
 
   //Update image
+  const serverURL = require("../config.js").serverURL;
   useEffect(() => {
     if (url) {
-      fetch("serverURL/pets/uploads", {
+      fetch(serverURL + "/pets/uploads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

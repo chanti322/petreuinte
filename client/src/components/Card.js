@@ -47,6 +47,7 @@ export default function CardPet(props) {
   const userId = localStorage.getItem("userId");
   console.log("userCard", userId);
   console.log("heart in card", heart);
+  const serverURL = require("../config.js").serverURL;
   const [userProfile, setUserProfile] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
 
@@ -61,7 +62,7 @@ export default function CardPet(props) {
   let accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
     if (accessToken) {
-      fetch(`serverURL/users/userProfile/favorites/${userId}`, {
+      fetch(`${serverURL}/users/userProfile/favorites/${userId}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },

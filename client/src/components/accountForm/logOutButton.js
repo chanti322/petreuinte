@@ -6,7 +6,7 @@ const LogOut = () => {
   const accessToken = localStorage.getItem("accessToken");
   console.log("tok logout", accessToken);
   console.log(isLoggedIn);
-
+  const serverURL = require("../../config.js").serverURL;
   let logoutButton = {
     padding: 5,
     textTransform: "uppercase",
@@ -16,7 +16,7 @@ const LogOut = () => {
     marginRight: 30,
   };
   function logOutFetch() {
-    fetch("serverURL/users/logout", {
+    fetch(serverURL + "/users/logout", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + accessToken,

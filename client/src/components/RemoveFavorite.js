@@ -14,9 +14,10 @@ export default function RemoveFavorite(props) {
   function heartButton() {
     setHeart((prev) => (prev -= 1));
   }
+  const serverURL = require("../config.js").serverURL;
   console.log("heartRem", heart);
   let removeFavorite = () => {
-    fetch("serverURL/pets/removeFavorite", {
+    fetch(serverURL + "/pets/removeFavorite", {
       method: "PUT",
       headers: {
         "Content-Type": "Application/json",

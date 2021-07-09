@@ -18,9 +18,9 @@ export default function SignIn() {
 
   const loggedIn = localStorage.getItem("loggedIn");
   const usernameStorage = localStorage.getItem("usernameStorage");
-
+  const serverURL = require("../../config.js").serverURL;
   let getLogIn = () => {
-    fetch("serverURL/users/login", {
+    fetch(serverURL + "/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

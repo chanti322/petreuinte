@@ -7,8 +7,9 @@ export default function RemovePost(props) {
   const postId = props.petId;
   console.log("postId", postId);
   console.log("userId", userId);
+  const serverURL = require("../config.js").serverURL;
   let deletePostFetch = () => {
-    fetch("serverURL/pets/deletePost", {
+    fetch(serverURL + "/pets/deletePost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

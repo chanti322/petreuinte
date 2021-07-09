@@ -11,13 +11,13 @@ export default function ManageFavorite(props) {
   console.log("varUser", userId);
   let userFavorites = props.petFavorite;
   console.log("userFav", userFavorites);
-
+  const serverURL = require("../config.js").serverURL;
   function heartButton() {
     setHeart((prev) => (prev += 1));
   }
 
   let addFavorite = () => {
-    fetch("serverURL/pets/addFavorite", {
+    fetch(serverURL + "/pets/addFavorite", {
       method: "PUT",
       headers: {
         "Content-Type": "Application/json",

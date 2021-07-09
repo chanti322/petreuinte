@@ -25,9 +25,9 @@ const RemoveComment = (props) => {
   let removeCountComment = () => {
     setCountComment((countComment -= 1));
   };
-
+  const serverURL = require("../config.js").serverURL;
   const deleteComment = () => {
-    fetch("serverURL/pets/deleteComment/", {
+    fetch(serverURL + "/pets/deleteComment/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -10,7 +10,7 @@ const SignUp = () => {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState(undefined);
   const [error, setError] = useState([]);
-
+  const serverURL = require("../../config.js").serverURL;
   useEffect(() => {
     if (url) {
       uploadFields();
@@ -41,7 +41,7 @@ const SignUp = () => {
     ) {
       return;
     }
-    fetch("serverURL/users/signUp", {
+    fetch(serverURL + "/users/signUp", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
