@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { VariablesContext } from "../context/VariablesContext";
+const serverURL = require("../config.js").serverURL;
 export default function RemovePost(props) {
   const { removePost, setRemovePost } = useContext(VariablesContext);
   const userId = localStorage.getItem("userId");
   const postId = props.petId;
   console.log("postId", postId);
   console.log("userId", userId);
-  const serverURL = require("../config.js").serverURL;
+
   let deletePostFetch = () => {
     fetch(serverURL + "/pets/deletePost", {
       method: "POST",

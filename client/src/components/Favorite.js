@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { VariablesContext } from "../context/VariablesContext";
+const serverURL = require("../config.js").serverURL;
 
 export default function ManageFavorite(props) {
   const [favorite, setFavorite] = useState(0);
@@ -11,7 +12,7 @@ export default function ManageFavorite(props) {
   console.log("varUser", userId);
   let userFavorites = props.petFavorite;
   console.log("userFav", userFavorites);
-  const serverURL = require("../config.js").serverURL;
+
   function heartButton() {
     setHeart((prev) => (prev += 1));
   }

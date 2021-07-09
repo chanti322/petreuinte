@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import ConvertedAddress from "./ConvertedAddress";
 import ManageFavorite from "./Favorite";
 import RemoveFavorite from "./RemoveFavorite";
-
+const serverURL = require("../config.js").serverURL;
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,

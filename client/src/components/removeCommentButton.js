@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { VariablesContext } from "../context/VariablesContext";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+const serverURL = require("../config.js").serverURL;
 
 const useStyles = makeStyles({
   buttonRemove: {
@@ -25,7 +26,7 @@ const RemoveComment = (props) => {
   let removeCountComment = () => {
     setCountComment((countComment -= 1));
   };
-  const serverURL = require("../config.js").serverURL;
+
   const deleteComment = () => {
     fetch(serverURL + "/pets/deleteComment/", {
       method: "POST",

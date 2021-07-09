@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { VariablesContext } from "../context/VariablesContext";
-
+const serverURL = require("../config.js").serverURL;
 export default function BackAtHome(props) {
   let userIdOfThePost = props.userIdOfThePost._id;
   let userId = localStorage.getItem("userId");
@@ -26,7 +26,7 @@ export default function BackAtHome(props) {
     setShowCheck(false);
   };
   let inSaveFetch = () => {
-    fetch("serverURL/pets/atHome", {
+    fetch(serverURL +"/pets/atHome", {
       method: "put",
       headers: {
         "Content-Type": "Application/json",

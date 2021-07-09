@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../../context/VariablesContext";
+const serverURL = require("../../config.js").serverURL;
 const LogOut = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(VariablesContext);
   const accessToken = localStorage.getItem("accessToken");
   console.log("tok logout", accessToken);
   console.log(isLoggedIn);
-  const serverURL = require("../../config.js").serverURL;
+
   let logoutButton = {
     padding: 5,
     textTransform: "uppercase",

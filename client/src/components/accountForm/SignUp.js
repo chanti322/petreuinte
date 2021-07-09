@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "../../styles/SignUpForm.css";
+const serverURL = require("../../config.js").serverURL;
 
 const SignUp = () => {
   const history = useHistory();
@@ -10,7 +11,7 @@ const SignUp = () => {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState(undefined);
   const [error, setError] = useState([]);
-  const serverURL = require("../../config.js").serverURL;
+
   useEffect(() => {
     if (url) {
       uploadFields();

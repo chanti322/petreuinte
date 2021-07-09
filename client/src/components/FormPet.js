@@ -6,6 +6,7 @@ import { Paper, TextField, TextareaAutosize } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import Typography from "@material-ui/core/Typography";
 import ConvertedAddress from "./ConvertedAddress";
+const serverURL = require("../config.js").serverURL;
 
 //Style
 let marginInputGroup = {
@@ -64,7 +65,7 @@ export default function FormPet() {
   } */
 
   //Update image
-  const serverURL = require("../config.js").serverURL;
+
   useEffect(() => {
     if (url) {
       fetch(serverURL + "/pets/uploads", {

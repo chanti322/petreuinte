@@ -10,11 +10,11 @@ export default function RemoveFavorite(props) {
   const userId = localStorage.getItem("userId");
   let userFavorites = props.petFavorite;
   console.log("userFav", userFavorites);
-
+  const serverURL = require("../config.js").serverURL;
   function heartButton() {
     setHeart((prev) => (prev -= 1));
   }
-  const serverURL = require("../config.js").serverURL;
+
   console.log("heartRem", heart);
   let removeFavorite = () => {
     fetch(serverURL + "/pets/removeFavorite", {
