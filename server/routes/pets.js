@@ -188,12 +188,10 @@ router.put("/atHome", (req, res) => {
 });
 //Delete Comment
 
-router.delete("/deleteComment/:petId/:commentId", (req, res) => {
-  console.log("reqRem", req.params);
-
+router.post("/deleteComment/", (req, res) => {
   petModel.findOneAndUpdate(
-    req.params.petId,
-    { $pull: { comments: { _id: req.params.commentId } } },
+    req.body.petId,
+    { $pull: { comments: { _id: req.body.commentId } } },
     { new: true, useFindAndModify: false },
     function (err, data) {
       if (err) {

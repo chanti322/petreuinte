@@ -20,14 +20,22 @@ const RemoveComment = (props) => {
   let userCommentId = props.userID;
   let commentId = props.commentId;
   let petId = props.petID;
-
+  console.log(petId);
+  console.log(commentId);
   let removeCountComment = () => {
     setCountComment((countComment -= 1));
   };
 
   const deleteComment = () => {
-    fetch(`serverURL/pets/deleteComment/${petId}/${commentId}`, {
-      method: "delete",
+    fetch("serverURL/pets/deleteComment/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        petId,
+        commentId,
+      }),
     })
       .then((res) => res.json())
       .then((result) => {
