@@ -169,16 +169,17 @@ export default function MenuAppBar() {
                 Solved Cases
               </MenuItem>
             </Link>
-
-            <Link className={classes.linkText} to="/userProfile">
-              <MenuItem
-                style={{ color: "orange" }}
-                className={classes.menuIt}
-                onClick={twoFunction}
-              >
-                My Profile
-              </MenuItem>
-            </Link>
+            {loggedIn && (
+              <Link className={classes.linkText} to="/userProfile">
+                <MenuItem
+                  style={{ color: "orange" }}
+                  className={classes.menuIt}
+                  onClick={twoFunction}
+                >
+                  My Profile
+                </MenuItem>
+              </Link>
+            )}
             {loggedIn && (
               <Link className={classes.linkText} to="/Form">
                 <MenuItem

@@ -150,7 +150,6 @@ export default function UserProfile() {
                         position: "absolute",
                         top: 10,
                         right: 15,
-                        fontFamily: "Pacifico",
                       }}
                       gutterBottom
                       variant="h5"

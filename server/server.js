@@ -2,18 +2,17 @@ const Grid = require("gridfs-stream");
 const express = require("express");
 const path = require("path");
 var multer = require("multer");
-const passport = require("passport");
-const { jwtStrategy } = require("./passport");
-
+//const passport = require("passport");
+//const { jwtStrategy } = require("./passport");
+require("dotenv").config();
 const router = express.Router();
 const mongoose = require("mongoose");
 const mongoURI = require("./config").mongoURI;
-const options = require("./config").secretOrKey
+const options = require("./config").secretOrKey;
 
 const cors = require("cors");
 var fs = require("fs");
-
-
+console.log(process.env.MONGO_URI);
 //Initialise express app
 const app = express();
 const port = process.env.PORT || 5000;
@@ -30,8 +29,8 @@ mongoose
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use(passport.initialize());
-passport.use("jwt", jwtStrategy);
+//app.use(passport.initialize());
+//passport.use("jwt", jwtStrategy);
 //images
 
 //upload parameters from multer
