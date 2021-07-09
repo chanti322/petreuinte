@@ -38,7 +38,7 @@ export default function SignIn() {
         //  console.log("favor", data.favorites);
 
         localStorage.setItem("accessToken", data.token);
-        if (data.token != undefined) {
+        if (data.token !== undefined) {
           localStorage.setItem("loggedIn", data.loggedIn);
         }
         localStorage.setItem("usernameStorage", data.user.username);
@@ -47,10 +47,10 @@ export default function SignIn() {
         localStorage.setItem("userId", data.user._id);
         localStorage.setItem("userFavorites", data.favorites);
         console.log(data.user._id);
-        console.log(data.token);
+        // console.log(data.token);
         history.push("/Form");
-        if (accessToken != undefined) {
-          console.log("toksinin", accessToken);
+        if (accessToken !== undefined) {
+          //  console.log("toksinin", accessToken);
           setErrorText("");
         }
       })

@@ -12,7 +12,7 @@ export default function BackAtHome(props) {
   const [inSavePet, setInSavePet] = useState(true);
   const [showCheck, setShowCheck] = useState(false);
   let { countInSave, setCountInSave } = useContext(VariablesContext);
-  console.log("showCheck", showCheck);
+  // console.log("showCheck", showCheck);
   let inSaveTrue = () => {
     setInSavePet(true);
   };
@@ -38,7 +38,7 @@ export default function BackAtHome(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("InSavedata", data);
+        //   console.log("InSavedata", data);
       });
   };
   function addSaveAndFetch() {

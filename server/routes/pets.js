@@ -267,7 +267,7 @@ router.put("/removeFavorite", requireLogin, async (req, res) => {
 //Delete Post
 router.post("/deletePost", function (req, res) {
   let postIdt = req.body.postId;
-  console.log(postIdt);
+  //console.log(postIdt);
   petModel
     .findOneAndRemove({ _id: req.body.postId }, function (err, response) {
       if (err) throw err;
@@ -302,92 +302,3 @@ router.post("/deletePost", function (req, res) {
 });
 
 module.exports = router;
-/* router.post("/comments", (req, res) => {
-  const { petId, userId, comment } = req.body;
-  console.log("comment", comment)
-  
-
- // petModel.findOneAndUpdate({ petId: petId }, function (req, res) {
-  
-
-
-    const commentPet = new commentModel({
-      userId,
-      comment,
-    });
-  
-    commentPet
-    .save()
-      .then((result) => {
-        res.status(201).json({
-          message: "Handling POST requests to /comment",
-          createdComment: result,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(400).json({
-          error: err,
-        });
-      });
- // });
- 
-
-// comments
-/* router.put('/comment',(req,res)=>{
-    const comment = {
-        text:req.body.text,
-        postedBy:req.user._id
-    }
-    petModel.findByIdAndUpdate(req.body.postId,{
-        $push:{comments:comment}
-    },{
-        new:true
-    })
-    .populate("comments.postedBy","_id name")
-    .populate("postedBy","_id name")
-    .exec((err,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
-            res.json(result)
-        }
-    })
-}) */
-
-/*  
-  petModel.findOne({ _id: req.params.commentId })
-  
-    .exec((err,comment)=>{
-        if(err || !comment){
-            return res.status(422).json({error:err})
-        }
-     // if(post.postedBy._id.toString() === req.user._id.toString()){
-              comment.remove()
-              .then(result=>{
-                  res.json(result)
-              }).catch(err=>{
-                  console.log(err)
-              })
-       // } 
-    })  */
-//Delete Post
-/* router.delete("/deletePost/:postId/:userId", async (req, res) => {
-  console.log("postId", req.params.postId);
-  try {
-    const deletePost = await petModel
-      .deleteOne({
-        _id: req.params.postId,
-      })
-      .exec();
-
-    res.status(200).json({ deletePost: deletePost });
-    const findUser = await userModel.updateOne(
-      { pets: req.params.postId },
-      { $pull: { pets: req.body.postId } },
-      { new: true, upsert: true }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-}); */

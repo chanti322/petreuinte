@@ -99,8 +99,8 @@ router.post("/login", (req, res) => {
 
 router.post("/logout", (req, res) => {
   const { accessToken } = req.body;
-  console.log("body0", req.body);
-  console.log("body tok", accessToken);
+  // console.log("body0", req.body);
+  // console.log("body tok", accessToken);
 
   const blackList = new blacklistModel({
     accessToken,
@@ -136,7 +136,7 @@ router.get("/userProfile/:userId", (req, res) => {
         res.status(400).json(`Error: ${err}`);
       } else {
         res.json(user);
-        console.log(user);
+        //   console.log(user);
       }
     });
 });
@@ -171,54 +171,3 @@ requireLogin,
 );  */
 
 module.exports = router;
-
-/* router.post('/logout', passport.authenticate("jwt", { session: false }), async(req, res) => {
-    try{
-        let randomNumberToAppend = toString(Math.floor((Math.random() * 1000) + 1));
-        let randomIndex = Math.floor((Math.random() * 10) + 1);
-        let hashedRandomNumberToAppend = await bcrypt.hash(randomNumberToAppend, 10);
-    
-        // now just concat the hashed random number to the end of the token
-       req.token = req.token + hashedRandomNumberToAppend;
-       console.log("newTok",req.token)
-        return res.status(200).json('logout');
-    }catch(err){
-        return res.status(500).json(err.message);
-    }
-});  */
-//Log out
-
-/* router.post('/logout', passport.authenticate("jwt", { session: false }), async (req, res) => {
-  
-  try {
- 
-    //  const auth =req.headers.authorization
-    console.log("body", req.body)
-    //console.log("res", res)
-   // console.log("new", newA)
-   // console.log("req", req.headers)
-    /*  const blackList = new blacklistModel({
-      blacklistArray: req.body.accessToken
-   
-  });
- 
-  blackList
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Handling POST requests to /black",
-        createdComment: result,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json({
-        error: err,
-      });
-    });  
-  
-        return res.status(200).json('logout');
-    }catch(err){
-        return res.status(500).json(err.message);
-    }
-});   */
