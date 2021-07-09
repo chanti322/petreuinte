@@ -17,7 +17,7 @@ export default function ManageFavorite(props) {
   }
 
   let addFavorite = () => {
-    fetch("http://localhost:5000/pets/addFavorite", {
+    fetch("serverURL/pets/addFavorite", {
       method: "PUT",
       headers: {
         "Content-Type": "Application/json",

@@ -16,7 +16,7 @@ const LogOut = () => {
     marginRight: 30,
   };
   function logOutFetch() {
-    fetch("http://localhost:5000/users/logout", {
+    fetch("serverURL/users/logout", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + accessToken,

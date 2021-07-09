@@ -41,7 +41,7 @@ const SignUp = () => {
     ) {
       return;
     }
-    fetch("http://localhost:5000/users/signUp", {
+    fetch("serverURL/users/signUp", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

@@ -44,7 +44,7 @@ export default function SinglePet(props) {
   console.log("id", id);
   useEffect(() => {
     const singlePetfetch = () => {
-      fetch(`http://localhost:5000/pets/details/${id}`)
+      fetch(`serverURL/pets/details/${id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("data", data);

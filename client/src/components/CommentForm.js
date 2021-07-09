@@ -29,7 +29,7 @@ const Comment = (props) => {
   };
 
   let commentFetch = () => {
-    fetch("http://localhost:5000/pets/comments", {
+    fetch("serverURL/pets/comments", {
       method: "put",
       headers: {
         "Content-Type": "Application/json",

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
-import Map from "./googleMaps/GoogleMap"
-import { Paper, TextField, TextareaAutosize } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import Typography from '@material-ui/core/Typography';
-import ConvertedAddress from "./ConvertedAddress"
+import Map from "./googleMaps/GoogleMap";
+import { Paper, TextField, TextareaAutosize } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import Typography from "@material-ui/core/Typography";
+import ConvertedAddress from "./ConvertedAddress";
 
 //Style
 let marginInputGroup = {
@@ -18,24 +18,23 @@ let marginInputGroup = {
   margin: "0 auto",
 };
 
-  const Paperstyle = {
-    padding:10,
-}
+const Paperstyle = {
+  padding: 10,
+};
 let alertPopup = {
-  position:" absolute",
-    bottom: -400,
-    width: 300,
-    height: 300,
-    display:"flex",
-    textAlign: "center",
-    alignContent:"flex-start",
-    justifyContent: "center",
-        alignItems: "center",
-    
-}
-  
+  position: " absolute",
+  bottom: -400,
+  width: 300,
+  height: 300,
+  display: "flex",
+  textAlign: "center",
+  alignContent: "flex-start",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
 export default function FormPet() {
-   const [name, setName] = useState("");
+  const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [breed, setBreed] = useState("");
   const [image, setImage] = useState("");
@@ -43,32 +42,31 @@ export default function FormPet() {
   const [info, setInfo] = useState("");
   const [color, setColor] = useState("");
   const [radio, setRadio] = useState("");
-  const [inSave,setInSave] =useState(false)
-  console.log("radioin form", radio)
+  const [inSave, setInSave] = useState(false);
+  console.log("radioin form", radio);
   //const [markers, setMarkers] = useState([])
-  const [comment, setComment] = useState([])
-  const [favorite, setFavorite]=useState(0)
-  const [submitted, setSubmitted] = useState(false)
-  const [error, setError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
-  const [urlError, setUrlError]=useState("")
-  
-    let userId = localStorage.getItem("userId")
-  
- 
-  const{markers, setMarkers}= useContext(VariablesContext)
- 
- // console.log("image", image)
- // console.log("markers", markers)
+  const [comment, setComment] = useState([]);
+  const [favorite, setFavorite] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [urlError, setUrlError] = useState("");
 
- /*  const onPageChange = (e) => {
+  let userId = localStorage.getItem("userId");
+
+  const { markers, setMarkers } = useContext(VariablesContext);
+
+  // console.log("image", image)
+  // console.log("markers", markers)
+
+  /*  const onPageChange = (e) => {
     setRadio(e.currentTarget.value)
   } */
- 
+
   //Update image
   useEffect(() => {
     if (url) {
-      fetch("http://localhost:5000/pets/uploads", {
+      fetch("serverURL/pets/uploads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,24 +89,21 @@ export default function FormPet() {
         .then((res) => res.json())
         .then((data) => {
           console.log("data", data);
-           if (data.error == undefined) {
-      setError(false)
-           setErrorMessage("")
-           } else {
-              setError(true)
-              setErrorMessage(data.error)
+          if (data.error == undefined) {
+            setError(false);
+            setErrorMessage("");
+          } else {
+            setError(true);
+            setErrorMessage(data.error);
           }
-             
         })
         .catch((err) => {
-         console.log("err", err);
-      
+          console.log("err", err);
         });
     }
   }, [url]);
 
   const postDetails = () => {
-    
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "find-pet");
@@ -119,136 +114,153 @@ export default function FormPet() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data error url", data.error)
-     /*    if (data.error !==undefined || data.error !==null) {
+        console.log("data error url", data.error);
+        /*    if (data.error !==undefined || data.error !==null) {
           setUrlError("Please add a picture")
         } else {setUrlError("")
           
         } */
-        
-      
+
         console.log(data.url);
-      
+
         setUrl(data.url);
-   
       })
       .catch((err) => {
         console.log("err", err);
-    
       });
   };
- 
-  console.log("mess", errorMessage)
-  console.log("url", urlError)
-  console.log("urlvalue",url)
+
+  console.log("mess", errorMessage);
+  console.log("url", urlError);
+  console.log("urlvalue", url);
   let postSubmitted = () => {
     setSubmitted(true);
-}
+  };
   let saveTheForm = () => {
     postDetails();
     postSubmitted();
-}
+  };
   return (
     <div style={{ marginTop: 80, marginBottom: "10vh" }}>
       <Paper style={Paperstyle}>
-       
         <h2>Please fill all the information about the pet:</h2>
-      <label forhtml="lost">Lost</label>
-      <input
-        type="radio"
-        id="lost"
-        name="situation"
+        <label forhtml="lost">Lost</label>
+        <input
+          type="radio"
+          id="lost"
+          name="situation"
           value="lost"
-          checked={radio==="lost" && true}
-        onChange={(e) => setRadio(e.target.value)}
+          checked={radio === "lost" && true}
+          onChange={(e) => setRadio(e.target.value)}
           required
-          style={{margin:10}}
-      />
-      <label forhtml="found">Found on the street</label>
-      <input
-        type="radio"
-        id="found"
-        name="situation"
+          style={{ margin: 10 }}
+        />
+        <label forhtml="found">Found on the street</label>
+        <input
+          type="radio"
+          id="found"
+          name="situation"
           value="found"
-          checked={radio==="found" && true}
-        onChange={(e) => setRadio(e.target.value)}
+          checked={radio === "found" && true}
+          onChange={(e) => setRadio(e.target.value)}
           required
-          style={{margin:10}}
-      />
-      <div style={marginInputGroup}>
-        <label forhtml="name">Pet's name</label>
-        <TextField
-          type="text"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          style={{ margin: 10 }}
         />
-        <label forhtml="type">Pet's specie</label>
-        <TextField
-          type="text"
-          name="type"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        />
-        <label forhtml="breed">Pet's breed</label>
-        <TextField
-          type="text"
-          name="breed"
-          value={breed}
-          onChange={(e) => setBreed(e.target.value)}
-        />
-    
-      <label forhtml="color">Color</label>
-      <TextField
-        type="text"
-        name="color"
-        value={color}
-        onChange={(e) => setColor(e.target.value)}
+        <div style={marginInputGroup}>
+          <label forhtml="name">Pet's name</label>
+          <TextField
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-            </div>
-       {/*  <p style={{ margin: 5 }}>Register your location:<Link to="/googleMap">Google Map</Link></p>
+          <label forhtml="type">Pet's specie</label>
+          <TextField
+            type="text"
+            name="type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          />
+          <label forhtml="breed">Pet's breed</label>
+          <TextField
+            type="text"
+            name="breed"
+            value={breed}
+            onChange={(e) => setBreed(e.target.value)}
+          />
+
+          <label forhtml="color">Color</label>
+          <TextField
+            type="text"
+            name="color"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+          />
+        </div>
+        {/*  <p style={{ margin: 5 }}>Register your location:<Link to="/googleMap">Google Map</Link></p>
       {markers && <p>location selected</p>} */}
-       
-        
-      <div style={marginInputGroup}>
-        <label forhtml="info">Write further informations</label>
+
+        <div style={marginInputGroup}>
+          <label forhtml="info">Write further informations</label>
           <TextareaAutosize
-            style={{padding:3}}
+            style={{ padding: 3 }}
             rowsMin={4}
-          placeholder="Write further information about the pet and where you lost or saw it"
-          value={info}
-          onChange={(e) => setInfo(e.target.value)}
-        />
-      </div>
+            placeholder="Write further information about the pet and where you lost or saw it"
+            value={info}
+            onChange={(e) => setInfo(e.target.value)}
+          />
+        </div>
 
         <div>
-          <Paper style={{padding:5, margin:5}}>
-        <label forhtml="image">Upload Image</label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0]) } required />
-            </Paper>
+          <Paper style={{ padding: 5, margin: 5 }}>
+            <label forhtml="image">Upload Image</label>
+            <input
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+              required
+            />
+          </Paper>
         </div>
         <p>Register the location where you lost or found the pet</p>
         <p>If Google Map is not available write the location in the info box</p>
         <Map />
 
-        
-          <button style={{ padding: 3, marginTop: 20 }} onClick={() => saveTheForm()}>Submit</button>
+        <button
+          style={{ padding: 3, marginTop: 20 }}
+          onClick={() => saveTheForm()}
+        >
+          Submit
+        </button>
       </Paper>
-      {submitted && !error && (url !==undefined) ? <Alert severity="info" style={{ position:" absolute",
-    bottom: -400,
-    width: 300,
-    height: 300,
-    display:"flex",
-    textAlign: "center",
-    alignContent:"flex-start",
-    justifyContent: "center",
-        alignItems: "center",
-      }}> <p>Post added with success!</p><Link to="/">Back to home page</Link></Alert> : <Alert ><p>{errorMessage}</p></Alert>}
+      {submitted && !error && url !== undefined ? (
+        <Alert
+          severity="info"
+          style={{
+            position: " absolute",
+            bottom: -400,
+            width: 300,
+            height: 300,
+            display: "flex",
+            textAlign: "center",
+            alignContent: "flex-start",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {" "}
+          <p>Post added with success!</p>
+          <Link to="/">Back to home page</Link>
+        </Alert>
+      ) : (
+        <Alert>
+          <p>{errorMessage}</p>
+        </Alert>
+      )}
     </div>
   );
 }
 
- /* const { name,
+/* const { name,
         setName,
         type,
         setType,

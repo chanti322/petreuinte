@@ -61,7 +61,7 @@ export default function CardPet(props) {
   let accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
     if (accessToken) {
-      fetch(`http://localhost:5000/users/userProfile/favorites/${userId}`, {
+      fetch(`serverURL/users/userProfile/favorites/${userId}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },

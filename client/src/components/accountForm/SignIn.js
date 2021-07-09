@@ -20,7 +20,7 @@ export default function SignIn() {
   const usernameStorage = localStorage.getItem("usernameStorage");
 
   let getLogIn = () => {
-    fetch("http://localhost:5000/users/login", {
+    fetch("serverURL/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

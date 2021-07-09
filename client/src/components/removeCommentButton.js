@@ -1,61 +1,58 @@
-import React, {useState, useContext, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useContext, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { VariablesContext } from "../context/VariablesContext";
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 const useStyles = makeStyles({
-
   buttonRemove: {
     padding: "1px 3px 1px 3px",
-    height:"fit-content",
-        marginBottom: "5px",
-        marginRight: 20,
-       
-  }
+    height: "fit-content",
+    marginBottom: "5px",
+    marginRight: 20,
+  },
 });
 
 const RemoveComment = (props) => {
-      const classes = useStyles();
-    const [data, setData] = useState([])
-     let  { countComment,setCountComment } = useContext(VariablesContext);
-     let userId = localStorage.getItem("userId")
-    let userCommentId = props.userID
-    let commentId = props.commentId
-    let petId = props.petID
+  const classes = useStyles();
+  const [data, setData] = useState([]);
+  let { countComment, setCountComment } = useContext(VariablesContext);
+  let userId = localStorage.getItem("userId");
+  let userCommentId = props.userID;
+  let commentId = props.commentId;
+  let petId = props.petID;
 
-  
+  let removeCountComment = () => {
+    setCountComment((countComment -= 1));
+  };
 
-    
-    let removeCountComment = () => {
-        setCountComment(countComment -=1)
-    }
+  const deleteComment = () => {
+    fetch(`serverURL/pets/deleteComment/${petId}/${commentId}`, {
+      method: "delete",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const newData = data.filter((item) => {
+          return item._id !== result._id;
+        });
+        setData(newData);
+      })
+      .catch((err) => console.log(err));
+  };
 
+  let fetchAndRemove = () => {
+    deleteComment();
+    removeCountComment();
+  };
+  return (
+    <div>
+      {userId === userCommentId && (
+        <button className={classes.buttonRemove} onClick={fetchAndRemove}>
+          <DeleteForeverIcon />
+        </button>
+      )}
+    </div>
+  );
+};
 
-        const deleteComment = ()=>{
-        fetch(`http://localhost:5000/pets/deleteComment/${petId}/${commentId}`,{
-            method:"delete",
-           
-        }).then(res=>res.json())
-        .then(result=>{
-            console.log(result)
-             const newData = data.filter(item=>{
-                return item._id !== result._id
-            })
-            setData(newData) 
-        }).catch(err=>console.log(err))
-    }
-  
-    
-    let fetchAndRemove = () => {
-        deleteComment();
-        removeCountComment()
-
-    }
-    return (<div>
-        {userId === userCommentId && <button  className={classes.buttonRemove} onClick={fetchAndRemove}><DeleteForeverIcon/></button>
-            }
-        
-    </div>)
-}
-
-export default RemoveComment
+export default RemoveComment;

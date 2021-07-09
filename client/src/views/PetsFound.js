@@ -40,7 +40,7 @@ export default function PetsFound() {
   const [userProfile, setUserProfile] = useState([]);
   const [pets, setPets] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/pets/found")
+    fetch("serverURL/pets/found")
       .then((res) => res.json())
       .then((data) => {
         setPets(data);
@@ -48,8 +48,8 @@ export default function PetsFound() {
       });
   }, [countInSave, removePost, heart]);
   useEffect(() => {
-    // if (accessToken) {
-    fetch(`http://localhost:5000/users/userProfile/${userId}`, {
+    //if (accessToken) {
+    fetch(`serverURL/users/userProfile/${userId}`, {
       /*   headers: {
           "Authorization": "Bearer " + localStorage.getItem("accessToken")
         }  */

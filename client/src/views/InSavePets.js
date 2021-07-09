@@ -37,7 +37,7 @@ export default function InSavePet() {
     useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/pets/inSave")
+    fetch("serverURL/pets/inSave")
       .then((res) => res.json())
       .then((data) => {
         setPets(data);

@@ -40,7 +40,7 @@ export default function PetsLost() {
 
   useEffect(() => {
     if (accessToken) {
-      fetch("http://localhost:5000/pets/lost", {
+      fetch("serverURL/pets/lost", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },

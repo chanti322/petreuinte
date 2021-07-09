@@ -16,7 +16,7 @@ export default function RemoveFavorite(props) {
   }
   console.log("heartRem", heart);
   let removeFavorite = () => {
-    fetch("http://localhost:5000/pets/removeFavorite", {
+    fetch("serverURL/pets/removeFavorite", {
       method: "PUT",
       headers: {
         "Content-Type": "Application/json",

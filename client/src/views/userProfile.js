@@ -90,7 +90,7 @@ export default function UserProfile() {
   const [userProfilePosts, setUserProfilePosts] = useState([]);
   useEffect(() => {
     let profileFetch = () => {
-      fetch(`http://localhost:5000/users/userProfile/${userId}`, {
+      fetch(`serverURL/users/userProfile/${userId}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",

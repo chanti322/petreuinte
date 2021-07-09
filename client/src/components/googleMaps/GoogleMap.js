@@ -1,6 +1,6 @@
-import React,{useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { VariablesContext } from "../../context/VariablesContext";
-import {GoBackButtonMap} from "../GoBackButtonMap"
+import { GoBackButtonMap } from "../GoBackButtonMap";
 import {
   GoogleMap,
   useLoadScript,
@@ -27,7 +27,7 @@ const libraries = ["places"];
 const mapContainerStyle = {
   height: "80vh",
   width: "80vw",
-  margin:"0 auto"
+  margin: "0 auto",
 };
 const options = {
   styles: [
@@ -46,7 +46,7 @@ const options = {
   ],
 };
 const center = {
-lat: 52.520008,
+  lat: 52.520008,
   lng: 13.404954,
 };
 
@@ -58,10 +58,9 @@ export default function Map() {
   const { markers, setMarkers } = useContext(VariablesContext);
   //const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
-localStorage.setItem("markers",markers)
+  localStorage.setItem("markers", markers);
   const onMapClick = React.useCallback((e) => {
-    setMarkers( [
-   
+    setMarkers([
       {
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
@@ -84,14 +83,7 @@ localStorage.setItem("markers",markers)
   if (!isLoaded) return "Loading...";
 
   return (
-    <div style={{marginTop:20}}>
-     {/*  <h1>
-        Bears{" "}
-        <span role="img" aria-label="tent">
-          ⛺️
-        </span>
-      </h1> */}
- 
+    <div style={{ marginTop: 20 }}>
       <Locate panTo={panTo} />
       <Search panTo={panTo} />
 
@@ -107,12 +99,12 @@ localStorage.setItem("markers",markers)
         {markers.map((marker) => (
           <Marker
             key={marker.time.toISOString()}
-           // key={`${marker.lat}-${marker.lng}`}
+            // key={`${marker.lat}-${marker.lng}`}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
               setSelected(marker);
             }}
-       /*      icon={{
+            /*      icon={{
               url: `/bear.svg`,
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
@@ -129,9 +121,7 @@ localStorage.setItem("markers",markers)
             }}
           >
             <div>
-              <h2>
-                Pet found
-              </h2>
+              <h2>Pet found</h2>
               <p>Spotted {formatRelative(selected.time, new Date())}</p>
             </div>
           </InfoWindow>
@@ -172,12 +162,10 @@ function Search({ panTo }) {
     clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
-      location: {lat: () => 52.520008, lng: () => 13.404954 },
+      location: { lat: () => 52.520008, lng: () => 13.404954 },
       radius: 100 * 1000,
     },
   });
-
-  
 
   const handleInput = (e) => {
     setValue(e.target.value);
