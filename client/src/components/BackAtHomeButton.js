@@ -50,7 +50,7 @@ export default function BackAtHome(props) {
   let buttonStyle = {
     backgroundColor: "green",
     padding: 5,
-    borderRadius: 5,
+    borderRadius: 20,
     marginLeft: 30,
     color: "white",
   };

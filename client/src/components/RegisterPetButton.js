@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     backgroundColor: "green",
     color: "white",
     padding: 5,
-    borderRadius: 5,
+    borderRadius: 20,
     justifyContent: "flex-end",
     fontWeight: "bold",
   },

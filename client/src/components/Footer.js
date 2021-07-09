@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 export default function Footer() {
+  useEffect(() => {
+    let userAvatar = localStorage.getItem("userAvatar");
+  }, []);
   let userAvatar = localStorage.getItem("userAvatar");
   let userName = localStorage.getItem("usernameStorage");
   let history = useHistory();
@@ -14,6 +17,7 @@ export default function Footer() {
     height: "10vh",
     width: "100%",
     position: "fixed",
+    zIndex: 10,
     bottom: 0,
   };
   let footerText = {

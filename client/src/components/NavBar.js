@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   welcometext: {
-    margin: "10px",
+    margin: "5px",
     color: "white",
     fontWeight: 600,
     fontFamily: "Montserrat",
@@ -82,7 +82,9 @@ export default function MenuAppBar() {
   const loggedIn = localStorage.getItem("loggedIn");
   const { isLoggedIn, setIsLoggedIn } = useContext(VariablesContext);
   const usernameStorage = localStorage.getItem("usernameStorage");
-
+  useEffect(() => {
+    const usernameStorage = localStorage.getItem("usernameStorage");
+  }, [isLoggedIn]);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

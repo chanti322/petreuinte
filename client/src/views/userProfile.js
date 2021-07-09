@@ -73,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 5,
     color: "orange",
     fontWeight: "bold",
+
+    borderRadius: 20,
   },
 }));
 export default function UserProfile() {
@@ -118,9 +120,10 @@ export default function UserProfile() {
       <h2
         style={{
           margin: 15,
-          fontSize: 20,
+          fontSize: 40,
           fontWeight: "bold",
-          textTransform: "uppercase",
+
+          fontFamily: "Great Vibes",
         }}
       >
         Your Posts
@@ -132,24 +135,31 @@ export default function UserProfile() {
             return (
               <Card className={classes.root}>
                 <CardActionArea>
-                  <CardMedia
-                    style={{ borderRadius: 15 }}
-                    className={classes.media}
-                    image={post.img}
-                    title="Pet"
-                  />
-
-                  <CardContent>
+                  <div>
+                    <CardMedia
+                      style={{ borderRadius: 15 }}
+                      className={classes.media}
+                      image={post.img}
+                      title="Pet"
+                    />
                     <Typography
-                      style={{ fontWeight: "bold", backgroundColor: "orange" }}
+                      style={{
+                        padding: 5,
+                        fontWeight: "bold",
+                        backgroundColor: "rgba(255,165,0,0.6)",
+                        position: "absolute",
+                        top: 10,
+                        right: 15,
+                        fontFamily: "Pacifico",
+                      }}
                       gutterBottom
                       variant="h5"
                       component="h2"
                     >
                       {post.name}
                     </Typography>
-
-                    <div></div>
+                  </div>
+                  <CardContent>
                     <ul>
                       {post.comments.map((comment) => {
                         return (
@@ -214,10 +224,11 @@ export default function UserProfile() {
                 </CardActionArea>
                 <CardActions>
                   <div className={classes.seeMoreDiv}>
-                    <Link to={`details/${post._id}`}>
-                      <button className={classes.seeMoreButton}>
-                        See more
-                      </button>
+                    <Link
+                      to={`details/${post._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <h3 className={classes.seeMoreButton}>See more</h3>
                     </Link>
                   </div>
                 </CardActions>
@@ -229,9 +240,9 @@ export default function UserProfile() {
       <h2
         style={{
           margin: 15,
-          fontSize: 20,
+          fontSize: 40,
           fontWeight: "bold",
-          textTransform: "uppercase",
+          fontFamily: "Great Vibes",
         }}
       >
         Your favorite Posts
@@ -254,11 +265,11 @@ export default function UserProfile() {
                   }}
                 >
                   <img
-                    style={{ width: 60, height: 60, borderRadius: 5 }}
+                    style={{ width: 70, height: 60, borderRadius: 5 }}
                     src={fav.img}
                     alt="pet"
                   />
-                  <p>{fav.name}</p>
+                  <p style={{ fontSize: 25, fontWeight: "bold" }}>{fav.name}</p>
                   <RemoveFavorite petId={fav._id} />
                 </div>
               </li>

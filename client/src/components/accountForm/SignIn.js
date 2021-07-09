@@ -48,7 +48,7 @@ export default function SignIn() {
         localStorage.setItem("userFavorites", data.favorites);
         console.log(data.user._id);
         console.log(data.token);
-        history.push("/");
+        history.push("/Form");
         if (accessToken != undefined) {
           console.log("toksinin", accessToken);
           setErrorText("");
@@ -59,17 +59,16 @@ export default function SignIn() {
         if (err) {
           setErrorText("password or email are invalid");
         } else {
-          history.push("/");
           setErrorText("");
         }
       });
   };
-  /* let changeLogIn = () => {
-    setIsLoggedIn(true);
-  }; */
+  let changeLogIn = () => {
+    setIsLoggedIn((prev) => !prev);
+  };
   const reloadAndFetch = () => {
     getLogIn();
-    //  changeLogIn();
+    changeLogIn();
   };
 
   return (

@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ConvertedAddress from "../components/ConvertedAddress";
 import DisplayComment from "./displayComment";
+import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 
 const useStyles = makeStyles({
   root: {
@@ -98,7 +99,12 @@ export default function SinglePet(props) {
             </div>
             <Typography variant="body2" color="textSecondary" component="p">
               <span
-                style={{ fontWeight: "bold", display: "block", fontSize: 20 }}
+                style={{
+                  fontWeight: "bold",
+                  display: "block",
+                  fontSize: 20,
+                  margin: 5,
+                }}
               >
                 Further Information:
               </span>{" "}
@@ -106,11 +112,11 @@ export default function SinglePet(props) {
             </Typography>
 
             <Typography
+              style={{ marginTop: 10 }}
               variant="body2"
               color="textSecondary"
               component="p"
-            ></Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            >
               {onePet.markers && <ConvertedAddress markers={onePet.markers} />}
             </Typography>
           </CardContent>
@@ -120,7 +126,7 @@ export default function SinglePet(props) {
             className={classes.goBackBtn}
             onClick={() => history.goBack()}
           >
-            Go Back
+            <KeyboardArrowLeftIcon />
           </button>
         </CardActions>
       </Card>

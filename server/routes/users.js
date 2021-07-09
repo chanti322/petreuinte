@@ -15,76 +15,48 @@ const {
   userValidator,
 } = require("../middleware/userValidator");
 // Create new user
-router.post(
-  "/signUp",
-  [
-    check("username")
-      .trim()
-      .not()
-      .isEmpty()
-      .withMessage("Name is required")
-      .isLength({ min: 3, max: 15 })
-      .withMessage("Name must have between 3 and 15 characters"),
-    check("email")
-      .trim()
-      .not()
-      .isEmpty()
-      .withMessage("Email is required")
-      .isEmail()
-      .withMessage("Please provide a valid Email"),
-    check("password")
-      .trim()
-      .not()
-      .isEmpty()
-      .withMessage("Password is required")
-      .isLength({ min: 6 })
-      .withMessage("Password must be at least 6 characters long"),
-  ],
-  userValidationResult,
-  (req, res) => {
-    const { username, email, password, pic } = req.body;
-    if (!username || !email || !password) {
+router.post("/signUp", userValidator, userValidationResult, (req, res) => {
+  const { username, email, password, pic } = req.body;
+  /*   if (!username || !email || !password) {
       return res.status(422).json({ error: "please add all the fields" });
-    }
+    } */
 
-    userModel
-      .findOne({ email: email })
-      .then((savedUser) => {
-        if (savedUser) {
-          return res
-            .status(422)
-            .json({ error: "user already exists with that email" });
-        }
-        bcrypt.hash(password, 12).then((hashedpassword) => {
-          const user = new userModel({
-            username,
-            email,
-            password: hashedpassword,
-            pic,
-          });
-
-          user
-            .save()
-            .then((user) => {
-              res.json({ message: "saved successfully" });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+  userModel
+    .findOne({ email: email })
+    .then((savedUser) => {
+      if (savedUser) {
+        return res
+          .status(422)
+          .json({ error: "user already exists with that email" });
+      }
+      bcrypt.hash(password, 12).then((hashedpassword) => {
+        const user = new userModel({
+          username,
+          email,
+          password: hashedpassword,
+          pic,
         });
-      })
-      .catch((err) => {
-        console.log(err);
+
+        user
+          .save()
+          .then((user) => {
+            res.json({ message: "saved successfully" });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
-  }
-);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 //Login
 router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  console.log("pass", password);
   if (!email || !password) {
     return res.status(422).json({ error: "please add email or password" });
   }
