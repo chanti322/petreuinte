@@ -40,7 +40,7 @@ export default function PetsFound() {
   const [userProfile, setUserProfile] = useState([]);
   const [pets, setPets] = useState([]);
   useEffect(() => {
-    fetch("serverURL/pets/found")
+    fetch(serverURL + "/pets/found")
       .then((res) => res.json())
       .then((data) => {
         setPets(data);
