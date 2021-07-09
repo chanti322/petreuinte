@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     fontStyle: "italic",
   },
 });
-
+const serverURL = require("../config.js").serverURL;
 const Comment = (props) => {
   const classes = useStyles();
   let { countComment, setCountComment } = useContext(VariablesContext);
@@ -29,7 +29,7 @@ const Comment = (props) => {
   };
 
   let commentFetch = () => {
-    fetch("serverURL/pets/comments", {
+    fetch(serverURL + "/pets/comments", {
       method: "put",
       headers: {
         "Content-Type": "Application/json",
