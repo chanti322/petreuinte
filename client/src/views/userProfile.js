@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import ManageFavorite from "../components/Favorite";
 import RemoveFavorite from "../components/RemoveFavorite";
-
+const serverURL = require("../config.js").serverURL;
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -90,7 +90,7 @@ export default function UserProfile() {
   const [userProfilePosts, setUserProfilePosts] = useState([]);
   useEffect(() => {
     let profileFetch = () => {
-      fetch(`serverURL/users/userProfile/${userId}`, {
+      fetch(`${serverURL}/users/userProfile/${userId}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
