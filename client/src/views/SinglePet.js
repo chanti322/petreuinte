@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import ConvertedAddress from "../components/ConvertedAddress";
 import DisplayComment from "./displayComment";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-
+const serverURL = require("../config.js").serverURL;
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -44,7 +44,7 @@ export default function SinglePet(props) {
   console.log("id", id);
   useEffect(() => {
     const singlePetfetch = () => {
-      fetch(`serverURL/pets/details/${id}`)
+      fetch(`${serverURL}/pets/details/${id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("data", data);

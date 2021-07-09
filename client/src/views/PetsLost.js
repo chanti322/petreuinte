@@ -5,7 +5,7 @@ import CardPet from "../components/Card";
 import RegisterPet from "../components/RegisterPetButton";
 
 import { VariablesContext } from ".././context/VariablesContext";
-
+const serverURL = require("../config.js").serverURL;
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -40,7 +40,7 @@ export default function PetsLost() {
 
   useEffect(() => {
     if (accessToken) {
-      fetch("serverURL/pets/lost", {
+      fetch(serverURL + "/pets/lost", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("accessToken"),
         },

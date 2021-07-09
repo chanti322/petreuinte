@@ -11,6 +11,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { VariablesContext } from ".././context/VariablesContext";
+const serverURL = require("../config.js").serverURL;
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +38,7 @@ export default function InSavePet() {
     useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   useEffect(() => {
-    fetch("serverURL/pets/inSave")
+    fetch(serverURL + "/pets/inSave")
       .then((res) => res.json())
       .then((data) => {
         setPets(data);

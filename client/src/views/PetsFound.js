@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import RegisterPet from "../components/RegisterPetButton";
 
 import { VariablesContext } from ".././context/VariablesContext";
-
+const serverURL = require("../config.js").serverURL;
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -49,7 +49,7 @@ export default function PetsFound() {
   }, [countInSave, removePost, heart]);
   useEffect(() => {
     //if (accessToken) {
-    fetch(`serverURL/users/userProfile/${userId}`, {
+    fetch(`${serverURL}users/userProfile/${userId}`, {
       /*   headers: {
           "Authorization": "Bearer " + localStorage.getItem("accessToken")
         }  */
