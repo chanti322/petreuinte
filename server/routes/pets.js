@@ -250,6 +250,18 @@ router.put("/addFavorite", requireLogin, async (req, res) => {
     console.log({ err: err });
   }
 });
+//Get quantity of likes
+router.get("/favorite/:petId", (req, res) => {
+  let petId = req.params.petId;
+  console.log("pp", petId);
+  petModel.find({ _id: petId }, "favorite", function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 //Delete Favorites
 router.put("/removeFavorite", requireLogin, async (req, res) => {
   let favorite = req.body.favorite;

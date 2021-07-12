@@ -39,6 +39,7 @@ const useStyles = makeStyles({
 
 export default function CardPet(props) {
   let pet = props.pet;
+  let petId = pet._id;
   // console.log("pet", pet.userId);
   // console.log("name", pet.userId.username);
   const { heart, setHeart, removePost, setRemovePost } =
@@ -47,6 +48,7 @@ export default function CardPet(props) {
   const userId = localStorage.getItem("userId");
   console.log("userCard", userId);
   console.log("heart in card", heart);
+  console.log("pet", pet);
 
   const [userProfile, setUserProfile] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
@@ -57,7 +59,7 @@ export default function CardPet(props) {
   // console.log("pet", pet);
   // console.log("favoriteUser", pet.userId.favorites);
   // console.log("petincard", pet);
-
+  console.log("userFavo", userFavorites);
   const classes = useStyles();
   let accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
@@ -85,6 +87,17 @@ export default function CardPet(props) {
     }
   }, [heart, removePost]);
   console.log("heart", heart);
+  ///Get favorite
+  /*  useEffect(() => {
+    let numberOfFavoriteFetch = () => {
+      fetch(`${serverURL}/pets/favorite/${petId}`, { method: "GET" })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("fav Data", data);
+        });
+    };
+    numberOfFavoriteFetch();
+  }, [heart]); */
 
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>

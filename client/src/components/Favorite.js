@@ -32,7 +32,7 @@ export default function ManageFavorite(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("favorites", data);
+        console.log("favorites", data.addOneFav.favorite);
       });
   };
   let addFavoriteAndFetch = () => {
