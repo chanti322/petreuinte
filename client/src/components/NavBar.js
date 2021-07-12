@@ -194,7 +194,7 @@ export default function MenuAppBar() {
             )}
           </Menu>
 
-          {!loggedIn ? (
+          {!isLoggedIn ? (
             <Link to="/signUpForm">
               <button className={classes.loginButton}>Sign in/up</button>
             </Link>

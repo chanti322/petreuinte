@@ -42,6 +42,7 @@ export default function SignIn() {
         localStorage.setItem("accessToken", data.token);
         if (data.token !== undefined) {
           localStorage.setItem("loggedIn", data.loggedIn);
+          setIsLoggedIn(data.loggedIn);
         }
         localStorage.setItem("usernameStorage", data.user.username);
         setUsernameStorage(data.user.username);
