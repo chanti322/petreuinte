@@ -22,8 +22,12 @@ const RemoveComment = (props) => {
   let commentId = props.commentId;
   let comments = props.comments;
   let petId = props.petID;
-  // console.log(petId);
-  // console.log(commentId);
+  let comment = props.comment;
+  console.log("comment", commentId);
+
+  console.log(petId);
+  console.log(commentId);
+  console.log("comm", comments);
   let removeCountComment = () => {
     setCountComment((countComment -= 1));
   };
@@ -34,15 +38,14 @@ const RemoveComment = (props) => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("result", result);
         const newData = comments.filter((item) => {
-          return item._id !== result._id;
+          return item._id !== commentId;
         });
         setData(newData);
       })
       .catch((err) => console.log(err));
   };
-
+  console.log("data comm", data);
   let fetchAndRemove = () => {
     deleteComment();
     removeCountComment();

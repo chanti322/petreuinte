@@ -171,8 +171,8 @@ router.put("/atHome", (req, res) => {
   const inSavePet = {
     inSave: req.body.inSavePet,
   };
-  console.log(req.body);
-  console.log("in Save", inSavePet);
+  // console.log(req.body);
+  //console.log("in Save", inSavePet);
   petModel.findByIdAndUpdate(
     req.body.petId,
     { $set: { inSave: req.body.inSavePet, radio: " " } },
@@ -186,25 +186,36 @@ router.put("/atHome", (req, res) => {
     }
   );
 });
-//Delete Comment
 
-router.delete("/deleteComment/:petId/:commentId", (req, res) => {
-  petModel.findOneAndUpdate(
-    req.params.petId,
-    { $pull: { comments: { _id: req.params.commentId } } },
-    { new: true, useFindAndModify: false },
-    function (err, data) {
-      if (err) {
-        return res.status(404).json({ message: "Error" });
-      } else {
-        res.send(data.comments);
-      }
-      /*   return res.status(200).json({
-            success: true,
-            message: 'success'
-        }); */
-    }
-  );
+router.delete("/deleteComment/:petId/:commentId", async (req, res) => {
+  const { petId, commentId } = req.params;
+  console.log("pet", petId);
+  console.log("petcomm", commentId);
+
+  try {
+    petModel
+      .updateOne(
+        { _id: req.params.petId },
+        { $pull: { comments: { _id: req.params.commentId } } },
+        { new: true, useFindAndModify: false },
+        function (err, data) {
+          if (err) {
+            return res.status(404).json({ message: "Error" });
+          } else {
+            // console.log(data);
+            res.send(commentId);
+          }
+          /*   return res.status(200).json({
+              success: true,
+              message: 'success'
+          }); */
+        }
+      )
+      .exec();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 //Add favorite to post
