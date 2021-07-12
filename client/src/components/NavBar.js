@@ -80,11 +80,12 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const loggedIn = localStorage.getItem("loggedIn");
-  const { isLoggedIn, setIsLoggedIn } = useContext(VariablesContext);
-  const usernameStorage = localStorage.getItem("usernameStorage");
+  const { isLoggedIn, setIsLoggedIn, usernameStorage, setUsernameStorage } =
+    useContext(VariablesContext);
+  //const usernameStorage = localStorage.getItem("usernameStorage");
   useEffect(() => {
-    const usernameStorage = localStorage.getItem("usernameStorage");
-  }, [isLoggedIn]);
+    //  const usernameStorage = localStorage.getItem("usernameStorage");
+  }, [usernameStorage]);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

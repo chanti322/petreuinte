@@ -17,6 +17,7 @@ const initContextVariables = {
   heart: 0,
   isLoggedIn: false,
   removePost: false,
+  usernameStorage: "",
 };
 
 export const VariablesContext = createContext(initContextVariables);
@@ -42,6 +43,9 @@ export const VariablesContextProvider = ({ children }) => {
     initContextVariables.countInSave
   );
   const [heart, setHeart] = useState(initContextVariables.heart);
+  const [usernameStorage, setUsernameStorage] = useState(
+    initContextVariables.usernameStorage
+  );
   console.log("in context heart", heart);
 
   return (
@@ -79,6 +83,8 @@ export const VariablesContextProvider = ({ children }) => {
         setHeart,
         removePost,
         setRemovePost,
+        usernameStorage,
+        setUsernameStorage,
       }}
     >
       {children}

@@ -14,11 +14,12 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
-  const { isLoggedIn, setIsLoggedIn } = useContext(VariablesContext);
+  const { isLoggedIn, setIsLoggedIn, usernameStorage, setUsernameStorage } =
+    useContext(VariablesContext);
   const accessToken = localStorage.getItem("accessToken");
 
   const loggedIn = localStorage.getItem("loggedIn");
-  const usernameStorage = localStorage.getItem("usernameStorage");
+  // const usernameStorage = localStorage.getItem("usernameStorage");
 
   let getLogIn = () => {
     fetch(serverURL + "/users/login", {
@@ -43,6 +44,7 @@ export default function SignIn() {
           localStorage.setItem("loggedIn", data.loggedIn);
         }
         localStorage.setItem("usernameStorage", data.user.username);
+        setUsernameStorage(data.user.username);
         localStorage.setItem("userAvatar", data.user.pic);
         localStorage.setItem("userEmail", data.user.email);
         localStorage.setItem("userId", data.user._id);
