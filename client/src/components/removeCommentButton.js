@@ -20,9 +20,10 @@ const RemoveComment = (props) => {
   let userId = localStorage.getItem("userId");
   let userCommentId = props.userID;
   let commentId = props.commentId;
+  let comments = props.comments;
   let petId = props.petID;
-  console.log(petId);
-  console.log(commentId);
+  // console.log(petId);
+  // console.log(commentId);
   let removeCountComment = () => {
     setCountComment((countComment -= 1));
   };
@@ -33,8 +34,8 @@ const RemoveComment = (props) => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
-        const newData = data.filter((item) => {
+        console.log("result", result);
+        const newData = comments.filter((item) => {
           return item._id !== result._id;
         });
         setData(newData);

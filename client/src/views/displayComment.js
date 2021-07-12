@@ -72,6 +72,7 @@ const DisplayComment = (props) => {
                       commentId={link._id}
                       userID={link.userId}
                       petID={props.petId}
+                      comments={petComments}
                     />
                   </Grid>
                 </Grid>

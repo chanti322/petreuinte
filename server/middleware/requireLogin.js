@@ -20,6 +20,7 @@ module.exports = async (request, response, next) => {
       message: "No token provided!",
     });
   } else if (token) {
+    //Check if the blacklist contains the token
     const black = await blacklistModel.findOne(
       { accessToken: token },
       function (err, accesstoken) {
@@ -42,8 +43,6 @@ module.exports = async (request, response, next) => {
       }
     );
   }
-
-  //blacklist
 
   // Verify the token
   jwt.verify(token, secretOrKey, (error, decoded) => {
@@ -78,51 +77,3 @@ module.exports = async (request, response, next) => {
          // console.log("valid")
         }
       }) */
-
-/*const token = authorization.replace("Bearer ","")
-    //authorization === Bearer ewefwegwrherhe
-    if(!authorization){
-       return res.status(401).json({error:"you must be logged in"})
-    }
-    const token = authorization.replace("Bearer ","")
-    jwt.verify(token,secretOrKey,(err,payload)=>{
-        if(err){
-         return   res.status(401).json({error:"you must be logged in"})
-        }
-
-        const {_id} = payload
-        User.findById(_id).then(userdata=>{
-            req.user = userdata
-            next()
-        })
-           })
- */
-/*   router.get("/blacklist", (req, res) => {
-              console.log("bodyBlacklist",req.body)
-    blacklistModel.find({}, function (err, accesstoken) {
-  console.log("b", accessToken)
-    if (err) {
-      res.send(err);
-    } else {
-        res.send(accesstoken);
-        console.log("blacklist",res)
-    }
-  });
- });
-  module.exports = router;  */
-// console.log("list", blacklist)
-/*  const blacklist = 
-    blacklistModel.find({}, function (err, accesstoken) {
-      //  console.log("b", accesstoken[0])
-      accesstoken.forEach(tok => {
-        console.log(tok.accessToken)
-        if (tok.accessToken === token) {
-          token = token + "cc";
-          console.log("cc", token)
-  
- 
-        } else { console.log("valid") }
-      })
-
-    }); */
-//console.log(blacklist)
