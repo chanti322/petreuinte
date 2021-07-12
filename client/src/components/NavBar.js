@@ -82,7 +82,7 @@ export default function MenuAppBar() {
   const loggedIn = localStorage.getItem("loggedIn");
   const { isLoggedIn, setIsLoggedIn, usernameStorage, setUsernameStorage } =
     useContext(VariablesContext);
-  //const usernameStorage = localStorage.getItem("usernameStorage");
+  const usernameStorageloc = localStorage.getItem("usernameStorage");
   useEffect(() => {
     //  const usernameStorage = localStorage.getItem("usernameStorage");
   }, [usernameStorage]);
@@ -194,14 +194,14 @@ export default function MenuAppBar() {
             )}
           </Menu>
 
-          {!isLoggedIn || loggedIn ? (
+          {!loggedIn || isLoggedIn ? (
             <Link to="/signUpForm">
               <button className={classes.loginButton}>Sign in/up</button>
             </Link>
           ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <p className={classes.welcometext}>
-                Welcome <span>{usernameStorage}</span>
+                Welcome <span>{usernameStorageloc}</span>
               </p>
               <LogOut />
             </div>
