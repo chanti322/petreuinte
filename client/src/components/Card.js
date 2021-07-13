@@ -93,17 +93,6 @@ export default function CardPet(props) {
     }
   }, [heart, removePost]);
   console.log("heart", heart);
-  ///Get favorite
-  /*  useEffect(() => {
-    let numberOfFavoriteFetch = () => {
-      fetch(`${serverURL}/pets/favorite/${petId}`, { method: "GET" })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("fav Data", data);
-        });
-    };
-    numberOfFavoriteFetch();
-  }, [heart]); */
 
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
