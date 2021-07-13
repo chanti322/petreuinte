@@ -47,7 +47,7 @@ export default function FormPet() {
   console.log("radioin form", radio);
   //const [markers, setMarkers] = useState([])
   const [comment, setComment] = useState([]);
-  const [favorite, setFavorite] = useState(0);
+  const [favorite, setFavorite] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");

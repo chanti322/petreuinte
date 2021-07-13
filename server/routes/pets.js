@@ -226,7 +226,7 @@ router.put("/addFavorite", requireLogin, async (req, res) => {
   try {
     const addOneFav = await petModel.findByIdAndUpdate(
       req.body.petId,
-      { $inc: { favorite: favorite } },
+      { $push: { favorite: userIdReal } },
       { new: true }
       /*   function (err, result) {
         console.log("userinResult", userIdReal);
@@ -270,7 +270,7 @@ router.put("/removeFavorite", requireLogin, async (req, res) => {
   try {
     const removeOneFav = await petModel.findByIdAndUpdate(
       req.body.petId,
-      { $inc: { favorite: favorite } },
+      { $pull: { favorite: userIdReal } },
       { new: true }
     );
     const removeFavInUser = await userModel.updateOne(

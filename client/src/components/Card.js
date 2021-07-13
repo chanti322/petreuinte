@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 export default function CardPet(props) {
   let pet = props.pet;
   let petId = pet._id;
-  // console.log("pet", pet.userId);
+  console.log("pet fav in card", pet.favorite);
   // console.log("name", pet.userId.username);
   const { heart, setHeart, removePost, setRemovePost } =
     useContext(VariablesContext);
@@ -191,7 +191,7 @@ export default function CardPet(props) {
         ) : (
           <ManageFavorite petId={pet._id} />
         )}
-        <p style={{ fontSize: 25 }}>{pet.favorite}</p>
+        <p style={{ fontSize: 25 }}>{pet.favorite.length}</p>
         <p>{errorMessage}</p>
         <BackAtHome
           userIdOfThePost={pet.userId}

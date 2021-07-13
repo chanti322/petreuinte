@@ -3,7 +3,7 @@ import { VariablesContext } from "../context/VariablesContext";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 export default function RemoveFavorite(props) {
-  const [favorite, setFavorite] = useState(0);
+  const [favorite, setFavorite] = useState([]);
   const { heart, setHeart } = useContext(VariablesContext);
 
   const petId = props.petId;

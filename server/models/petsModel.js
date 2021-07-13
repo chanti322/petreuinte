@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
-const {ObjectId} = mongoose.Schema.Types
+const { ObjectId } = mongoose.Schema.Types;
 const petSchema = new mongoose.Schema(
   {
-    
-    
     radio: {
       type: String,
     },
-   /*  userId: {
+    /*  userId: {
       type:String,
     }, */
     name: {
@@ -35,7 +33,7 @@ const petSchema = new mongoose.Schema(
       type: Boolean,
     },
     favorite: {
-      type: Number,
+      type: Array,
     },
     comments: [
       {
@@ -43,22 +41,19 @@ const petSchema = new mongoose.Schema(
           type: String,
         },
         avatar: {
-          type: String
+          type: String,
         },
         username: {
-          type:String
+          type: String,
         },
         userId: {
-          type:String,
-        }
-       
-      }
-    ], userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-  }
-     , 
-
-  
-   { timestamps: true }
+          type: String,
+        },
+      },
+    ],
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  },
+  { timestamps: true }
 );
 //let Pet = mongoose.model("Pet", petSchema);
 module.exports = mongoose.model("Pet", petSchema);
