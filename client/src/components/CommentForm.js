@@ -45,11 +45,12 @@ const Comment = (props) => {
       .then((res) => res.json())
       .then((data) => {
         console.log("commentdata", data);
+        setCountComment((countComment += 1));
       });
   };
   let fetchAndCount = () => {
     commentFetch();
-    addToCount();
+    //  addToCount();
   };
 
   return (
@@ -68,7 +69,7 @@ const Comment = (props) => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <button className={classes.commentBtn} onClick={fetchAndCount}>
+          <button className={classes.commentBtn} onClick={commentFetch}>
             Send
           </button>
         </div>

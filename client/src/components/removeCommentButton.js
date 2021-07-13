@@ -43,6 +43,7 @@ const RemoveComment = (props) => {
         });
         setData(newData);
       })
+
       .catch((err) => console.log(err));
   };
   console.log("data comm", data);
