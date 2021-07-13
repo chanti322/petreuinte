@@ -13,7 +13,8 @@ const useStyles = makeStyles({
 const serverURL = require("../config.js").serverURL;
 const Comment = (props) => {
   const classes = useStyles();
-  let { countComment, setCountComment } = useContext(VariablesContext);
+  let { countComment, setCountComment, onePet, setOnePet } =
+    useContext(VariablesContext);
   const [text, setText] = useState("");
 
   const loggedIn = localStorage.getItem("loggedIn");
@@ -46,6 +47,7 @@ const Comment = (props) => {
       .then((data) => {
         console.log("commentdata", data);
         setCountComment((countComment += 1));
+        setOnePet(data);
       });
   };
   let fetchAndCount = () => {

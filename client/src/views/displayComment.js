@@ -36,9 +36,9 @@ const DisplayComment = (props) => {
   let petComments = props.petComments;
   console.log(petComments);
   let { countComment, setCountComment } = useContext(VariablesContext);
-  useEffect(() => {
-    petComments = props.petComments;
-  }, [countComment]);
+  // useEffect(() => {
+  //   petComments = props.petComments;
+  // }, []);
   return (
     <div style={{ marginTop: 10 }}>
       <ul>

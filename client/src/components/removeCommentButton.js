@@ -15,46 +15,58 @@ const useStyles = makeStyles({
 
 const RemoveComment = (props) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
-  let { countComment, setCountComment } = useContext(VariablesContext);
+  // const [data, setData] = useState([]);
+  let { countComment, setCountComment, onePet, setOnePet } =
+    useContext(VariablesContext);
   let userId = localStorage.getItem("userId");
   let userCommentId = props.userID;
   let commentId = props.commentId;
   let comments = props.comments;
   let petId = props.petID;
   let comment = props.comment;
-  console.log("comment", commentId);
+  // console.log("comment", commentId);
 
-  console.log(petId);
-  console.log(commentId);
-  console.log("comm", comments);
-  let removeCountComment = () => {
-    setCountComment((countComment -= 1));
-  };
+  // console.log(petId);
+  // console.log(commentId);
+  // console.log("comm", comments);
+  // let removeCountComment = () => {
+  //   setCountComment((countComment -= 1));
+  // };
 
   const deleteComment = () => {
     fetch(`${serverURL}/pets/deleteComment/${petId}/${commentId}`, {
-      method: "DELETE",
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = comments.filter((item) => {
-          return item._id !== commentId;
-        });
-        setData(newData);
+      .then((res) => {
+        console.log(res);
+        return res.json();
       })
-
+      .then((result) => {
+        console.log(result);
+        // const newData = comments.filter((item) => {
+        //   return item._id !== commentId;
+        // });
+        // setData(newData);
+        setOnePet(result);
+      })
       .catch((err) => console.log(err));
   };
-  console.log("data comm", data);
-  let fetchAndRemove = () => {
-    deleteComment();
-    removeCountComment();
-  };
+  // console.log("data comm", data);
+  // let fetchAndRemove = () => {
+  //   deleteComment();
+  //   removeCountComment();
+  // };
   return (
     <div>
       {userId === userCommentId && (
-        <button className={classes.buttonRemove} onClick={fetchAndRemove}>
+        <button
+          className={classes.buttonRemove}
+          onClick={() => deleteComment()}
+        >
           <DeleteForeverIcon />
         </button>
       )}

@@ -19,12 +19,14 @@ const initContextVariables = {
   removePost: false,
   usernameStorage: "",
   userFavoritesArray: [],
+  onePet: null,
 };
 
 export const VariablesContext = createContext(initContextVariables);
 
 export const VariablesContextProvider = ({ children }) => {
   const [pets, setPets] = useState(initContextVariables.pets);
+  const [onePet, setOnePet] = useState(initContextVariables.onePet);
   const [name, setName] = useState(initContextVariables.name);
   const [type, setType] = useState(initContextVariables.type);
   const [breed, setBreed] = useState(initContextVariables.breed);
@@ -57,6 +59,8 @@ export const VariablesContextProvider = ({ children }) => {
       value={{
         pets,
         setPets,
+        onePet,
+        setOnePet,
         name,
         setName,
         type,

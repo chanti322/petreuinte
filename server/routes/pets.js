@@ -152,9 +152,10 @@ router.put("/comments", (req, res) => {
       req.body.petId,
       {
         $push: { comments: comment },
-      } /* {
-        new:true
-    } */
+      },
+      {
+        new: true,
+      }
     )
 
     .exec((err, result) => {
@@ -187,35 +188,31 @@ router.put("/atHome", (req, res) => {
   );
 });
 
-router.delete("/deleteComment/:petId/:commentId", async (req, res) => {
+router.put("/deleteComment/:petId/:commentId", (req, res) => {
   const { petId, commentId } = req.params;
   console.log("pet", petId);
   console.log("petcomm", commentId);
 
-  try {
-    petModel
-      .updateOne(
-        { _id: req.params.petId },
-        { $pull: { comments: { _id: req.params.commentId } } },
-        { new: true, useFindAndModify: false },
-        function (err, data) {
-          if (err) {
-            return res.status(404).json({ message: "Error" });
-          } else {
-            // console.log(data);
-            res.send(commentId);
-          }
-          /*   return res.status(200).json({
+  petModel
+    .findByIdAndUpdate(
+      req.params.petId,
+      { $pull: { comments: { _id: req.params.commentId } } },
+      { new: true },
+      function (err, data) {
+        console.log(data);
+        if (err) {
+          return res.status(404).json({ message: "Error" });
+        } else {
+          console.log(data);
+          res.send(data);
+        }
+        /*   return res.status(200).json({
               success: true,
               message: 'success'
           }); */
-        }
-      )
-      .exec();
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+      }
+    )
+    .exec();
 });
 
 //Add favorite to post

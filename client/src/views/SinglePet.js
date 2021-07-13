@@ -38,8 +38,9 @@ const useStyles = makeStyles({
 
 export default function SinglePet(props) {
   let history = useHistory();
-  const [onePet, setOnePet] = useState([]);
-  const { countComment, setCountComment } = useContext(VariablesContext);
+  //const [onePet, setOnePet] = useState([]);
+  const { countComment, setCountComment, onePet, setOnePet } =
+    useContext(VariablesContext);
   let { id } = useParams();
   console.log("id", id);
   useEffect(() => {
@@ -52,89 +53,93 @@ export default function SinglePet(props) {
         });
     };
     singlePetfetch();
-  }, [countComment]);
+  }, []);
   // console.log("onePettype",onePet.type)
   // console.log("onePetmarker", onePet.markers)
-  console.log("onePetcomments", onePet.comments);
+  //console.log("onePetcomments", onePet.comments);
   const classes = useStyles();
 
   return (
-    <div style={{ marginTop: 90, width: "100vw", marginBottom: "10vh" }}>
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia
-            style={{ borderRadius: 15 }}
-            className={classes.media}
-            image={onePet.img}
-            title="Pet"
-          />
-          <CardContent>
-            <Typography
-              style={{ fontWeight: "bold", backgroundColor: "orange" }}
-              gutterBottom
-              variant="h5"
-              component="h2"
-            >
-              {onePet.name}
-            </Typography>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <Paper
-                className={classes.paperElem}
+    onePet !== null && (
+      <div style={{ marginTop: 90, width: "100vw", marginBottom: "10vh" }}>
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              style={{ borderRadius: 15 }}
+              className={classes.media}
+              image={onePet.img}
+              title="Pet"
+            />
+            <CardContent>
+              <Typography
+                style={{ fontWeight: "bold", backgroundColor: "orange" }}
+                gutterBottom
+                variant="h5"
+                component="h2"
+              >
+                {onePet.name}
+              </Typography>
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <Paper
+                  className={classes.paperElem}
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                >
+                  <span style={{ fontWeight: "bold" }}> Species: </span>
+                  {onePet.type}
+                </Paper>
+                <Paper
+                  className={classes.paperElem}
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                >
+                  <span style={{ fontWeight: "bold" }}>Breed:</span>{" "}
+                  {onePet.breed}
+                </Paper>
+              </div>
+              <Typography variant="body2" color="textSecondary" component="p">
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    display: "block",
+                    fontSize: 20,
+                    margin: 5,
+                  }}
+                >
+                  Further Information:
+                </span>{" "}
+                {onePet.info}
+              </Typography>
+
+              <Typography
+                style={{ marginTop: 10 }}
                 variant="body2"
                 color="textSecondary"
                 component="p"
               >
-                <span style={{ fontWeight: "bold" }}> Species: </span>
-                {onePet.type}
-              </Paper>
-              <Paper
-                className={classes.paperElem}
-                variant="body2"
-                color="textSecondary"
-                component="p"
-              >
-                <span style={{ fontWeight: "bold" }}>Breed:</span>{" "}
-                {onePet.breed}
-              </Paper>
-            </div>
-            <Typography variant="body2" color="textSecondary" component="p">
-              <span
-                style={{
-                  fontWeight: "bold",
-                  display: "block",
-                  fontSize: 20,
-                  margin: 5,
-                }}
-              >
-                Further Information:
-              </span>{" "}
-              {onePet.info}
-            </Typography>
-
-            <Typography
-              style={{ marginTop: 10 }}
-              variant="body2"
-              color="textSecondary"
-              component="p"
+                {onePet.markers && (
+                  <ConvertedAddress markers={onePet.markers} />
+                )}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <button
+              className={classes.goBackBtn}
+              onClick={() => history.goBack()}
             >
-              {onePet.markers && <ConvertedAddress markers={onePet.markers} />}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <button
-            className={classes.goBackBtn}
-            onClick={() => history.goBack()}
-          >
-            <KeyboardArrowLeftIcon />
-          </button>
-        </CardActions>
-      </Card>
-      <div>
-        <DisplayComment petComments={onePet.comments} petId={onePet._id} />
+              <KeyboardArrowLeftIcon />
+            </button>
+          </CardActions>
+        </Card>
+        <div>
+          <DisplayComment petComments={onePet.comments} petId={onePet._id} />
 
-        <Comment petId={id} />
+          <Comment petId={id} />
+        </div>
       </div>
-    </div>
+    )
   );
 }
