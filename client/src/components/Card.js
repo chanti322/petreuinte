@@ -40,26 +40,31 @@ const useStyles = makeStyles({
 export default function CardPet(props) {
   let pet = props.pet;
   let petId = pet._id;
-  console.log("pet fav in card", pet.favorite);
+  console.log("pet fav in card", pet.favorite.length);
   // console.log("name", pet.userId.username);
-  const { heart, setHeart, removePost, setRemovePost } =
-    useContext(VariablesContext);
+  const {
+    heart,
+    setHeart,
+    removePost,
+    setRemovePost,
+    userFavoritesArray,
+    setUserFavoritesArray,
+  } = useContext(VariablesContext);
   let favoriteUser = localStorage.getItem("userFavorites");
   const userId = localStorage.getItem("userId");
-  console.log("userCard", userId);
-  console.log("heart in card", heart);
-  console.log("pet", pet);
+  // console.log("userCard", userId);
+  // console.log("heart in card", heart);
+  // console.log("pet", pet);
 
   const [userProfile, setUserProfile] = useState([]);
-  const [userFavorites, setUserFavorites] = useState([]);
+  //const [userFavorites, setUserFavorites] = useState([]);
 
-  const [idFavorites, setIdFavorites] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   // console.log("favRealUser", favoriteUser);
   // console.log("pet", pet);
   // console.log("favoriteUser", pet.userId.favorites);
   // console.log("petincard", pet);
-  console.log("userFavo", userFavorites);
+  // console.log("userFavo", userFavorites);
   const classes = useStyles();
   let accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
@@ -74,7 +79,8 @@ export default function CardPet(props) {
         })
         .then((data) => {
           setUserProfile(data);
-          setUserFavorites(data[0].favorites);
+          //    setUserFavorites(data[0].favorites);
+          setUserFavoritesArray(data[0].favorites);
 
           console.log("postcard", data[0]);
         })
@@ -183,8 +189,8 @@ export default function CardPet(props) {
             More information
           </Link>
         </Button>
-        {userFavorites !== undefined &&
-        userFavorites.filter(function (e) {
+        {userFavoritesArray !== undefined &&
+        userFavoritesArray.filter(function (e) {
           return e._id === pet._id;
         }).length > 0 ? (
           <RemoveFavorite petId={pet._id} />

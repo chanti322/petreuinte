@@ -18,6 +18,7 @@ const initContextVariables = {
   isLoggedIn: false,
   removePost: false,
   usernameStorage: "",
+  userFavoritesArray: [],
 };
 
 export const VariablesContext = createContext(initContextVariables);
@@ -45,6 +46,9 @@ export const VariablesContextProvider = ({ children }) => {
   const [heart, setHeart] = useState(initContextVariables.heart);
   const [usernameStorage, setUsernameStorage] = useState(
     initContextVariables.usernameStorage
+  );
+  const [userFavoritesArray, setUserFavoritesArray] = useState(
+    initContextVariables.userFavoritesArray
   );
   console.log("in context heart", heart);
 
@@ -85,6 +89,8 @@ export const VariablesContextProvider = ({ children }) => {
         setRemovePost,
         usernameStorage,
         setUsernameStorage,
+        userFavoritesArray,
+        setUserFavoritesArray,
       }}
     >
       {children}
