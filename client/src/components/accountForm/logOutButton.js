@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../../context/VariablesContext";
+import { AuthContext } from "../../context/AuthContext";
 const serverURL = require("../../config.js").serverURL;
 const LogOut = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(VariablesContext);
+  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } =
+    useContext(AuthContext);
   const accessToken = localStorage.getItem("accessToken");
   console.log("tok logout", accessToken);
   console.log(isLoggedIn);
@@ -28,14 +30,20 @@ const LogOut = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        setIsLoggedIn(false);
+        setUserInfo(null);
+
+        localStorage.clear();
+      });
   }
   let changeLogIn = () => {
     setIsLoggedIn(false);
   };
   const reloadAndClean = () => {
     logOutFetch();
-    localStorage.clear();
+
     changeLogIn();
   };
   return (

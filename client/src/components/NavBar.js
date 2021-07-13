@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
+import { AuthContext } from "../context/AuthContext";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
@@ -80,8 +81,10 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const loggedIn = localStorage.getItem("loggedIn");
-  const { isLoggedIn, setIsLoggedIn, usernameStorage, setUsernameStorage } =
-    useContext(VariablesContext);
+  const { usernameStorage, setUsernameStorage } = useContext(VariablesContext);
+  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } =
+    useContext(AuthContext);
+
   const usernameStorageloc = localStorage.getItem("usernameStorage");
   useEffect(() => {
     //  const usernameStorage = localStorage.getItem("usernameStorage");
@@ -194,14 +197,14 @@ export default function MenuAppBar() {
             )}
           </Menu>
 
-          {!loggedIn ? (
+          {!isLoggedIn ? (
             <Link to="/signUpForm">
               <button className={classes.loginButton}>Sign in/up</button>
             </Link>
           ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <p className={classes.welcometext}>
-                Welcome <span>{usernameStorageloc}</span>
+                Welcome <span>{userInfo[0].username}</span>
               </p>
               <LogOut />
             </div>

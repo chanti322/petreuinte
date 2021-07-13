@@ -15,7 +15,7 @@ const initContextVariables = {
   countComment: 0,
   countInSave: 0,
   heart: 0,
-  isLoggedIn: false,
+  //isLoggedIn: false,
   removePost: false,
   usernameStorage: "",
   userFavoritesArray: [],
@@ -37,7 +37,7 @@ export const VariablesContextProvider = ({ children }) => {
   const [radio, setRadio] = useState(initContextVariables.radio);
   const [markers, setMarkers] = useState(initContextVariables.markers);
   const [addressPet, setAddressPet] = useState(initContextVariables.addressPet);
-  const [isLoggedIn, setIsLoggedIn] = useState(initContextVariables.isLoggedIn);
+  // const [isLoggedIn, setIsLoggedIn] = useState(initContextVariables.isLoggedIn);
   const [countComment, setCountComment] = useState(
     initContextVariables.countComment
   );
@@ -81,8 +81,7 @@ export const VariablesContextProvider = ({ children }) => {
         setMarkers,
         addressPet,
         setAddressPet,
-        isLoggedIn,
-        setIsLoggedIn,
+
         countComment,
         setCountComment,
         countInSave,

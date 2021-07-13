@@ -14,6 +14,7 @@ import Home from "./views/Home";
 import InSavePet from "./views/InSavePets";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContextProvider } from "./context/VariablesContext";
+import { AuthContextProvider } from "./context/AuthContext";
 import ConvertedAddress from "./components/ConvertedAddress";
 import SinglePet from "./views/SinglePet";
 import Footer from "./components/Footer";
@@ -24,29 +25,31 @@ function App() {
   return (
     <div className="App" style={{ width: "fit-content", maxWidth: 360 }}>
       <Router>
-        <VariablesContextProvider>
-          <MenuAppBar />
+        <AuthContextProvider>
+          <VariablesContextProvider>
+            <MenuAppBar />
 
-          <ConvertedAddress />
-          <Switch>
-            <Route path="/petsLost" exact component={PetsLost} />
-          </Switch>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/petsFound" exact component={PetsFound} />
-            <Route path="/googleMap" exact component={GoogleMap} />
-            <Route path="/Form" exact component={FormPet} />
-            <Route path="/signUpForm" exact component={SignUp} />
-            <Route path="/inSave" exact component={InSavePet} />
-            <Route path="/signInForm" exact component={SignIn} />
-            <Route path="/signUpSuccess" exact component={SignUpSuccess} />
-            <Route path="/userProfile" exact component={UserProfile} />
-            <Route exact path="/details/:id">
-              <SinglePet />
-            </Route>
-          </Switch>
-          <Footer />
-        </VariablesContextProvider>
+            <ConvertedAddress />
+            <Switch>
+              <Route path="/petsLost" exact component={PetsLost} />
+            </Switch>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/petsFound" exact component={PetsFound} />
+              <Route path="/googleMap" exact component={GoogleMap} />
+              <Route path="/Form" exact component={FormPet} />
+              <Route path="/signUpForm" exact component={SignUp} />
+              <Route path="/inSave" exact component={InSavePet} />
+              <Route path="/signInForm" exact component={SignIn} />
+              <Route path="/signUpSuccess" exact component={SignUpSuccess} />
+              <Route path="/userProfile" exact component={UserProfile} />
+              <Route exact path="/details/:id">
+                <SinglePet />
+              </Route>
+            </Switch>
+            <Footer />
+          </VariablesContextProvider>
+        </AuthContextProvider>
       </Router>
     </div>
   );

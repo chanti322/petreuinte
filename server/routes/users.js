@@ -61,7 +61,7 @@ router.post("/login", (req, res) => {
     return res.status(422).json({ error: "please add email or password" });
   }
   userModel.findOne({ email: email }, (err, user) => {
-    console.log("user", user);
+    // console.log("user", user);
     if (err) {
       res.send("Email does not exist");
     } else {
@@ -160,14 +160,14 @@ router.get(
       });
   }
 );
+// Get user Profile
 /* router.get(
   "/userProfile",
-requireLogin,
- 
+
   (req, res) => {
-  //  console.log("profile",req.user);
+    console.log("profile", req);
     res.send(req.user);
   }
-);  */
+); */
 
 module.exports = router;

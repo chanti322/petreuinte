@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { VariablesContext } from "../../context/VariablesContext";
+import { AuthContext } from "../../context/AuthContext";
 import "../../styles/SignUpForm.css";
 import {
   BrowserRouter as Router,
@@ -14,8 +15,10 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
-  const { isLoggedIn, setIsLoggedIn, usernameStorage, setUsernameStorage } =
-    useContext(VariablesContext);
+  const { usernameStorage, setUsernameStorage } = useContext(VariablesContext);
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } =
+    useContext(AuthContext);
+  console.log(isLoggedIn);
   const accessToken = localStorage.getItem("accessToken");
 
   const loggedIn = localStorage.getItem("loggedIn");
@@ -42,7 +45,7 @@ export default function SignIn() {
         localStorage.setItem("accessToken", data.token);
         if (data.token !== undefined) {
           localStorage.setItem("loggedIn", data.loggedIn);
-          setIsLoggedIn(data.loggedIn);
+          setIsLoggedIn(true);
         }
         localStorage.setItem("usernameStorage", data.user.username);
         setUsernameStorage(data.user.username);
@@ -67,12 +70,9 @@ export default function SignIn() {
         }
       });
   };
-  let changeLogIn = () => {
-    setIsLoggedIn((prev) => !prev);
-  };
+
   const reloadAndFetch = () => {
     getLogIn();
-    changeLogIn();
   };
 
   return (
