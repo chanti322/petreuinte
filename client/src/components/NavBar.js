@@ -203,9 +203,11 @@ export default function MenuAppBar() {
             </Link>
           ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className={classes.welcometext}>
-                Welcome <span>{userInfo[0].username}</span>
-              </p>
+              {userInfo[0] && (
+                <p className={classes.welcometext}>
+                  Welcome <span>{userInfo[0].username}</span>
+                </p>
+              )}
               <LogOut />
             </div>
           )}

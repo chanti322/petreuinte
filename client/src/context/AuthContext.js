@@ -4,7 +4,7 @@ let userId = localStorage.getItem("userId");
 let token = localStorage.getItem("accessToken");
 
 const initAuthContextVariables = {
-  userInfo: null,
+  userInfo: [],
   isLoggedIn: false,
 };
 
