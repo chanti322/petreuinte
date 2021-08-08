@@ -54,9 +54,7 @@ export default function SinglePet(props) {
     };
     singlePetfetch();
   }, []);
-  // console.log("onePettype",onePet.type)
-  // console.log("onePetmarker", onePet.markers)
-  //console.log("onePetcomments", onePet.comments);
+console.log("onePet",onePet)
   const classes = useStyles();
 
   return (

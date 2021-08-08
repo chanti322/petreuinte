@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { VariablesContext } from "../context/VariablesContext";
+import { AuthContext } from "../context/AuthContext";
 const serverURL = require("../config.js").serverURL;
 
 export default function ManageFavorite(props) {
   const [favorite, setFavorite] = useState([]);
   const { heart, setHeart } = useContext(VariablesContext);
-
+/*   const {  userId, setUserId } =
+    useContext(AuthContext); */
   const petId = props.petId;
-  const userId = localStorage.getItem("userId");
+ const userId = localStorage.getItem("userId");
   console.log("varUser", userId);
   let userFavorites = props.petFavorite;
   console.log("userFav", userFavorites);
@@ -32,7 +34,7 @@ export default function ManageFavorite(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log("datafav", data);
       });
   };
   let addFavoriteAndFetch = () => {

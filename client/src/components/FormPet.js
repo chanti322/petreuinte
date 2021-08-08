@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
+import {AuthContext} from "../context/AuthContext"
 import Map from "./googleMaps/GoogleMap";
 import { Paper, TextField, TextareaAutosize } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
@@ -52,8 +53,9 @@ export default function FormPet() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [urlError, setUrlError] = useState("");
-
-  let userId = localStorage.getItem("userId");
+  const {  userId, setUserId } =
+  useContext(AuthContext);
+ // let userId = localStorage.getItem("userId");
 
   const { markers, setMarkers } = useContext(VariablesContext);
 

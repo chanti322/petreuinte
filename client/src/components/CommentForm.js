@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { VariablesContext } from "../context/VariablesContext";
+import { AuthContext } from "../context/AuthContext";
 const useStyles = makeStyles({
   commentBtn: {
     backgroundColor: "orange",
@@ -15,6 +16,8 @@ const Comment = (props) => {
   const classes = useStyles();
   let { countComment, setCountComment, onePet, setOnePet } =
     useContext(VariablesContext);
+    const {  userId, setUserId } =
+    useContext(AuthContext);
   const [text, setText] = useState("");
 
   const loggedIn = localStorage.getItem("loggedIn");
@@ -22,7 +25,7 @@ const Comment = (props) => {
   const avatar = localStorage.getItem("userAvatar");
   //  console.log("avatarCommForm", avatar)
   const username = localStorage.getItem("usernameStorage");
-  const userId = localStorage.getItem("userId");
+ // const userId = localStorage.getItem("userId");
   // console.log("nameCommForm", username)
   let petId = props.petId;
   let addToCount = () => {

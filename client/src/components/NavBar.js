@@ -85,10 +85,8 @@ export default function MenuAppBar() {
   const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } =
     useContext(AuthContext);
 
-  const usernameStorageloc = localStorage.getItem("usernameStorage");
-  useEffect(() => {
-    //  const usernameStorage = localStorage.getItem("usernameStorage");
-  }, [usernameStorage]);
+console.log("log", isLoggedIn)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -102,7 +100,7 @@ export default function MenuAppBar() {
   }
 
   console.log("li", isLoggedIn);
-  useEffect(() => {}, [isLoggedIn]);
+  
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBarColor}>
@@ -197,20 +195,20 @@ export default function MenuAppBar() {
             )}
           </Menu>
 
-          {!isLoggedIn ? (
+          {!loggedIn ? (
             <Link to="/signUpForm">
               <button className={classes.loginButton}>Sign in/up</button>
             </Link>
-          ) : (
+        ) : ( 
             <div style={{ display: "flex", flexDirection: "column" }}>
-              {userInfo[0] && (
+              {/* {userInfo.length >0 && (
                 <p className={classes.welcometext}>
-                  Welcome <span>{userInfo[0].username}</span>
+                  Welcome <span>{userInfo.username}</span>
                 </p>
-              )}
+              )}  */}
               <LogOut />
             </div>
-          )}
+    )} 
         </Toolbar>
       </AppBar>
     </div>

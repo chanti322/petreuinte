@@ -36,9 +36,9 @@ export default function PetsFound() {
   const classes = useStyles();
   const loggedIn = localStorage.getItem("loggedIn");
   const userId = localStorage.getItem("userId");
-  //const { pets, setPets } = useContext(VariablesContext);
+  const { pets, setPets } = useContext(VariablesContext);
   const [userProfile, setUserProfile] = useState([]);
-  const [pets, setPets] = useState([]);
+ // const [pets, setPets] = useState([]);
   useEffect(() => {
     fetch(serverURL + "/pets/found")
       .then((res) => res.json())

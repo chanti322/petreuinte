@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
 import { VariablesContext } from "../context/VariablesContext";
+import {AuthContext} from "../context/AuthContext"
 const serverURL = require("../config.js").serverURL;
 export default function BackAtHome(props) {
+  const {userId, setUserId } =
+    useContext(AuthContext);
   let userIdOfThePost = props.userIdOfThePost._id;
-  let userId = localStorage.getItem("userId");
+ // let userId = localStorage.getItem("userId");
   // console.log("userPost", userIdOfThePost);
   // console.log(userId);
   let petId = props.petId;
