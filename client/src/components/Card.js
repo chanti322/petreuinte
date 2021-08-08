@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
-
 import BackAtHome from "./BackAtHomeButton";
 import RemovePost from "./RemovePostButton";
 import Card from "@material-ui/core/Card";
@@ -70,34 +69,7 @@ export default function CardPet(props) {
   useEffect(()=>{
     setNumberFavorite(petFavorite)
   },[heart, userFavoritesArray])
- /*  useEffect(() => {
-    if (accessToken) {
-      fetch(`${serverURL}/users/userProfile/favorites/${userId}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        },
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log("data in fav", data)
-       
-          setUserFavoritesArray(data[0].favorites);
 
-          console.log("postcard", data[0].favorites);
-          console.log("userfavarr", data[0].favorites) 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      console.log("You have to logIn");
-      setErrorMessage("You have to login to add a like");
-    }
-  }, [heart, removePost]);
-  console.log("heart", heart);
-  console.log("userFavoCard", userFavoritesArray); */
   
   useEffect(() => {
     let profileFetch = () => {

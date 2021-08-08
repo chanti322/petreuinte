@@ -206,10 +206,7 @@ router.put("/deleteComment/:petId/:commentId", (req, res) => {
           console.log(data);
           res.send(data);
         }
-        /*   return res.status(200).json({
-              success: true,
-              message: 'success'
-          }); */
+     
       }
     )
     .exec();
@@ -225,16 +222,7 @@ router.put("/addFavorite", requireLogin, async (req, res) => {
       req.body.petId,
       { $push: { favorite: userIdReal } },
       { new: true }
-      /*   function (err, result) {
-        console.log("userinResult", userIdReal);
-        console.log("result", result);
-
-        if (err) {
-          return res.status(422).json({ error: err });
-        } else {
-          res.json({ message: result.favorite });
-        }
-      } */
+  
     );
     const addFavInUser = await userModel.updateOne(
       { _id: userIdReal },
@@ -263,7 +251,7 @@ router.get("/favorite/:petId", (req, res) => {
 router.put("/removeFavorite", requireLogin, async (req, res) => {
   let favorite = req.body.favorite;
   let userIdReal = req.body.userId;
-  // console.log("user", req.body.userId);
+
   try {
     const removeOneFav = await petModel.findByIdAndUpdate(
       req.body.petId,

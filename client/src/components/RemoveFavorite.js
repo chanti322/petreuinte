@@ -9,13 +9,13 @@ export default function RemoveFavorite(props) {
   const petId = props.petId;
   const userId = localStorage.getItem("userId");
   let userFavorites = props.petFavorite;
-  console.log("userFav", userFavorites);
+ // console.log("userFav", userFavorites);
   const serverURL = require("../config.js").serverURL;
   function heartButton() {
     setHeart((prev) => (prev -= 1));
   }
 
-  console.log("heartRem", heart);
+  //console.log("heartRem", heart);
   let removeFavorite = () => {
     fetch(serverURL + "/pets/removeFavorite", {
       method: "PUT",
@@ -31,8 +31,8 @@ export default function RemoveFavorite(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("bothin Rem", data)
-        console.log("favoritesinREm", data.removeOneFav.favorite);
+        //console.log("bothin Rem", data)
+       // console.log("favoritesinREm", data.removeOneFav.favorite);
         setUserFavoritesArray(data.removeFavUser.favorites)
       });
   };

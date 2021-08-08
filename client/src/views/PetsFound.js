@@ -50,27 +50,7 @@ export default function PetsFound() {
        
       });
   }, [removePost, heart, userFavoritesArray]);
- /*  useEffect(() => {
-    //if (accessToken) {
-    fetch(`${serverURL}users/userProfile/${userId}`, {
-       headers: {
-          "Authorization": "Bearer " + localStorage.getItem("accessToken")
-        }  
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setUserProfile(data);
-        console.log("postinFound", data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-     }else {
-      console.log("You have to logIn")
-    }  
-  }, []); */
+
   return (
     <div style={{ marginTop: 80, width: "100vw", textAlign: "center" }}>
       <h2 className={classes.title}>Spotted Pets</h2>
