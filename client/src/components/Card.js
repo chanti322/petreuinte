@@ -44,6 +44,8 @@ export default function CardPet(props) {
   let petFavorite = pet.favorite
   console.log("arrayfav", petFavorite)
   console.log("pet fav in card", pet.favorite.length);
+  let [numberFavorite, setNumberFavorite]=useState([])
+
   // console.log("name", pet.userId.username);
   const {
     heart,
@@ -62,10 +64,12 @@ export default function CardPet(props) {
 
 
   const [errorMessage, setErrorMessage] = useState("");
- 
- 
   const classes = useStyles();
   let accessToken = localStorage.getItem("accessToken");
+
+  useEffect(()=>{
+    setNumberFavorite(petFavorite)
+  },[heart, userFavoritesArray])
  /*  useEffect(() => {
     if (accessToken) {
       fetch(`${serverURL}/users/userProfile/favorites/${userId}`, {

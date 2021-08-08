@@ -32,6 +32,8 @@ export default function PetsFound() {
     setRemovePost,
     heart,
     setHeart,
+    userFavoritesArray,
+    setUserFavoriteArray
   } = useContext(VariablesContext);
   const classes = useStyles();
   const loggedIn = localStorage.getItem("loggedIn");
@@ -44,10 +46,10 @@ export default function PetsFound() {
       .then((res) => res.json())
       .then((data) => {
         setPets(data);
-        console.log("petfound", pets);
+        console.log("petfound", data);
        
       });
-  }, [countInSave, removePost, heart]);
+  }, [removePost, heart, userFavoritesArray]);
  /*  useEffect(() => {
     //if (accessToken) {
     fetch(`${serverURL}users/userProfile/${userId}`, {
