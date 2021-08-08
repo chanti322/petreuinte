@@ -3,8 +3,8 @@ import { VariablesContext } from "../context/VariablesContext";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 export default function RemoveFavorite(props) {
-  const [favorite, setFavorite] = useState([]);
-  const { heart, setHeart } = useContext(VariablesContext);
+  const { heart, setHeart, userFavoritesArray,
+    setUserFavoritesArray, } = useContext(VariablesContext);
 
   const petId = props.petId;
   const userId = localStorage.getItem("userId");
@@ -31,7 +31,9 @@ export default function RemoveFavorite(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("favorites", data);
+        console.log("bothin Rem", data)
+        console.log("favoritesinREm", data.removeOneFav.favorite);
+        setUserFavoritesArray(data.removeFavUser.favorites)
       });
   };
   let removeFavoriteAndFetch = () => {

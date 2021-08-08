@@ -6,7 +6,8 @@ const serverURL = require("../config.js").serverURL;
 
 export default function ManageFavorite(props) {
  
-  const { heart, setHeart } = useContext(VariablesContext);
+  const { heart, setHeart, userFavoritesArray,
+    setUserFavoritesArray, } = useContext(VariablesContext);
 console.log("props in fav", props)
   const petId = props.petId;
  const userId = localStorage.getItem("userId");
@@ -33,7 +34,9 @@ console.log("props in fav", props)
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("datafav", data);
+        console.log("bothin Add", data)
+        console.log("datafav", data.addOneFav.favorite);
+        setUserFavoritesArray(data.addFavUser.favorites)
       });
   };
   let addFavoriteAndFetch = () => {

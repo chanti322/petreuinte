@@ -27,12 +27,13 @@ const useStyles = makeStyles({
 export default function PetsLost() {
   const classes = useStyles();
   let {
-    countInSave,
-    setCountInSave,
+   
     removePost,
     setRemovePost,
     heart,
     setHeart,
+    userFavoritesArray,
+    setUserFavoritesArray
   } = useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
@@ -56,7 +57,7 @@ export default function PetsLost() {
     } else {
       console.log("You have to logIn");
     }
-  }, [countInSave, removePost, heart]);
+  }, [userFavoritesArray, removePost, heart]);
   return (
     <div style={{ marginTop: 80, width: "100vw", textAlign: "center" }}>
       <h2 className={classes.title}>Lost Pets</h2>
