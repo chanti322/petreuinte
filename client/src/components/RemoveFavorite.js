@@ -40,7 +40,7 @@ export default function RemoveFavorite(props) {
     removeFavorite();
     heartButton();
   };
-
+  console.log("userfavinREmbutton", userFavoritesArray)
   return (
     <div>
       <button onClick={removeFavoriteAndFetch}>

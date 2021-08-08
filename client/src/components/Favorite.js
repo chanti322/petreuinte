@@ -43,6 +43,7 @@ console.log("props in fav", props)
     heartButton();
     addFavorite();
   };
+  console.log("userfavinbutton", userFavoritesArray)
   console.log("heartAdd", heart);
   return (
     <div>

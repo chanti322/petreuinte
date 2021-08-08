@@ -115,6 +115,7 @@ export default function CardPet(props) {
     };
     profileFetch();
   }, [heart]);
+  console.log("userFAvArray", userFavoritesArray)
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
       <div
@@ -202,7 +203,7 @@ export default function CardPet(props) {
         {userFavoritesArray !== undefined && userFavoritesArray.filter(function (e) {
           return e._id === pet._id;
         }).length > 0  ? (
-          <RemoveFavorite petId={pet._id} petFavorite={userFavoritesArray} />
+          <RemoveFavorite petId={pet._id} petFavorite={petFavorite} />
         ) : (
           <ManageFavorite petId={pet._id} />
         )}
