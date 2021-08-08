@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
-import { AuthContext } from "../context/AuthContext";
+
 import BackAtHome from "./BackAtHomeButton";
 import RemovePost from "./RemovePostButton";
 import Card from "@material-ui/core/Card";
@@ -53,16 +53,13 @@ export default function CardPet(props) {
     userFavoritesArray,
     setUserFavoritesArray,
   } = useContext(VariablesContext);
-/*   const {  userId, setUserId } =
-    useContext(AuthContext); */
+
   let favoriteUser = localStorage.getItem("userFavorites");
   const userId = localStorage.getItem("userId");
   // console.log("userCard", userId);
   // console.log("heart in card", heart);
   // console.log("pet", pet);
 
-  const [userProfile, setUserProfile] = useState([]);
-  //const [userFavorites, setUserFavorites] = useState([]);
 
   const [errorMessage, setErrorMessage] = useState("");
  
@@ -80,12 +77,12 @@ export default function CardPet(props) {
           return res.json();
         })
         .then((data) => {
-          setUserProfile(data);
-          //    setUserFavorites(data[0].favorites);
+          console.log("data in fav", data)
+       
           setUserFavoritesArray(data[0].favorites);
 
           console.log("postcard", data[0].favorites);
-          console.log("userfavarr", data[0].favorites)
+          console.log("userfavarr", data[0].favorites) 
         })
         .catch((err) => {
           console.log(err);

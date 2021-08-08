@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 const serverURL = require("../config.js").serverURL;
 //let userId = localStorage.getItem("userId");
 let token = localStorage.getItem("accessToken");
-
+let userId = localStorage.getItem("userId")
 const initAuthContextVariables = {
   userInfo: {},
   isLoggedIn: false,

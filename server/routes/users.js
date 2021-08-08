@@ -85,6 +85,7 @@ router.post("/login", (req, res) => {
               success: true,
               token: token,
               user: { pic, username, email, _id },
+
             });
           } else {
             res.send("password does not match");
@@ -124,7 +125,7 @@ router.post("/logout", (req, res) => {
 
 // Get all the post of a user
  router.get("/userProfile/:userId", (req, res) => {
- console.log("req", req)
+
   let userId = req.params.userId;
   console.log("usProf", userId);
   userModel
@@ -136,8 +137,9 @@ router.post("/logout", (req, res) => {
         res.status(400).json(`Error: ${err}`);
       } else {
        
+     
        res.send(user)
-        res.json(user);
+       // res.json(user);
         console.log("user",user);
       }
     });

@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { VariablesContext } from "../context/VariablesContext";
-import { AuthContext } from "../context/AuthContext";
+
 const serverURL = require("../config.js").serverURL;
 
 export default function ManageFavorite(props) {
-  const [favorite, setFavorite] = useState([]);
+ 
   const { heart, setHeart } = useContext(VariablesContext);
-/*   const {  userId, setUserId } =
-    useContext(AuthContext); */
+console.log("props in fav", props)
   const petId = props.petId;
  const userId = localStorage.getItem("userId");
   console.log("varUser", userId);
