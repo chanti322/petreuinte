@@ -66,7 +66,7 @@ export default function CardPet(props) {
  
   const classes = useStyles();
   let accessToken = localStorage.getItem("accessToken");
-  useEffect(() => {
+ /*  useEffect(() => {
     if (accessToken) {
       fetch(`${serverURL}/users/userProfile/favorites/${userId}`, {
         headers: {
@@ -93,7 +93,24 @@ export default function CardPet(props) {
     }
   }, [heart, removePost]);
   console.log("heart", heart);
-  console.log("userFavoCard", userFavoritesArray);
+  console.log("userFavoCard", userFavoritesArray); */
+  
+  useEffect(() => {
+    let profileFetch = () => {
+      fetch(`${serverURL}/users/userProfile/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("data cards", data);
+          setUserFavoritesArray(data[0].favorites);
+        });
+    };
+    profileFetch();
+  }, [heart]);
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
       <div
