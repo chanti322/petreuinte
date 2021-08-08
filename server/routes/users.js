@@ -123,8 +123,8 @@ router.post("/logout", (req, res) => {
 });
 
 // Get all the post of a user
-router.get("/userProfile/:userId", (req, res) => {
-  console.log(req.params.userId);
+ router.get("/userProfile/:userId", (req, res) => {
+ console.log("req", req)
   let userId = req.params.userId;
   console.log("usProf", userId);
   userModel
@@ -135,11 +135,13 @@ router.get("/userProfile/:userId", (req, res) => {
       if (err) {
         res.status(400).json(`Error: ${err}`);
       } else {
+       
+       res.send(user)
         res.json(user);
-        //   console.log(user);
+        console.log("user",user);
       }
     });
-});
+}); 
 
 //Get all the favorites of a user
 router.get(
@@ -155,12 +157,12 @@ router.get(
           res.status(400).json(`Error: ${err}`);
         } else {
           res.json(user);
-          console.log(user);
+        
         }
       });
   }
 );
-// Get user Profile
+// Get user Profile 
 /* router.get(
   "/userProfile",
 
@@ -168,6 +170,6 @@ router.get(
     console.log("profile", req);
     res.send(req.user);
   }
-); */
-
+); 
+ */
 module.exports = router;

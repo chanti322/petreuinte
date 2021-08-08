@@ -4,7 +4,7 @@ import { VariablesContext } from "../../context/VariablesContext";
 import { AuthContext } from "../../context/AuthContext";
 const serverURL = require("../../config.js").serverURL;
 const LogOut = () => {
-  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } =
+  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo, userId, setUserId } =
     useContext(AuthContext);
   const accessToken = localStorage.getItem("accessToken");
   console.log("tok logout", accessToken);
@@ -34,7 +34,7 @@ const LogOut = () => {
         console.log(data);
         setIsLoggedIn(false);
         setUserInfo(null);
-
+        setUserId(null)
         localStorage.clear();
       });
   }

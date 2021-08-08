@@ -16,9 +16,10 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
   const { usernameStorage, setUsernameStorage } = useContext(VariablesContext);
-  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn } =
+  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn,userId, setUserId } =
     useContext(AuthContext);
   console.log(isLoggedIn);
+  console.log("userInfo", userInfo)
   const accessToken = localStorage.getItem("accessToken");
 
   const loggedIn = localStorage.getItem("loggedIn");
@@ -37,7 +38,7 @@ export default function SignIn() {
     })
       .then((res) => res.json())
       .then((data) => {
-        //   console.log("alldata", data);
+         console.log("alldata", data);
         //  console.log("data", data.token);
         //  console.log("user", data.loggedIn);
         //  console.log("favor", data.favorites);
@@ -45,8 +46,10 @@ export default function SignIn() {
         localStorage.setItem("accessToken", data.token);
         if (data.token !== undefined) {
           localStorage.setItem("loggedIn", data.loggedIn);
-          setIsLoggedIn(true);
-          setUserInfo(data);
+         setIsLoggedIn(true);
+         setUserInfo(data.user);
+         setUserId(data.user._id)
+        // console.log("id",userId)
         }
         localStorage.setItem("usernameStorage", data.user.username);
         setUsernameStorage(data.user.username);
@@ -55,11 +58,12 @@ export default function SignIn() {
         localStorage.setItem("userId", data.user._id);
         localStorage.setItem("userFavorites", data.favorites);
         console.log(data.user._id);
+
         // console.log(data.token);
         history.push("/Form");
         if (accessToken !== undefined) {
           //  console.log("toksinin", accessToken);
-          setErrorText("");
+         setErrorText("");
         }
       })
       .catch((err) => {
