@@ -41,6 +41,8 @@ const useStyles = makeStyles({
 export default function CardPet(props) {
   let pet = props.pet;
   let petId = pet._id;
+  let petFavorite = pet.favorite
+  console.log("arrayfav", petFavorite)
   console.log("pet fav in card", pet.favorite.length);
   // console.log("name", pet.userId.username);
   const {
@@ -51,10 +53,10 @@ export default function CardPet(props) {
     userFavoritesArray,
     setUserFavoritesArray,
   } = useContext(VariablesContext);
-  const {  userId, setUserId } =
-    useContext(AuthContext);
+/*   const {  userId, setUserId } =
+    useContext(AuthContext); */
   let favoriteUser = localStorage.getItem("userFavorites");
-  //const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   // console.log("userCard", userId);
   // console.log("heart in card", heart);
   // console.log("pet", pet);

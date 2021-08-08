@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 export default function SinglePet(props) {
   let history = useHistory();
   //const [onePet, setOnePet] = useState([]);
-  const { countComment, setCountComment, onePet, setOnePet } =
+  const {  onePet, setOnePet } =
     useContext(VariablesContext);
   let { id } = useParams();
   console.log("id", id);

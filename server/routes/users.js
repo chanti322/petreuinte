@@ -157,7 +157,7 @@ router.get(
           res.status(400).json(`Error: ${err}`);
         } else {
           res.json(user);
-        
+        console.log("userfav", user)
         }
       });
   }

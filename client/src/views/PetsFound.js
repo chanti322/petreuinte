@@ -45,6 +45,7 @@ export default function PetsFound() {
       .then((data) => {
         setPets(data);
         console.log("petfound", pets);
+       
       });
   }, [countInSave, removePost, heart]);
  /*  useEffect(() => {
