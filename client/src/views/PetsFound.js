@@ -47,12 +47,12 @@ export default function PetsFound() {
         console.log("petfound", pets);
       });
   }, [countInSave, removePost, heart]);
-  useEffect(() => {
+ /*  useEffect(() => {
     //if (accessToken) {
     fetch(`${serverURL}users/userProfile/${userId}`, {
-      /*   headers: {
+       headers: {
           "Authorization": "Bearer " + localStorage.getItem("accessToken")
-        }  */
+        }  
     })
       .then((res) => {
         return res.json();
@@ -64,10 +64,10 @@ export default function PetsFound() {
       .catch((err) => {
         console.log(err);
       });
-    /*   }else {
+     }else {
       console.log("You have to logIn")
-    }  */
-  }, []);
+    }  
+  }, []); */
   return (
     <div style={{ marginTop: 80, width: "100vw", textAlign: "center" }}>
       <h2 className={classes.title}>Spotted Pets</h2>
