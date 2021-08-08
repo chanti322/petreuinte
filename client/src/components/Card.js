@@ -202,7 +202,7 @@ export default function CardPet(props) {
         ) : (
           <ManageFavorite petId={pet._id} />
         )}
-        <p style={{ fontSize: 25 }}>{pet.favorite.length}</p>
+        <p style={{ fontSize: 25 }}>{petFavorite.length}</p>
         <p>{errorMessage}</p>
         <BackAtHome
           userIdOfThePost={pet.userId}
