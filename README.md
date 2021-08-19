@@ -18,12 +18,12 @@ Did you lose your pet or did you see an abandoned animal on the street? Share pi
  </tr>
   <tr>
     <td> 
-         <img src="./Sshot/home-findmypet.jpg"  alt="1" width = 300px height = 400px ></td>
+         <img src="./Sshot/home-findmypet.jpg"  alt="1" width = 300px height = 350px ></td>
       
- <td><img src="./Sshot/detailspage.jpg" align="right" alt="2" width =300px height = 400px></td>
-   <td><img src="./Sshot/post.jpg" alt="3" width = 300px height = 400px></td>
-     <td><img src="./Sshot/userProfile.jpg" alt="4" width = 300px height = 400px></td>
-    <td><img src="./Sshot/map.jpg" alt="4" width = 300px height = 400px></td>
+ <td><img src="./Sshot/detailspage.jpg" align="right" alt="2" width =300px height =350px></td>
+   <td><img src="./Sshot/post.jpg" alt="3" width = 300px height = 350px></td>
+     <td><img src="./Sshot/userProfile.jpg" alt="4" width = 300px height = 350px></td>
+    <td><img src="./Sshot/map.jpg" alt="4" width = 300px height = 350px></td>
 
   </tr>
 
