@@ -6,3 +6,25 @@ Did you lose your pet or did you see an abandoned animal on the street? Share pi
 - Save the location of the animal through Google Maps
 - BackEnd uploaded through Heroku
 
+## Screen shots
+
+<table style="padding:10px">
+ <tr>
+ <th>Home page</th>
+   <th>Post details page</th>
+   <th>Post Feed</th>
+   <th>User Profile</th>
+    <th>Map</th>
+ </tr>
+  <tr>
+    <td> 
+         <img src="./Sshot/home-findmypet.jpg"  alt="1" width = 300px height = 400px ></td>
+      
+ <td><img src="./Sshot/detailspage.jpg" align="right" alt="2" width =300px height = 400px></td>
+   <td><img src="./Sshot/post.jpg" alt="3" width = 300px height = 400px></td>
+   <td><img src="./Sshot/userprofile.jpg" alt="4" width = 288px height = 400px></td>
+    <td><img src="./Sshot/map.jpg" alt="4" width = 288px height = 400px></td>
+    
+
+  </tr>
+</table>
