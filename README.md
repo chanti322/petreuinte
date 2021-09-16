@@ -5,6 +5,7 @@ Did you lose your pet or did you see an abandoned animal on the street? Share pi
 - Pictures Upload: Cloudinary
 - Save the location of the animal through Google Maps
 - BackEnd uploaded through Heroku
+- Own Middleware to manage Token Blacklist
 
 ## Screen shots
 
