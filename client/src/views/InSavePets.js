@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CardPet from "../components/Card";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import RegisterPet from "../components/RegisterPetButton";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { VariablesContext } from ".././context/VariablesContext";
 const serverURL = require("../config.js").serverURL;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
@@ -29,13 +29,26 @@ const useStyles = makeStyles({
     textShadow: "2px 2px 2px rgba(150, 150, 150, 1)",
     padding: 5,
   },
-});
+  blockContainer: {
+    [theme.breakpoints.up(600)]: {
+      display: "flex",
+      justifyContent: "space-around",
+      flexWrap: "wrap",
+    },
+  },
+}));
 
 export default function InSavePet() {
   const classes = useStyles();
   const loggedIn = localStorage.getItem("loggedIn");
-  const { heart, setHeart, removePost, setRemovePost, userFavoritesArray, setUserFavoritesArray } =
-    useContext(VariablesContext);
+  const {
+    heart,
+    setHeart,
+    removePost,
+    setRemovePost,
+    userFavoritesArray,
+    setUserFavoritesArray,
+  } = useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   useEffect(() => {
     fetch(serverURL + "/pets/inSave")
@@ -53,10 +66,11 @@ export default function InSavePet() {
         List of animals that are in safe at home again
       </p>
       <RegisterPet />
-
-      {pets.map((pet) => {
-        return <CardPet pet={pet} />;
-      })}
+      <div className={classes.blockContainer}>
+        {pets.map((pet) => {
+          return <CardPet pet={pet} />;
+        })}
+      </div>
     </div>
   );
 }

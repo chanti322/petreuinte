@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
 import BackAtHome from "./BackAtHomeButton";
@@ -15,7 +15,7 @@ import ConvertedAddress from "./ConvertedAddress";
 import ManageFavorite from "./Favorite";
 import RemoveFavorite from "./RemoveFavorite";
 const serverURL = require("../config.js").serverURL;
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
 
@@ -35,15 +35,15 @@ const useStyles = makeStyles({
 
     position: "absolute",
   },
-});
+}));
 
 export default function CardPet(props) {
   let pet = props.pet;
   let petId = pet._id;
-  let petFavorite = pet.favorite
-  console.log("arrayfav", petFavorite)
+  let petFavorite = pet.favorite;
+  console.log("arrayfav", petFavorite);
   console.log("pet fav in card", pet.favorite.length);
-  let [numberFavorite, setNumberFavorite]=useState([])
+  let [numberFavorite, setNumberFavorite] = useState([]);
 
   // console.log("name", pet.userId.username);
   const {
@@ -61,16 +61,14 @@ export default function CardPet(props) {
   // console.log("heart in card", heart);
   // console.log("pet", pet);
 
-
   const [errorMessage, setErrorMessage] = useState("");
   const classes = useStyles();
   let accessToken = localStorage.getItem("accessToken");
 
-  useEffect(()=>{
-    setNumberFavorite(petFavorite)
-  },[heart, userFavoritesArray])
+  useEffect(() => {
+    setNumberFavorite(petFavorite);
+  }, [heart, userFavoritesArray]);
 
-  
   useEffect(() => {
     let profileFetch = () => {
       fetch(`${serverURL}/users/userProfile/${userId}`, {
@@ -87,7 +85,7 @@ export default function CardPet(props) {
     };
     profileFetch();
   }, [heart]);
-  console.log("userFAvArray", userFavoritesArray)
+  console.log("userFAvArray", userFavoritesArray);
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
       <div
@@ -100,6 +98,7 @@ export default function CardPet(props) {
         <div style={{ display: "flex" }}>
           <img
             src={pet.userId.pic}
+            alt="card"
             style={{ width: 50, height: 50, borderRadius: 100 }}
           />
           <p
@@ -172,9 +171,10 @@ export default function CardPet(props) {
             More information
           </Link>
         </Button>
-        {userFavoritesArray !== undefined && userFavoritesArray.filter(function (e) {
+        {userFavoritesArray !== undefined &&
+        userFavoritesArray.filter(function (e) {
           return e._id === pet._id;
-        }).length > 0  ? (
+        }).length > 0 ? (
           <RemoveFavorite petId={pet._id} petFavorite={petFavorite} />
         ) : (
           <ManageFavorite petId={pet._id} />

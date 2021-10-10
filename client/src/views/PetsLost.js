@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CardPet from "../components/Card";
 import RegisterPet from "../components/RegisterPetButton";
 
 import { VariablesContext } from ".././context/VariablesContext";
 const serverURL = require("../config.js").serverURL;
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
@@ -22,18 +22,24 @@ const useStyles = makeStyles({
     textShadow: "2px 2px 2px rgba(150, 150, 150, 1)",
     padding: 5,
   },
-});
+  blockContainer: {
+    [theme.breakpoints.up(600)]: {
+      display: "flex",
+      justifyContent: "space-around",
+      flexWrap: "wrap",
+    },
+  },
+}));
 
 export default function PetsLost() {
   const classes = useStyles();
   let {
-   
     removePost,
     setRemovePost,
     heart,
     setHeart,
     userFavoritesArray,
-    setUserFavoritesArray
+    setUserFavoritesArray,
   } = useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
@@ -63,11 +69,12 @@ export default function PetsLost() {
       <h2 className={classes.title}>Lost Pets</h2>
       <p className={classes.description}>Animals that have been lost</p>
       <RegisterPet />
-
-      {pets.length > 0 &&
-        pets.map((pet) => {
-          return <CardPet pet={pet} />;
-        })}
+      <div className={classes.blockContainer}>
+        {pets.length > 0 &&
+          pets.map((pet) => {
+            return <CardPet pet={pet} />;
+          })}
+      </div>
     </div>
   );
 }
