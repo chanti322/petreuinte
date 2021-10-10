@@ -13,7 +13,7 @@ module.exports = async (request, response, next) => {
   let token = request.header("Authorization").replace("Bearer ", "");
   console.log("tok", token);
   //Checking if token exists
-  let errore = false;
+  let errorChecker = false;
   if (token == null) {
     console.log("no token");
     response.status(403).send({
@@ -24,16 +24,15 @@ module.exports = async (request, response, next) => {
     const black = await blacklistModel.findOne(
       { accessToken: token },
       function (err, accesstoken) {
-        // console.log("b", accesstoken)
+       
         if (accesstoken !== null) {
-          errore = true;
+          errorChecker = true;
           response.status(401).send({
             status: "error",
             message: "not allowed",
           });
 
-          //  response.write("<p>Hello World</p>");
-          // response.end();
+         
         } else if (token != null && accesstoken == null) {
           console.log("token is not in the blacklists");
         }
@@ -55,25 +54,11 @@ module.exports = async (request, response, next) => {
 
     // Append the parameters to the request object
     request.userId = decoded.id;
-    // request.tokenExp = decoded.exp;
-    // request.token = token;
-    if (!errore) {
+   
+    if (!errorChecker) {
       next();
     }
   });
 };
 
-/* accesstoken.forEach(tok => {
-        //console.log(tok.accessToken)
-        if (tok.accessToken === token) {
-         // token2 = token + "cc";
-         // console.log("cc", token2)
-          token = request.header('Authorization').replace('Bearer ', 'c');
-          console.log("+c",token)
-        //  token2=token
- 
-        } else {
-         // token2 =token
-         // console.log("valid")
-        }
-      }) */
+

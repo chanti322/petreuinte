@@ -20,10 +20,23 @@ import SinglePet from "./views/SinglePet";
 import Footer from "./components/Footer";
 import SignUpSuccess from "./components/accountForm/SignUpSuccess";
 import UserProfile from "./views/userProfile";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  appContainer: {
+    width: "fit-content",
+    maxWidth: 360,
+    [theme.breakpoints.up(600)]: {
+      maxWidth: "100%",
+      width: "100%",
+    },
+  },
+}));
 
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App" style={{ width: "fit-content", maxWidth: 360 }}>
+    <div className="App" className={classes.appContainer}>
       <Router>
         <AuthContextProvider>
           <VariablesContextProvider>
