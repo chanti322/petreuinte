@@ -47,14 +47,14 @@ const LogOut = () => {
         setIsLoggedIn(false);
       });
   }
-  let changeLogIn = () => {
+  /*  let changeLogIn = () => {
     setIsLoggedIn(false);
     console.log("test");
-  };
+  }; */
   const reloadAndClean = () => {
     logOutFetch();
 
-    changeLogIn();
+    //  changeLogIn();
   };
   console.log("in button", isLoggedIn);
   return (
