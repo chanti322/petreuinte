@@ -2,11 +2,11 @@ import React, { useState, createContext, useEffect } from "react";
 const serverURL = require("../config.js").serverURL;
 //let userId = localStorage.getItem("userId");
 let token = localStorage.getItem("accessToken");
-let userId = localStorage.getItem("userId")
+let userId = localStorage.getItem("userId");
 const initAuthContextVariables = {
   userInfo: {},
   isLoggedIn: false,
-  userId:""
+  userId: "",
 };
 
 export const AuthContext = createContext(initAuthContextVariables);
@@ -16,29 +16,25 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(
     initAuthContextVariables.isLoggedIn
   );
-  const [userId, setUserId] = useState(
-    initAuthContextVariables.userId
-  );
-console.log("infoexcontex", userInfo)
+  const [userId, setUserId] = useState(initAuthContextVariables.userId);
+  console.log("infoexcontex", userInfo);
   useEffect(() => {
     let userInfoFetch = () => {
       if (token !== null) {
-        console.log("token exists", userInfo)
+        console.log("token exists", userInfo);
         fetch(`${serverURL}/users/userProfile/${userId}`)
-        .then(res=>res.json())
-        .then(data=>{
-      console.log("user in context", data);
-      setUserInfo(data);
-  
-    })  
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("user in context", data);
+            setUserInfo(data);
+          });
       } else {
-     
         setIsLoggedIn(true);
       }
     };
     userInfoFetch();
   }, [isLoggedIn]);
- 
+  console.log("auth context", isLoggedIn);
   return (
     <AuthContext.Provider
       value={{

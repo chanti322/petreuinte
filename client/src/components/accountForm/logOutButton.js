@@ -4,8 +4,14 @@ import { VariablesContext } from "../../context/VariablesContext";
 import { AuthContext } from "../../context/AuthContext";
 const serverURL = require("../../config.js").serverURL;
 const LogOut = () => {
-  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo, userId, setUserId } =
-    useContext(AuthContext);
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    userInfo,
+    setUserInfo,
+    userId,
+    setUserId,
+  } = useContext(AuthContext);
   const accessToken = localStorage.getItem("accessToken");
   console.log("tok logout", accessToken);
   console.log(isLoggedIn);
@@ -34,18 +40,23 @@ const LogOut = () => {
         console.log(data);
         setIsLoggedIn(false);
         setUserInfo(null);
-        setUserId(null)
+        setUserId(null);
         localStorage.clear();
+      })
+      .then(() => {
+        setIsLoggedIn(false);
       });
   }
   let changeLogIn = () => {
     setIsLoggedIn(false);
+    console.log("test");
   };
   const reloadAndClean = () => {
     logOutFetch();
 
     changeLogIn();
   };
+  console.log("in button", isLoggedIn);
   return (
     <div>
       <Link to="/">

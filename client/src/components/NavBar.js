@@ -85,7 +85,7 @@ export default function MenuAppBar() {
   const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } =
     useContext(AuthContext);
 
-console.log("log", isLoggedIn)
+  console.log("log", isLoggedIn);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -100,7 +100,7 @@ console.log("log", isLoggedIn)
   }
 
   console.log("li", isLoggedIn);
-  
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBarColor}>
@@ -199,7 +199,7 @@ console.log("log", isLoggedIn)
             <Link to="/signUpForm">
               <button className={classes.loginButton}>Sign in/up</button>
             </Link>
-        ) : ( 
+          ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
               {/* {userInfo.length >0 && (
                 <p className={classes.welcometext}>
@@ -208,7 +208,7 @@ console.log("log", isLoggedIn)
               )}  */}
               <LogOut />
             </div>
-    )} 
+          )}
         </Toolbar>
       </AppBar>
     </div>
