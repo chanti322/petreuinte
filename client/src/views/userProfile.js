@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
+
 import { VariablesContext } from "../context/VariablesContext";
-import ConvertedAddress from "../components/ConvertedAddress";
+
 import Card from "@material-ui/core/Card";
 import { Paper } from "@material-ui/core";
 import { BrowserRouter as Router, Link } from "react-router-dom";
