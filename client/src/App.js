@@ -1,8 +1,6 @@
-import logo from "./logo.svg";
 import React from "react";
 import "./App.css";
 import "./styles/SignUpForm.css";
-import Form from "./components/accountForm/Form";
 import MenuAppBar from "./components/NavBar";
 import PetsLost from "./views/PetsLost";
 import PetsFound from "./views/PetsFound";
@@ -12,7 +10,7 @@ import SignIn from "./components/accountForm/SignIn";
 import GoogleMap from "./components/googleMaps/GoogleMap";
 import Home from "./views/Home";
 import InSavePet from "./views/InSavePets";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { VariablesContextProvider } from "./context/VariablesContext";
 import { AuthContextProvider } from "./context/AuthContext";
 import ConvertedAddress from "./components/ConvertedAddress";
@@ -20,7 +18,7 @@ import SinglePet from "./views/SinglePet";
 import Footer from "./components/Footer";
 import SignUpSuccess from "./components/accountForm/SignUpSuccess";
 import UserProfile from "./views/userProfile";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   appContainer: {
@@ -36,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   return (
-    <div className="App" className={classes.appContainer}>
+    <div className={classes.appContainer}>
       <Router>
         <AuthContextProvider>
           <VariablesContextProvider>
