@@ -200,7 +200,7 @@ export default function MenuAppBar() {
               <button className={classes.loginButton}>Sign in/up</button>
             </Link>
           ) : (
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", flexDirection: "column",alignItems:"center" }}>
               { userInfo !==undefined && (
                 <p className={classes.welcometext}>
                   Welcome <span>{userInfo.username}</span>

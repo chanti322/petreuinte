@@ -22,7 +22,7 @@ const LogOut = () => {
     color: "orange",
     fontWeight: "bold",
     fontSize: 10,
-    marginRight: 30,
+
   };
   function logOutFetch() {
     fetch(serverURL + "/users/logout", {
