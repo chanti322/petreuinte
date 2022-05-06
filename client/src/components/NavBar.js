@@ -201,7 +201,7 @@ export default function MenuAppBar() {
             </Link>
           ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
-              { userInfo.length >0 && (
+              { userInfo !==undefined && (
                 <p className={classes.welcometext}>
                   Welcome <span>{userInfo.username}</span>
                 </p>
