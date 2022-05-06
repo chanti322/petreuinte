@@ -1,19 +1,18 @@
-import React, { useState, useContext, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { VariablesContext } from "../../context/VariablesContext";
+import React, {  useContext } from "react";
+import { Link } from "react-router-dom";
+
 import { AuthContext } from "../../context/AuthContext";
 const serverURL = require("../../config.js").serverURL;
 const LogOut = () => {
   const {
     isLoggedIn,
     setIsLoggedIn,
-    userInfo,
+ 
     setUserInfo,
-    userId,
+ 
     setUserId,
   } = useContext(AuthContext);
   const accessToken = localStorage.getItem("accessToken");
-  console.log("tok logout", accessToken);
   console.log(isLoggedIn);
 
   let logoutButton = {
@@ -46,14 +45,11 @@ const LogOut = () => {
         setIsLoggedIn(false);
       });
   }
-  /*  let changeLogIn = () => {
-    setIsLoggedIn(false);
-    console.log("test");
-  }; */
+
   const reloadAndClean = () => {
     logOutFetch();
 
-    //  changeLogIn();
+ 
   };
   console.log("in button", isLoggedIn);
   return (
