@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { VariablesContext } from "../../context/VariablesContext";
 import { AuthContext } from "../../context/AuthContext";
 import "../../styles/SignUpForm.css";
@@ -18,12 +18,11 @@ export default function SignIn() {
   const { usernameStorage, setUsernameStorage } = useContext(VariablesContext);
   const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn,userId, setUserId } =
     useContext(AuthContext);
-  console.log(isLoggedIn);
-  console.log("userInfo", userInfo)
+
   const accessToken = localStorage.getItem("accessToken");
 
   const loggedIn = localStorage.getItem("loggedIn");
-  // const usernameStorage = localStorage.getItem("usernameStorage");
+ 
 
   let getLogIn = () => {
     fetch(serverURL + "/users/login", {
@@ -38,10 +37,7 @@ export default function SignIn() {
     })
       .then((res) => res.json())
       .then((data) => {
-         console.log("alldata", data);
-        //  console.log("data", data.token);
-        //  console.log("user", data.loggedIn);
-        //  console.log("favor", data.favorites);
+
 
         localStorage.setItem("accessToken", data.token);
         if (data.token !== undefined) {
@@ -49,7 +45,7 @@ export default function SignIn() {
          setIsLoggedIn(true);
          setUserInfo(data.user);
          setUserId(data.user._id)
-        // console.log("id",userId)
+   
         }
         localStorage.setItem("usernameStorage", data.user.username);
         setUsernameStorage(data.user.username);
@@ -57,12 +53,10 @@ export default function SignIn() {
         localStorage.setItem("userEmail", data.user.email);
         localStorage.setItem("userId", data.user._id);
         localStorage.setItem("userFavorites", data.favorites);
-        console.log(data.user._id);
-
-        // console.log(data.token);
+  
         history.push("/Form");
         if (accessToken !== undefined) {
-          //  console.log("toksinin", accessToken);
+      
          setErrorText("");
         }
       })
