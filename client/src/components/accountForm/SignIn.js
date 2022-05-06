@@ -2,12 +2,29 @@ import React, { useState, useContext } from "react";
 import { VariablesContext } from "../../context/VariablesContext";
 import { AuthContext } from "../../context/AuthContext";
 import "../../styles/SignUpForm.css";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   useHistory
 } from "react-router-dom";
 const serverURL = require("../../config.js").serverURL;
+const useStyles = makeStyles((theme) => ({
+  widthForm: {
+    marginTop: 80,
+    width: "30%",
+    margin: "0 auto",
+    boxShadow: "1px 1px 4px 10px rgba(120,120,120,0.23)",
+    padding:10,
+    paddingBottom:20,
+    borderRadius:10,
+
+    [theme.breakpoints.down('sm')]: {
+    width: "90%",
+    },
+  },
+}))
 export default function SignIn() {
   const history = useHistory();
+  const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
@@ -69,7 +86,7 @@ export default function SignIn() {
   };
 
   return (
-    <div style={{ width: "90%", margin: "0 auto", marginTop: 80 }}>
+    <div className={classes.widthForm}>
       <h3 className="title" style={{ fontSize: 30 }}>
         Welcome Back!
       </h3>
