@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { VariablesContext } from "../context/VariablesContext";
 import { AuthContext } from "../context/AuthContext";
 import Menu from "@material-ui/core/Menu";
@@ -80,12 +80,12 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const loggedIn = localStorage.getItem("loggedIn");
+
   const { usernameStorage, setUsernameStorage } = useContext(VariablesContext);
   const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } =
     useContext(AuthContext);
 
-  console.log("log", isLoggedIn);
+  console.log("log in navbar", isLoggedIn);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -171,7 +171,7 @@ export default function MenuAppBar() {
                 Solved Cases
               </MenuItem>
             </Link>
-            {loggedIn && (
+            {isLoggedIn && (
               <Link className={classes.linkText} to="/userProfile">
                 <MenuItem
                   style={{ color: "orange" }}
@@ -182,7 +182,7 @@ export default function MenuAppBar() {
                 </MenuItem>
               </Link>
             )}
-            {loggedIn && (
+            {isLoggedIn && (
               <Link className={classes.linkText} to="/Form">
                 <MenuItem
                   style={{ color: "orange" }}
@@ -195,17 +195,17 @@ export default function MenuAppBar() {
             )}
           </Menu>
 
-          {!loggedIn ? (
+          {!isLoggedIn ? (
             <Link to="/signUpForm">
               <button className={classes.loginButton}>Sign in/up</button>
             </Link>
           ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
-              {/* {userInfo.length >0 && (
+              { userInfo.length >0 && (
                 <p className={classes.welcometext}>
                   Welcome <span>{userInfo.username}</span>
                 </p>
-              )}  */}
+              )}  
               <LogOut />
             </div>
           )}
