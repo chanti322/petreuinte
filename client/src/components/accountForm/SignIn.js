@@ -3,11 +3,7 @@ import { VariablesContext } from "../../context/VariablesContext";
 import { AuthContext } from "../../context/AuthContext";
 import "../../styles/SignUpForm.css";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useHistory,
+  useHistory
 } from "react-router-dom";
 const serverURL = require("../../config.js").serverURL;
 export default function SignIn() {
@@ -15,13 +11,13 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
-  const { usernameStorage, setUsernameStorage } = useContext(VariablesContext);
-  const { userInfo, setUserInfo, isLoggedIn, setIsLoggedIn,userId, setUserId } =
+  const {  setUsernameStorage } = useContext(VariablesContext);
+  const { setUserInfo,  setIsLoggedIn, setUserId } =
     useContext(AuthContext);
 
   const accessToken = localStorage.getItem("accessToken");
 
-  const loggedIn = localStorage.getItem("loggedIn");
+
  
 
   let getLogIn = () => {
@@ -37,8 +33,6 @@ export default function SignIn() {
     })
       .then((res) => res.json())
       .then((data) => {
-
-
         localStorage.setItem("accessToken", data.token);
         if (data.token !== undefined) {
           localStorage.setItem("loggedIn", data.loggedIn);

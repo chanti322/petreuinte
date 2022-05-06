@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 const serverURL = require("../config.js").serverURL;
 //let userId = localStorage.getItem("userId");
 let token = localStorage.getItem("accessToken");
-let userId = localStorage.getItem("userId");
+
 const initAuthContextVariables = {
   userInfo: {},
   isLoggedIn: false,
@@ -17,11 +17,12 @@ export const AuthContextProvider = ({ children }) => {
     initAuthContextVariables.isLoggedIn
   );
   const [userId, setUserId] = useState(initAuthContextVariables.userId);
-  console.log("infoexcontex", userInfo);
+
   useEffect(() => {
     let userInfoFetch = () => {
       if (token !== null) {
         console.log("token exists", userInfo);
+        console.log(token)
         fetch(`${serverURL}/users/userProfile/${userId}`)
           .then((res) => res.json())
           .then((data) => {
@@ -29,11 +30,11 @@ export const AuthContextProvider = ({ children }) => {
             setUserInfo(data);
           });
       } else {
-        setIsLoggedIn(true);
+        setIsLoggedIn(false);
       }
     };
     userInfoFetch();
-  }, [isLoggedIn]);
+  }, []);
   console.log("auth context", isLoggedIn);
   return (
     <AuthContext.Provider
