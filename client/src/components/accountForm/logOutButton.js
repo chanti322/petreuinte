@@ -37,7 +37,6 @@ const LogOut = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setIsLoggedIn(false);
         setUserInfo(null);
         setUserId(null);
