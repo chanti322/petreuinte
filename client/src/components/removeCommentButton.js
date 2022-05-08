@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     padding: "1px 3px 1px 3px",
     height: "fit-content",
     marginBottom: "5px",
-    marginRight: 20,
+  
   },
 });
 
@@ -45,7 +45,7 @@ const RemoveComment = (props) => {
   };
 
   return (
-    <div>
+    <div style={{display:"flex", width:"350px", justifyContent:"flex-end"}}>
       {userId === userCommentId && (
         <button
           className={classes.buttonRemove}

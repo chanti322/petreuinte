@@ -37,13 +37,13 @@ const DisplayComment = (props) => {
 
  
   return (
-    <div style={{ marginTop: 10 }}>
+    <div style={{ marginTop: 10,  marginBottom: "12vh", width: 350, margin: "0 auto" }}>
       <ul>
         {petComments !== undefined &&
           petComments.map((link) => (
             <li className={classes.liComment} key={link._id}>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Grid container xs={12}>
+                <Grid container>
                   <Grid
                     item
                     xs={2}
@@ -61,13 +61,13 @@ const DisplayComment = (props) => {
                       {link.username}
                     </p>
                   </Grid>
-                  <Grid item xs={8}>
+                  <Grid item  style={{width:350}}>
                     <p className={classes.textComment}>{link.text}</p>
                   </Grid>
                   <Grid
                     item
-                    xs={2}
-                    style={{ display: "flex", alignItems: "flex-end" }}
+                    
+                    style={{ display: "flex",  }}
                   >
                     <RemoveComment
                       commentId={link._id}
