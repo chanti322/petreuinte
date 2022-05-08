@@ -58,7 +58,7 @@ router.get("/inSave", (req, res) => {
 // More details single pet
 router.get("/details/:id", (req, res) => {
   let petId = req.params.id;
-  console.log(petId);
+
   petModel.findById(petId).exec(function (err, pet) {
     if (err) {
       console.log("err");
@@ -110,7 +110,7 @@ router.post("/uploads", (req, res) => {
     .save()
     .then((result) => {
       let userIdReal = req.body.userId;
-      console.log("res", result._id);
+    
       userModel.findByIdAndUpdate(
         userIdReal,
         { $push: { pets: result._id } },
@@ -145,8 +145,7 @@ router.put("/comments", (req, res) => {
     username: req.body.username,
     userId: req.body.userId,
   };
-  console.log(req.body);
-  console.log("be comment", comment);
+
   petModel
     .findByIdAndUpdate(
       req.body.petId,
@@ -172,8 +171,7 @@ router.put("/atHome", (req, res) => {
   const inSavePet = {
     inSave: req.body.inSavePet,
   };
-  // console.log(req.body);
-  //console.log("in Save", inSavePet);
+
   petModel.findByIdAndUpdate(
     req.body.petId,
     { $set: { inSave: req.body.inSavePet, radio: " " } },
@@ -190,8 +188,7 @@ router.put("/atHome", (req, res) => {
 
 router.put("/deleteComment/:petId/:commentId", (req, res) => {
   const { petId, commentId } = req.params;
-  console.log("pet", petId);
-  console.log("petcomm", commentId);
+
 
   petModel
     .findByIdAndUpdate(
@@ -199,11 +196,11 @@ router.put("/deleteComment/:petId/:commentId", (req, res) => {
       { $pull: { comments: { _id: req.params.commentId } } },
       { new: true },
       function (err, data) {
-        console.log(data);
+    
         if (err) {
           return res.status(404).json({ message: "Error" });
         } else {
-          console.log(data);
+        
           res.send(data);
         }
      
@@ -216,7 +213,7 @@ router.put("/deleteComment/:petId/:commentId", (req, res) => {
 router.put("/addFavorite", requireLogin, async (req, res) => {
   let favorite = req.body.favorite;
   let userIdReal = req.body.userId;
-  console.log("userBE", req.body.userId);
+
   try {
     const addOneFav = await petModel.findByIdAndUpdate(
       req.body.petId,
@@ -230,7 +227,7 @@ router.put("/addFavorite", requireLogin, async (req, res) => {
       { new: true}
     );
     res.status(200).json({ addFavUser: addFavInUser, addOneFav: addOneFav });
-    //  res.json({ message: res.favorite });
+
   } catch (err) {
     console.log({ err: err });
   }
@@ -238,7 +235,7 @@ router.put("/addFavorite", requireLogin, async (req, res) => {
 //Get quantity of likes
 router.get("/favorite/:petId", (req, res) => {
   let petId = req.params.petId;
-  console.log("pp", petId);
+
   petModel.find({ _id: petId }, "favorite", function (err, result) {
     if (err) {
       console.log(err);
@@ -273,7 +270,7 @@ router.put("/removeFavorite", requireLogin, async (req, res) => {
 //Delete Post
 router.post("/deletePost", function (req, res) {
   let postIdt = req.body.postId;
-  //console.log(postIdt);
+
   petModel
     .findOneAndRemove({ _id: req.body.postId }, function (err, response) {
       if (err) throw err;
@@ -285,7 +282,7 @@ router.post("/deletePost", function (req, res) {
           if (err) {
             throw err;
           } else {
-            // console.log(res);
+ 
           }
         }
       );
@@ -296,7 +293,7 @@ router.post("/deletePost", function (req, res) {
           if (err) {
             throw err;
           } else {
-            // console.log(res);
+        
           }
         }
       );
@@ -304,7 +301,7 @@ router.post("/deletePost", function (req, res) {
     .then(function () {
       res.json({ message: "success" });
     });
-  // console.log("res", res);
+
 });
 
 module.exports = router;

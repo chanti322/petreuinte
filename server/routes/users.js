@@ -127,7 +127,7 @@ router.post("/logout", (req, res) => {
  router.get("/userProfile/:userId", (req, res) => {
 
   let userId = req.params.userId;
-  console.log("usProf", userId);
+
   userModel
     .find({ _id: userId })
     .populate({ path: "pets" })
@@ -149,7 +149,7 @@ router.post("/logout", (req, res) => {
 router.get(
   "/userProfile/favorites/:userId",
   /*  requireLogin, */ (req, res) => {
-    console.log(req.params.userId);
+ 
     let userId = req.params.userId;
     userModel
       .find({ _id: userId })
@@ -159,19 +159,10 @@ router.get(
           res.status(400).json(`Error: ${err}`);
         } else {
           res.json(user);
-        console.log("userfav", user)
+  
         }
       });
   }
 );
-// Get user Profile 
-/* router.get(
-  "/userProfile",
 
-  (req, res) => {
-    console.log("profile", req);
-    res.send(req.user);
-  }
-); 
- */
 module.exports = router;
