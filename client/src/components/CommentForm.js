@@ -58,14 +58,14 @@ const Comment = (props) => {
   };
 
   return (
-    <div style={{ marginBottom: "12vh" }}>
+    <div style={{ marginBottom: "12vh", width: 350 }}>
       {loggedIn ? (
         <div>
           <input
             style={{
               marginTop: 10,
               marginBottom: 15,
-              width: "60%",
+              width: "80%",
               padding: 7,
             }}
             type="text"
