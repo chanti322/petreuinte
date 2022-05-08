@@ -10,6 +10,9 @@ const useStyles = makeStyles({
     marginLeft: 7,
     fontStyle: "italic",
   },
+  commentInput:{
+    marginBottom: "12vh", width: 350, margin: "0 auto",
+  }
 });
 const serverURL = require("../config.js").serverURL;
 const Comment = (props) => {
@@ -53,7 +56,7 @@ const Comment = (props) => {
 
 
   return (
-    <div style={{ marginBottom: "12vh", width: 350 }}>
+    <div className={classes.commentInput}>
       {loggedIn ? (
         <div>
           <input
