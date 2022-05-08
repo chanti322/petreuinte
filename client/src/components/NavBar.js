@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+let username =   localStorage.getItem("usernameStorage");
  
   const { isLoggedIn, userInfo } =
     useContext(AuthContext);
@@ -200,7 +200,7 @@ export default function MenuAppBar() {
             <div style={{ display: "flex", flexDirection: "column",alignItems:"center" }}>
               { userInfo !==undefined && (
                 <p className={classes.welcometext}>
-                  Welcome <span>{userInfo.username}</span>
+                  Welcome <span>{username}</span>
                 </p>
               )}  
               <LogOut />
