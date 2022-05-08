@@ -14,23 +14,27 @@
   margin-top: 20px;
 }
 .app-wrapper {
-  margin-top:50px;
+ 
   background-color: #fff;
-  width: fit-content;
+  width: 350px;
+  margin:0 auto;
   min-height: 650px;
+  margin-top:50px;
   padding: 30px;
   box-sizing: border-box;
   border-radius: 5px;
+  box-shadow: 1px -1px 15px 5px rgba(157,157,157,0.72);
+
 }
 .title {
   color: #ff8c00;
   text-align: center;
-  margin: 20px 0px 40px 0px;
+  margin: 5px 0px 10px 0px;
 }
 .welcome {
   color: #ff8c00;
   text-align: center;
-  margin: 15px 0px 10px 0px;
+  margin: 20px 0px 5px 0px;
 }
 .name,
 .email,

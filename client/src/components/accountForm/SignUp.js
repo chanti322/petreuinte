@@ -1,9 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import "../../styles/SignUpForm.css";
 const serverURL = require("../../config.js").serverURL;
+const useStyles = makeStyles((theme) => ({
+  widthForm: {
+    marginTop: 80,
+    width: "30%",
+    margin: "0 auto",
+    boxShadow: "1px 1px 4px 10px rgba(120,120,120,0.23)",
+    padding:10,
+    paddingBottom:20,
+    borderRadius:10,
 
+    [theme.breakpoints.down('sm')]: {
+    width: "90%",
+    },
+  },
+  signInLink:{
+    marginTop: 30, 
+    fontSize: 16,
+    textAlign:"center"
+  },
+}))
 const SignUp = () => {
+  const classes = useStyles();
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -124,14 +145,13 @@ const SignUp = () => {
       </button>
       <h5>
         <Link to="/signInForm">
-          <p style={{ marginTop: 30, fontSize: 25 }}>
+          <p className={classes.signInLink}>
             Already have an account ?
           </p>
         </Link>
       </h5>
     </div>
-    //  </div>
-    // </div>
+
   );
 };
 
