@@ -52,10 +52,7 @@ const Comment = (props) => {
         setOnePet(data);
       });
   };
-  let fetchAndCount = () => {
-    commentFetch();
-    //  addToCount();
-  };
+
 
   return (
     <div style={{ marginBottom: "12vh", width: 350 }}>
