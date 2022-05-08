@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, {  useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { VariablesContext } from "../context/VariablesContext";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -15,23 +15,15 @@ const useStyles = makeStyles({
 
 const RemoveComment = (props) => {
   const classes = useStyles();
-  // const [data, setData] = useState([]);
-  let { countComment, setCountComment, onePet, setOnePet } =
+
+  let {  setOnePet } =
     useContext(VariablesContext);
   let userId = localStorage.getItem("userId");
   let userCommentId = props.userID;
   let commentId = props.commentId;
-  let comments = props.comments;
-  let petId = props.petID;
-  let comment = props.comment;
-  // console.log("comment", commentId);
 
-  // console.log(petId);
-  // console.log(commentId);
-  // console.log("comm", comments);
-  // let removeCountComment = () => {
-  //   setCountComment((countComment -= 1));
-  // };
+  let petId = props.petID;
+  
 
   const deleteComment = () => {
     fetch(`${serverURL}/pets/deleteComment/${petId}/${commentId}`, {
@@ -42,24 +34,16 @@ const RemoveComment = (props) => {
       },
     })
       .then((res) => {
-        console.log(res);
+       
         return res.json();
       })
       .then((result) => {
-        console.log(result);
-        // const newData = comments.filter((item) => {
-        //   return item._id !== commentId;
-        // });
-        // setData(newData);
+    
         setOnePet(result);
       })
       .catch((err) => console.log(err));
   };
-  // console.log("data comm", data);
-  // let fetchAndRemove = () => {
-  //   deleteComment();
-  //   removeCountComment();
-  // };
+
   return (
     <div>
       {userId === userCommentId && (

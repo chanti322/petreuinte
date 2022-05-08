@@ -14,19 +14,18 @@ const useStyles = makeStyles({
 const serverURL = require("../config.js").serverURL;
 const Comment = (props) => {
   const classes = useStyles();
-  let { countComment, setCountComment, onePet, setOnePet } =
+  let { countComment, setCountComment, setOnePet } =
     useContext(VariablesContext);
-    const {  userId, setUserId } =
+    const {  userId } =
     useContext(AuthContext);
   const [text, setText] = useState("");
 
   const loggedIn = localStorage.getItem("loggedIn");
 
   const avatar = localStorage.getItem("userAvatar");
-  //  console.log("avatarCommForm", avatar)
+
   const username = localStorage.getItem("usernameStorage");
- // const userId = localStorage.getItem("userId");
-  // console.log("nameCommForm", username)
+
   let petId = props.petId;
   let addToCount = () => {
     setCountComment((countComment += 1));
@@ -48,7 +47,7 @@ const Comment = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("commentdata", data);
+
         setCountComment((countComment += 1));
         setOnePet(data);
       });
@@ -86,29 +85,4 @@ const Comment = (props) => {
 };
 export default Comment;
 
-/* const commentFetch = (text,postId)=>{
-          fetch('/comment',{
-              method:"put",
-              headers:{
-                  "Content-Type":"application/json",
-                  
-              },
-              body:JSON.stringify({
-                  postId,
-                  text
-              })
-          }).then(res=>res.json())
-          .then(result=>{
-              console.log(result)
-              const newData = data.map(item=>{
-                if(item._id==result._id){
-                    return result
-                }else{
-                    return item
-                }
-             })
-            setData(newData)
-          }).catch(err=>{
-              console.log(err)
-          })
-    } */
+

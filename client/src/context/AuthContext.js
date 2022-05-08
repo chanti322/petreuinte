@@ -21,12 +21,11 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     let userInfoFetch = () => {
       if (token !== null) {
-        console.log("token exists", userInfo);
-        console.log(token)
+    
         fetch(`${serverURL}/users/userProfile/${userId}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log("user in context", data);
+        
             setUserInfo(data);
           });
       } else {
@@ -35,7 +34,7 @@ export const AuthContextProvider = ({ children }) => {
     };
     userInfoFetch();
   }, []);
-  console.log("auth context", isLoggedIn);
+
   return (
     <AuthContext.Provider
       value={{

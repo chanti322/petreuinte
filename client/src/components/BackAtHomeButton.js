@@ -6,16 +6,14 @@ export default function BackAtHome(props) {
   const {userId, setUserId } =
     useContext(AuthContext);
   let userIdOfThePost = props.userIdOfThePost._id;
- // let userId = localStorage.getItem("userId");
-  // console.log("userPost", userIdOfThePost);
-  // console.log(userId);
+
   let petId = props.petId;
   let petInSave = props.inSave;
 
   const [inSavePet, setInSavePet] = useState(true);
   const [showCheck, setShowCheck] = useState(false);
   let { countInSave, setCountInSave } = useContext(VariablesContext);
-  // console.log("showCheck", showCheck);
+  
   let inSaveTrue = () => {
     setInSavePet(true);
   };
@@ -41,11 +39,11 @@ export default function BackAtHome(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        //   console.log("InSavedata", data);
+ 
       });
   };
   function addSaveAndFetch() {
-    //inSaveTrue()
+   
     inSaveFetch();
     addCount();
   }

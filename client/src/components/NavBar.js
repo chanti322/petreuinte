@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { VariablesContext } from "../context/VariablesContext";
+
 import { AuthContext } from "../context/AuthContext";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -29,9 +29,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 50,
     borderRadius: 5,
   },
-  menuButton: {
-    //  marginRight: theme.spacing(1),
-  },
+
   title: {
     flexGrow: 1,
   },
@@ -81,11 +79,10 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const { usernameStorage, setUsernameStorage } = useContext(VariablesContext);
-  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } =
+ 
+  const { isLoggedIn, userInfo } =
     useContext(AuthContext);
 
-  console.log("log in navbar", isLoggedIn);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -99,7 +96,7 @@ export default function MenuAppBar() {
     handleClose();
   }
 
-  console.log("li", isLoggedIn);
+
 
   return (
     <div className={classes.root}>
@@ -125,7 +122,7 @@ export default function MenuAppBar() {
               <MenuIcon className={classes.menuIconColor} />
             </IconButton>
           </div>
-          {/*  {loggedIn && <p className={classes.welcometext}>Welcome <span>{usernameStorage}</span></p> }*/}
+        
 
           <Menu
             id="simple-menu"

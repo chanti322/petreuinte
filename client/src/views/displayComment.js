@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { BrowserRouter as Router, Link, useParams } from "react-router-dom";
+import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
-import { VariablesContext } from "../context/VariablesContext";
+
 import RemoveComment from "../components/removeCommentButton";
 
 import { Grid } from "@material-ui/core";
@@ -34,11 +34,8 @@ const useStyles = makeStyles({
 const DisplayComment = (props) => {
   const classes = useStyles();
   let petComments = props.petComments;
-  console.log(petComments);
-  let { countComment, setCountComment } = useContext(VariablesContext);
-  // useEffect(() => {
-  //   petComments = props.petComments;
-  // }, []);
+
+ 
   return (
     <div style={{ marginTop: 10 }}>
       <ul>

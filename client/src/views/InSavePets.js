@@ -40,14 +40,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InSavePet() {
   const classes = useStyles();
-  const loggedIn = localStorage.getItem("loggedIn");
+ 
   const {
     heart,
-    setHeart,
+   
     removePost,
-    setRemovePost,
+  
     userFavoritesArray,
-    setUserFavoritesArray,
+   
   } = useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function InSavePet() {
       .then((res) => res.json())
       .then((data) => {
         setPets(data);
-        console.log("inSave", pets);
+       
       });
   }, [heart, removePost, userFavoritesArray]);
 

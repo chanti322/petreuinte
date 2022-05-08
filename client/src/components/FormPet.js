@@ -44,27 +44,22 @@ export default function FormPet() {
   const [info, setInfo] = useState("");
   const [color, setColor] = useState("");
   const [radio, setRadio] = useState("");
-  const [inSave, setInSave] = useState(false);
-  console.log("radioin form", radio);
-  //const [markers, setMarkers] = useState([])
-  const [comment, setComment] = useState([]);
-  const [favorite, setFavorite] = useState([]);
+  const [inSave] = useState(false);
+
+
+  const [comment] = useState([]);
+  const [favorite] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [urlError, setUrlError] = useState("");
-  const {  userId, setUserId } =
+  const [urlError] = useState("");
+  const {  userId} =
   useContext(AuthContext);
  // let userId = localStorage.getItem("userId");
 
-  const { markers, setMarkers } = useContext(VariablesContext);
+  const { markers } = useContext(VariablesContext);
 
-  // console.log("image", image)
-  // console.log("markers", markers)
 
-  /*  const onPageChange = (e) => {
-    setRadio(e.currentTarget.value)
-  } */
 
   //Update image
 
@@ -92,7 +87,7 @@ export default function FormPet() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("data", data);
+ 
           if (data.error == undefined) {
             setError(false);
             setErrorMessage("");
@@ -118,14 +113,7 @@ export default function FormPet() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data error url", data.error);
-        /*    if (data.error !==undefined || data.error !==null) {
-          setUrlError("Please add a picture")
-        } else {setUrlError("")
-          
-        } */
 
-        console.log(data.url);
 
         setUrl(data.url);
       })
@@ -134,9 +122,7 @@ export default function FormPet() {
       });
   };
 
-  console.log("mess", errorMessage);
-  console.log("url", urlError);
-  console.log("urlvalue", url);
+
   let postSubmitted = () => {
     setSubmitted(true);
   };

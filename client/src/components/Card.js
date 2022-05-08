@@ -39,31 +39,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CardPet(props) {
   let pet = props.pet;
-  let petId = pet._id;
-  let petFavorite = pet.favorite;
-  console.log("arrayfav", petFavorite);
-  console.log("pet fav in card", pet.favorite.length);
-  let [numberFavorite, setNumberFavorite] = useState([]);
 
-  // console.log("name", pet.userId.username);
+  let petFavorite = pet.favorite;
+
+  let [ setNumberFavorite] = useState([]);
+
+
   const {
     heart,
-    setHeart,
-    removePost,
-    setRemovePost,
+    
     userFavoritesArray,
     setUserFavoritesArray,
   } = useContext(VariablesContext);
-
-  let favoriteUser = localStorage.getItem("userFavorites");
   const userId = localStorage.getItem("userId");
-  // console.log("userCard", userId);
-  // console.log("heart in card", heart);
-  // console.log("pet", pet);
 
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const [errorMessage] = useState("");
   const classes = useStyles();
-  let accessToken = localStorage.getItem("accessToken");
+
 
   useEffect(() => {
     setNumberFavorite(petFavorite);
@@ -79,13 +72,13 @@ export default function CardPet(props) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("data cards", data);
+        
           setUserFavoritesArray(data[0].favorites);
         });
     };
     profileFetch();
   }, [heart]);
-  console.log("userFAvArray", userFavoritesArray);
+
   return (
     <Card className={classes.root} key={`found ${pet._id}`}>
       <div
