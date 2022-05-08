@@ -13,7 +13,7 @@ const LogOut = () => {
     setUserId,
   } = useContext(AuthContext);
   const accessToken = localStorage.getItem("accessToken");
-  console.log(isLoggedIn);
+
 
   let logoutButton = {
     padding: 5,

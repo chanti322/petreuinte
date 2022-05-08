@@ -4,16 +4,15 @@ import Geocode from "react-geocode";
 
 export default function ConvertedAddress(props) {
   let markers = props.markers;
-  console.log("mark", markers);
+
 
   const [addressPet, setAddressPet] = useState("");
-  //  console.log("conv", markers)
+
   useEffect(() => {
     if (markers !== undefined && markers.length > 0) {
       let lat = markers[0].lat;
       let lng = markers[0].lng;
-      console.log(markers[0].lat);
-      console.log(markers[0].lng);
+   
 
       /*   const KEY = "process.env.REACT_APP_GOOGLE_API_KEY";*/
       Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API_KEY);
@@ -40,9 +39,9 @@ export default function ConvertedAddress(props) {
       Geocode.fromLatLng(lat, lng).then(
         (response) => {
           const address = response.results[0].formatted_address;
-          console.log("address", address);
+          
           setAddressPet(address);
-          console.log("petadd", address);
+          
         },
         (error) => {
           console.error(error);

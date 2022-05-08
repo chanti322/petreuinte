@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
 import CardPet from "../components/Card";
 import { makeStyles } from "@material-ui/core/styles";
@@ -42,17 +42,16 @@ export default function PetsFound() {
 
   } = useContext(VariablesContext);
   const classes = useStyles();
-  const loggedIn = localStorage.getItem("loggedIn");
-  const userId = localStorage.getItem("userId");
+
   const { pets, setPets } = useContext(VariablesContext);
-  const [userProfile, setUserProfile] = useState([]);
+
   // const [pets, setPets] = useState([]);
   useEffect(() => {
     fetch(serverURL + "/pets/found")
       .then((res) => res.json())
       .then((data) => {
         setPets(data);
-        console.log("petfound", data);
+   
       });
   }, [removePost, heart, userFavoritesArray]);
 

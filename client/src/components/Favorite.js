@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { VariablesContext } from "../context/VariablesContext";
 
@@ -8,13 +8,12 @@ export default function ManageFavorite(props) {
  
   const { heart, setHeart, userFavoritesArray,
     setUserFavoritesArray, } = useContext(VariablesContext);
-console.log("props in fav", props)
+
   const petId = props.petId;
  const userId = localStorage.getItem("userId");
-  console.log("varUser", userId);
+
   let userFavorites = props.petFavorite;
-  console.log("userFav", userFavorites);
-  console.log("petId", petId);
+
 
   function heartButton() {
     setHeart((prev) => (prev += 1));
@@ -34,8 +33,7 @@ console.log("props in fav", props)
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("bothin Add", data)
-        console.log("datafav", data.addOneFav.favorite);
+    
         setUserFavoritesArray(data.addFavUser.favorites)
       });
   };
@@ -43,8 +41,7 @@ console.log("props in fav", props)
     heartButton();
     addFavorite();
   };
-  console.log("userfavinbutton", userFavoritesArray)
-  console.log("heartAdd", heart);
+
   return (
     <div>
       <button onClick={addFavoriteAndFetch}>

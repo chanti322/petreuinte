@@ -52,7 +52,7 @@ export const VariablesContextProvider = ({ children }) => {
   const [userFavoritesArray, setUserFavoritesArray] = useState(
     initContextVariables.userFavoritesArray
   );
-  console.log("in context heart", heart);
+
 
   return (
     <VariablesContext.Provider
