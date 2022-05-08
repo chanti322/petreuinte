@@ -10,16 +10,13 @@ const serverURL = require("../../config.js").serverURL;
 const useStyles = makeStyles((theme) => ({
   widthForm: {
     marginTop: 80,
-    width: "30%",
+    width: 350,
     margin: "0 auto",
     boxShadow: "1px 1px 4px 10px rgba(120,120,120,0.23)",
     padding:10,
     paddingBottom:20,
     borderRadius:10,
 
-    [theme.breakpoints.down('sm')]: {
-    width: "90%",
-    },
   },
 }))
 export default function SignIn() {
