@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { BrowserRouter as Router, Link, useParams } from "react-router-dom";
+import React, {  useEffect, useContext } from "react";
+import { BrowserRouter as  useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Comment from "../components/CommentForm";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +10,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
+
 import Typography from "@material-ui/core/Typography";
 import ConvertedAddress from "../components/ConvertedAddress";
 import DisplayComment from "./displayComment";
@@ -38,23 +38,23 @@ const useStyles = makeStyles({
 
 export default function SinglePet(props) {
   let history = useHistory();
-  //const [onePet, setOnePet] = useState([]);
+
   const {  onePet, setOnePet } =
     useContext(VariablesContext);
   let { id } = useParams();
-  console.log("id", id);
+ 
   useEffect(() => {
     const singlePetfetch = () => {
       fetch(`${serverURL}/pets/details/${id}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("data", data);
+        
           setOnePet(data);
         });
     };
     singlePetfetch();
   }, []);
-console.log("onePet",onePet)
+
   const classes = useStyles();
 
   return (

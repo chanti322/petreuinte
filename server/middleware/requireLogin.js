@@ -9,9 +9,9 @@ const blacklistModel = require("../models/blacklistModel");
 
 module.exports = async (request, response, next) => {
   // Take the token from the Authorization header
-  console.log("response", response.status);
+
   let token = request.header("Authorization").replace("Bearer ", "");
-  console.log("tok", token);
+
   //Checking if token exists
   let errorChecker = false;
   if (token == null) {

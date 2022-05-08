@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CardPet from "../components/Card";
 import RegisterPet from "../components/RegisterPetButton";
@@ -35,15 +35,15 @@ export default function PetsLost() {
   const classes = useStyles();
   let {
     removePost,
-    setRemovePost,
+    
     heart,
-    setHeart,
+   
     userFavoritesArray,
-    setUserFavoritesArray,
+ 
   } = useContext(VariablesContext);
   const [pets, setPets] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
-  console.log("tokeninLost", accessToken);
+
 
   useEffect(() => {
     if (accessToken) {
@@ -55,7 +55,7 @@ export default function PetsLost() {
         .then((res) => res.json())
         .then((data) => {
           setPets(data);
-          console.log("petlost", pets);
+       
         })
         .catch((err) => {
           console.log(err);

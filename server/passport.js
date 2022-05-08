@@ -1,11 +1,11 @@
-const JwtStrategy = require("passport-jwt").Strategy,
+/* const JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
 const secretOrKey = require("./config.js").secretOrKey;
 const userModel = require("./models/usersModel");
 let jwt = require('jsonwebtoken')
 const blacklistModel = require("./models/blacklistModel");
 const express = require("express");
-const router = express.Router();
+const router = express.Router(); */
 //console.log(ExtractJwt.fromAuthHeaderAsBearerToken())
 /* let getTok = (request, response, next) => {
 console.log("request", request)
@@ -23,7 +23,7 @@ console.log("request", request)
     jwt.verify(token, secretOrKey, (error, decoded) => {
         console.log("tok", token)
        
-    if (error) {
+/*     if (error) {
       return response.status(401).send({
         status: 'error',
         message: error.message,
@@ -38,23 +38,23 @@ console.log("request", request)
   });
 }; */
 
-const jwtOptions = {
+/* const jwtOptions = {
   secretOrKey: secretOrKey,
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
-const jwtVerify = async (payload, next) => {
+const jwtVerify = async (payload, next) => { */
  // console.log("payload", payload);
  // console.log("next",next)
 
-  try {
+/*   try {
     const user = await userModel.findById(payload.id);
     console.log("user :> ", user);
    // console.log("next", next)
-    const blacklist = await blacklistModel.find({})
+    const blacklist = await blacklistModel.find({}) */
     //const gett = await getTok()
    // console.log("blpass", blacklist)
-/*     const ver = jwt.verify(token, secretOrKey, function(err, decoded) {
+/*    const ver = jwt.verify(token, secretOrKey, function(err, decoded) {
  if(err){
      console.log(err)
  }else{
@@ -63,7 +63,7 @@ const jwtVerify = async (payload, next) => {
     })
     console.log("ver",ver) */
  //const tok = await getTok()
-    if (!user) {
+ /*   if (!user) {
       return next(null, false);
     }
     next(null, user);
@@ -77,7 +77,7 @@ const jwtStrategy = new JwtStrategy(jwtOptions, jwtVerify);
 module.exports = {
   jwtStrategy,
   
-};
+}; */
 
  /*  module.exports = (request, response, next) => {
   console.log("requestheader",request)

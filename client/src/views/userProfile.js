@@ -5,7 +5,7 @@ import { VariablesContext } from "../context/VariablesContext";
 
 import Card from "@material-ui/core/Card";
 import { Paper } from "@material-ui/core";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as  Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
@@ -13,7 +13,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import ManageFavorite from "../components/Favorite";
+
 import RemoveFavorite from "../components/RemoveFavorite";
 const serverURL = require("../config.js").serverURL;
 const useStyles = makeStyles((theme) => ({
@@ -79,12 +79,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function UserProfile() {
   const classes = useStyles();
-  const { heart, setHeart } = useContext(VariablesContext);
-  const [expanded, setExpanded] = React.useState(false);
-
-  const accessToken = localStorage.getItem("accessToken");
+  const { heart } = useContext(VariablesContext);
   const userId = localStorage.getItem("userId");
-  console.log(userId);
+ 
   const username = localStorage.getItem("usernameStorage");
   const userEmail = localStorage.getItem("userEmail");
   const [userProfilePosts, setUserProfilePosts] = useState([]);
@@ -98,13 +95,13 @@ export default function UserProfile() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+      
           setUserProfilePosts(data);
         });
     };
     profileFetch();
   }, [heart]);
-  // console.log("fav", userProfilePosts[0].favorites[0].name);
+
   return (
     <div style={{ marginTop: 70, marginBottom: "12vh", width: "100vw" }}>
       <h2>Your Details:</h2>
