@@ -1,5 +1,5 @@
 import React, {  useEffect, useContext } from "react";
-import { BrowserRouter as  useParams } from "react-router-dom";
+import { BrowserRouter as Link, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Comment from "../components/CommentForm";
 import { makeStyles } from "@material-ui/core/styles";
@@ -42,6 +42,7 @@ export default function SinglePet(props) {
   const {  onePet, setOnePet } =
     useContext(VariablesContext);
   let { id } = useParams();
+ 
  
   useEffect(() => {
     const singlePetfetch = () => {

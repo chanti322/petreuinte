@@ -26,7 +26,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
   const {  setUsernameStorage } = useContext(VariablesContext);
-  const { setUserInfo,  setIsLoggedIn, setUserId } =
+  const {userInfo, setUserInfo,  setIsLoggedIn, userId, setUserId } =
     useContext(AuthContext);
 
   const accessToken = localStorage.getItem("accessToken");
@@ -61,6 +61,7 @@ export default function SignIn() {
         localStorage.setItem("userEmail", data.user.email);
         localStorage.setItem("userId", data.user._id);
         localStorage.setItem("userFavorites", data.favorites);
+        localStorage.setItem("userInfo",data.user)
   
         history.push("/Form");
         if (accessToken !== undefined) {

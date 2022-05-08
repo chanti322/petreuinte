@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 const serverURL = require("../config.js").serverURL;
-//let userId = localStorage.getItem("userId");
+let userIdStorage = localStorage.getItem("userId");
 let token = localStorage.getItem("accessToken");
 
 const initAuthContextVariables = {
@@ -17,12 +17,15 @@ export const AuthContextProvider = ({ children }) => {
     initAuthContextVariables.isLoggedIn
   );
   const [userId, setUserId] = useState(initAuthContextVariables.userId);
+  console.log("token out", token)
+  console.log("info",userInfo._id)
 
   useEffect(() => {
     let userInfoFetch = () => {
       if (token !== null) {
-    
-        fetch(`${serverURL}/users/userProfile/${userId}`)
+    console.log("token", token)
+    console.log("user",userId)
+        fetch(`${serverURL}/users/userProfile/${userIdStorage}`)
           .then((res) => res.json())
           .then((data) => {
         
@@ -30,6 +33,7 @@ export const AuthContextProvider = ({ children }) => {
           });
       } else {
         setIsLoggedIn(false);
+        console.log("token no", token)
       }
     };
     userInfoFetch();
