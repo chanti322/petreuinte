@@ -27,9 +27,7 @@ const Comment = (props) => {
   const username = localStorage.getItem("usernameStorage");
 
   let petId = props.petId;
-  let addToCount = () => {
-    setCountComment((countComment += 1));
-  };
+
 
   let commentFetch = () => {
     fetch(serverURL + "/pets/comments", {
