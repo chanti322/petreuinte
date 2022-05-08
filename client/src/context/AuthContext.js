@@ -17,23 +17,23 @@ export const AuthContextProvider = ({ children }) => {
     initAuthContextVariables.isLoggedIn
   );
   const [userId, setUserId] = useState(initAuthContextVariables.userId);
-  console.log("token out", token)
-  console.log("info",userInfo._id)
+
 
   useEffect(() => {
     let userInfoFetch = () => {
+      
       if (token !== null) {
-    console.log("token", token)
-    console.log("user",userId)
+
         fetch(`${serverURL}/users/userProfile/${userIdStorage}`)
           .then((res) => res.json())
           .then((data) => {
-        
+       
             setUserInfo(data);
+            setIsLoggedIn(true)
           });
       } else {
         setIsLoggedIn(false);
-        console.log("token no", token)
+      
       }
     };
     userInfoFetch();
