@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   appContainer: {
     width: "fit-content",
     maxWidth: 360,
+    margin:"0 auto",
     [theme.breakpoints.up(600)]: {
       maxWidth: "100%",
       width: "100%",
