@@ -7,7 +7,7 @@ export default function SignUpSuccess() {
    
       <div >
         <h1 className="form-success">Account Created!</h1>
-        <Link to="/signInForm"><p style={{marginTop:20}}>Please Log in</p></Link>
+        <Link to="/signInForm"><p style={{textAlign:"center",marginTop:20}}>Please Log in</p></Link>
       </div>
    
   );
