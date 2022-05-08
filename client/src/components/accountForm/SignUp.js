@@ -77,10 +77,10 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+ 
         if (data.error) {
-          console.log(data);
-          console.log(data.error);
+        
+  
 
           setError(data.error);
         } else {
@@ -103,6 +103,7 @@ const SignUp = () => {
   };
 
   return (
+    <div style={{display:"flex", justifyContent:"center"}}>
     <div className="app-wrapper">
       <div className="card auth-card input-field">
         <h2 className="welcome">Welcome!</h2>
@@ -151,7 +152,7 @@ const SignUp = () => {
         </Link>
       </h5>
     </div>
-
+    </div>
   );
 };
 
