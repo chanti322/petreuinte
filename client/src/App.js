@@ -17,7 +17,7 @@ import ConvertedAddress from "./components/ConvertedAddress";
 import SinglePet from "./views/SinglePet";
 import Footer from "./components/Footer";
 import SignUpSuccess from "./components/accountForm/SignUpSuccess";
-import UserProfile from "./views/userProfile";
+import UserProfile from "./views/UserProfile";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
