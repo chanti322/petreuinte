@@ -130,7 +130,7 @@ export default function UserProfile() {
         {userProfilePosts.length > 0 &&
           userProfilePosts[0].pets.map((post) => {
             return (
-              <Card className={classes.root}>
+              <Card key={post} className={classes.root}>
                 <CardActionArea>
                   <div>
                     <CardMedia
@@ -159,7 +159,7 @@ export default function UserProfile() {
                     <ul>
                       {post.comments.map((comment) => {
                         return (
-                          <li className={classes.liComment} key={comment._id}>
+                          <li  className={classes.liComment} key={comment._id}>
                             <div
                               style={{
                                 display: "flex",
@@ -248,7 +248,7 @@ export default function UserProfile() {
         {userProfilePosts.length > 0 &&
           userProfilePosts[0].favorites.map((fav) => {
             return (
-              <li>
+              <li key={fav}>
                 <div
                   style={{
                     marginTop: 10,
