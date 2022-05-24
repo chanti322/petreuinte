@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { VariablesContext } from "../../context/VariablesContext";
-import { GoBackButtonMap } from "../GoBackButtonMap";
+
 import {
   GoogleMap,
   useLoadScript,
